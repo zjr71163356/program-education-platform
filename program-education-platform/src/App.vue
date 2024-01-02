@@ -4,17 +4,27 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+  <header class="fixed-nav">
+    <el-menu
+    class="el-menu-demo"
+    mode="horizontal"
+  >
+    <el-menu-item index="1">Processing Center</el-menu-item>
+    <el-sub-menu index="2">
+      <template #title>Workspace</template>
+      <el-menu-item index="2-1">item one</el-menu-item>
+      <el-menu-item index="2-2">item two</el-menu-item>
+      <el-menu-item index="2-3">item three</el-menu-item>
+      <el-sub-menu index="2-4">
+        <template #title>item four</template>
+        <el-menu-item index="2-4-1">item one</el-menu-item>
+        <el-menu-item index="2-4-2">item two</el-menu-item>
+        <el-menu-item index="2-4-3">item three</el-menu-item>
+      </el-sub-menu>
+    </el-sub-menu>
+    <el-menu-item index="3" disabled>Info</el-menu-item>
+    <el-menu-item index="4">Orders</el-menu-item>
+  </el-menu>
   </header>
 
   <RouterView />
@@ -81,5 +91,17 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Adjust the z-index as needed */
+  background-color: #fff; /* Set background color as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for styling */
+  padding: 0;
+  margin: 0;
+  
 }
 </style>
