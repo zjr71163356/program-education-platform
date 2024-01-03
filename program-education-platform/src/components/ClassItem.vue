@@ -1,15 +1,14 @@
 <template>
   <div class="list-item-link">
     <div class="heading-3">
-      <div class="become-a-python-master">
-        Become a
-        <br />
-        Python Master
-      </div>
+      <div class="div">教程/课程标题</div>
     </div>
-    <div class="_273-questions">273+ Questions</div>
-    <div class="beginner-course">Beginner Course</div>
     <img class="python-png" src="../assets/logo.svg" />
+    <div class="group-19">
+      <div class="rectangle-14"></div>
+      <div class="div2">教程</div>
+    </div>
+    <div class="x">进度:X%</div>
   </div>
 </template>
 <script>
@@ -49,7 +48,7 @@ export default {
   top: 97px;
   overflow: hidden;
 }
-.become-a-python-master {
+.div {
   color: #25265e;
   text-align: left;
   font-family: "Inter-SemiBold", sans-serif;
@@ -65,38 +64,6 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
-._273-questions {
-  color: rgba(37, 38, 94, 0.87);
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 11.25px;
-  line-height: 16px;
-  font-weight: 500;
-  position: absolute;
-  left: 17px;
-  top: 161px;
-  width: 86.84px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.beginner-course {
-  color: rgba(37, 38, 94, 0.87);
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 11.8125px;
-  line-height: 16px;
-  font-weight: 500;
-  position: absolute;
-  left: 17px;
-  top: 183px;
-  width: 94.62px;
-  height: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
 .python-png {
   width: 80px;
   height: 80px;
@@ -104,5 +71,40 @@ export default {
   left: 17px;
   top: 17px;
   overflow: hidden;
+}
+.group-19 {
+  position: absolute;
+  inset: 0;
+}
+.rectangle-14 {
+  background: #3498db;
+  border-radius: 3px;
+  width: 49px;
+  height: 19.93px;
+  position: absolute;
+  left: 13px;
+  top: 181px;
+}
+.div2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  position: absolute;
+  left: 25px;
+  top: 182.93px;
+  width: 30.15px;
+  height: 23px;
+}
+.x {
+  color: #000000;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  position: absolute;
+  left: 107px;
+  top: 183px;
 }
 </style>
