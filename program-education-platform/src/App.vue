@@ -1,19 +1,14 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
+import {  RouterView } from 'vue-router'
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
       <el-header>
-        <el-menu class="el-menu-demo" mode="horizontal">
-          <el-menu-item index="1">
-            <RouterLink :to="{ name: 'ClassList' }">课程中心</RouterLink>
-          </el-menu-item>
-          <el-menu-item index="2"
-            ><RouterLink :to="{ name: 'MyClassList' }">题库</RouterLink>
-          </el-menu-item>
+        <el-menu class="el-menu-demo" mode="horizontal"  :router="true">
+          <el-menu-item index="1" :route="{ name: 'ClassList' }"> 课程中心 </el-menu-item>
+          <el-menu-item index="2" :route="{ name: 'QuestionBank' }">题库 </el-menu-item>
         </el-menu>
       </el-header>
       <el-main class="centered-content"><RouterView /></el-main>
@@ -21,14 +16,18 @@ import { RouterLink, RouterView } from 'vue-router'
     </el-container>
   </div>
 </template>
+<script>
+
+</script>
 
 <style scoped>
 .centered-content {
   display: flex;
   justify-content: center;
 }
-#RouterLink {
+RouterLink {
   text-decoration: none;
+  display: block;
 }
 
 /* 如果需要设置 el-main 的高度 */
