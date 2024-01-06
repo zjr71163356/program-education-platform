@@ -21,6 +21,7 @@
           </div>
         </template>
       </el-table-column>
+        <el-table-column prop="difficulty" label="难度" />
       <el-table-column prop="acceptRate" label="通过率" />
     </el-table>
 
