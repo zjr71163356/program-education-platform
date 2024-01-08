@@ -1,110 +1,55 @@
+
 <template>
-  <div class="list-item-link">
-    <div class="heading-3">
-      <div class="div">教程/课程标题</div>
+  <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+    <h3 class="mb-3 text-xl font-bold text-blue-600">{{title}}</h3>
+    <div class="relative">
+      <img class="w-full rounded-xl" src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Colors" />
+      <p class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">FREE</p>
     </div>
-    <img class="python-png" src="../assets/logo.svg" />
-    <div class="group-19">
-      <div class="rectangle-14"></div>
-      <div class="div2">教程</div>
+    <h1 class="mt-4 text-gray-800 text-2xl font-bold cursor-pointer">{{title}}</h1>
+    <div class="my-4">
+      <div class="flex space-x-1 items-center">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </span>
+        <p>{{duration}}</p>
+      </div>
+      <div class="flex space-x-1 items-center">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </span>
+        <p>{{parts}}</p>
+      </div>
+      <div class="flex space-x-1 items-center">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </span>
+        <p>{{language}}</p>
+      </div>
+      <button class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg">进入</button>
     </div>
-    <div class="x">进度:X%</div>
   </div>
 </template>
-<script>
-/* Code generated with AutoHTML Plugin for Figma */
 
-export default {
-  name: "ListItemLink",
-  components: {},
-  props: {},
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'ClassItem',
   data() {
-    // quickfix to have components available to pass as props
-    return {};
+    return {
+      title: 'JavaScript初学者入门',
+      duration: '1小时34分钟23秒',
+      parts: '3个部分',
+      language: 'JavaScript',
+   
+    };
   },
-};
+});
 </script>
-<style scoped>
-.list-item-link,
-.list-item-link * {
-  box-sizing: border-box;
-}
-.list-item-link {
-  background: #ffffff;
-  border-radius: 4px;
-  border-style: solid;
-  border-color: #d3dce6;
-  border-width: 1px;
-  width: 160px;
-  height: 216px;
-  position: relative;
-  box-shadow: 0px 4px 8px 0px rgba(49, 48, 45, 0.08);
-}
-.heading-3 {
-  height: 48px;
-  position: absolute;
-  right: 17px;
-  left: 17px;
-  top: 97px;
-  overflow: hidden;
-}
-.div {
-  color: #25265e;
-  text-align: left;
-  font-family: "Inter-SemiBold", sans-serif;
-  font-size: 15.75px;
-  line-height: 24px;
-  font-weight: 600;
-  position: absolute;
-  left: 0px;
-  top: 4px;
-  width: 112.06px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.python-png {
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  left: 17px;
-  top: 17px;
-  overflow: hidden;
-}
-.group-19 {
-  position: absolute;
-  inset: 0;
-}
-.rectangle-14 {
-  background: #3498db;
-  border-radius: 3px;
-  width: 49px;
-  height: 19.93px;
-  position: absolute;
-  left: 13px;
-  top: 181px;
-}
-.div2 {
-  color: #ffffff;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  position: absolute;
-  left: 25px;
-  top: 182.93px;
-  width: 30.15px;
-  height: 23px;
-}
-.x {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  position: absolute;
-  left: 107px;
-  top: 183px;
-}
-</style>

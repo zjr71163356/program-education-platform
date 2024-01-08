@@ -5,13 +5,14 @@ import ClassItem from '../components/ClassItem.vue'
 import ClassList from '@/pages/ClassList.vue'
 import MyClassList from '@/pages/MyClassList.vue'
 import QuestionBank from '@/pages/QuestionBank.vue'
+import SignIn from '@/components/SignIn.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: HomeView
     },
     {
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/QuestionBank',
       name: 'QuestionBank',
       component: QuestionBank
+    },
+    {
+      path: '/SignIn',
+      name: 'SignIn',
+      component: SignIn
     }
   ]
 })

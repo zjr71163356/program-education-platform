@@ -4,9 +4,9 @@
       <el-card class="box-card">
         <el-row :gutter="20" class="margin-zero">
           <div v-for="o in 5" :key="o" class="text item">
-            <el-col :span="6">
+      
               <ClassItem />
-            </el-col>
+         
           </div>
         </el-row>
       </el-card>
@@ -15,9 +15,9 @@
       <el-card class="box-card">
         <el-row :gutter="20" class="margin-zero">
           <div v-for="o in 20" :key="o" class="text item">
-            <el-col :span="6">
+          
               <ClassItem />
-            </el-col>
+          
           </div>
         </el-row>
       </el-card>
