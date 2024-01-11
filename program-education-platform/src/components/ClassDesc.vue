@@ -1,6 +1,6 @@
 <template>
   <!-- Container for demo purpose -->
-  <div class="flex flex-col">
+  <div class="flex flex-col items-center">
     <div class="container my-24 mx-auto md:px-6 xl:px-32">
       <!-- Section: Design Block -->
       <section class="mb-32">
@@ -147,7 +147,7 @@
       </section>
       <!-- Section: Design Block -->
     </div>
-    <div class="flex">
+    <div class="flex ">
       <SideBar/>
       <SideBarDesc/>
     </div>
