@@ -6,7 +6,7 @@ import ClassList from '@/pages/ClassList.vue'
 import MyClassList from '@/pages/MyClassList.vue'
 import QuestionBank from '@/pages/QuestionBank.vue'
 import SignIn from '@/components/SignIn.vue'
-import ClassDetail from '@/components/ClassDetail.vue'
+import ClassDesc from '@/components/ClassDesc.vue'
 import SideBar from '@/components/SideBar.vue'
 
 const router = createRouter({
@@ -43,9 +43,9 @@ const router = createRouter({
       component: SignIn
     },
     {
-      path: '/ClassDetail',
-      name: 'ClassDetail',
-      component: ClassDetail
+      path: '/ClassDesc',
+      name: 'ClassDesc',
+      component: ClassDesc
     },
     {
       path: '/SideBar',
