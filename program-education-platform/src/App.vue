@@ -1,7 +1,4 @@
-<script setup>
-import { RouterView } from 'vue-router'
-import MyNavbar from './components/MyNavbar.vue'
-</script>
+
 
 <template>
   <div class="common-layout">
@@ -17,7 +14,17 @@ import MyNavbar from './components/MyNavbar.vue'
     </el-container>
   </div>
 </template>
-<script></script>
+<script setup>
+import { RouterView } from 'vue-router'
+import MyNavbar from './components/MyNavbar.vue'
+import { onMounted } from 'vue'
+import { initTE, Sidenav } from 'tw-elements'
+onMounted(() => {
+  
+  initTE({ Sidenav }) // set second parameter to true if you want to use a debugger
+
+})
+</script>
 
 <style scoped>
 .centered-content {

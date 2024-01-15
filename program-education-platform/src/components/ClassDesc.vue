@@ -147,17 +147,72 @@
       </section>
       <!-- Section: Design Block -->
     </div>
-    <div class="flex ">
-      <SideBar/>
-      <SideBarDesc/>
+
+    <div class="flex  w-full justify-center ">
+      <SideBar :items="items" class="w-1/5"  />
+      <SideBarDesc :items="items" class="w-2/3" />
     </div>
   </div>
   <!-- Container for demo purpose -->
 </template>
-<script>
-import SideBar from './SideBar.vue';
-import SideBarDesc from './SideBarDesc.vue';
+<script setup>
+import SideBar from './SideBar.vue'
+import SideBarDesc from './SideBarDesc.vue'
+import { ref } from 'vue'
 
-export default { components: { SideBar, SideBarDesc } }
+
+const items = ref([
+  {
+    id: 1,
+    title: 'Category 1',
+    links: [
+      {
+        id: 1,
+        title: 'Link 1',
+        url: '#',
+      },
+      {
+        id: 2,
+        title: 'Link 2',
+        url: '#',
+      },
+      {
+        id: 3,
+        title: 'Link 3',
+        url: '#',
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Category 2',
+    links: [
+      {
+        id: 4,
+        title: 'Link 1',
+        url: '#',
+      },
+    ]
+  },
+  {
+    id: 3,
+    title: 'Category 3',
+    links: [
+      {
+        id: 5,
+        title: 'Link 1',
+        url: '#',
+      },
+      {
+        id: 6,
+        title: 'Link 2',
+        url: '#',
+      },
+    ]
+  }
+])
+
+
+
 </script>
 <style lang=""></style>

@@ -32,7 +32,7 @@
         </span>
         <p>{{language}}</p>
       </div>
-      <button class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg">进入</button>
+     <router-link :to="{name:'ClassDesc'}"> <button class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg">进入</button> </router-link>
     </div>
   </div>
 </template>
