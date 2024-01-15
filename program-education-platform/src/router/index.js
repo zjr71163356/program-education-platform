@@ -6,8 +6,10 @@ import ClassList from '@/pages/ClassList.vue'
 import MyClassList from '@/pages/MyClassList.vue'
 import QuestionBank from '@/pages/QuestionBank.vue'
 import SignIn from '@/components/SignIn.vue'
-import ClassDesc from '@/components/ClassDesc.vue'
+import ClassDesc from '@/pages/ClassDesc.vue'
+import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue'
+import TestPage from '@/components/TestPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +53,17 @@ const router = createRouter({
       path: '/SideBar',
       name: 'SideBar',
       component: SideBar
+    },
+    {
+      path: '/ClassContent',
+      name: 'ClassContent',
+      component: ClassContent,
+      props: true
+    },
+    {
+      path: '/TestPage',
+      name: 'TestPage',
+      component: TestPage
     }
   ]
 })

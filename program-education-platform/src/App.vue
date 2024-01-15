@@ -17,13 +17,9 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import MyNavbar from './components/MyNavbar.vue'
-import { onMounted } from 'vue'
-import { initTE, Sidenav } from 'tw-elements'
-onMounted(() => {
-  
-  initTE({ Sidenav }) // set second parameter to true if you want to use a debugger
 
-})
+
+
 </script>
 
 <style scoped>

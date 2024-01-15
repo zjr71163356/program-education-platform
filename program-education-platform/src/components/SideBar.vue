@@ -1,7 +1,7 @@
 <template>
   <nav
     id="sidenav-1"
-    class="rounded-lg z-[1035] overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] dark:bg-zinc-800"
+    class="rounded-lg z-[1035] h-auto overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] dark:bg-zinc-800"
     data-te-sidenav-init
     data-te-sidenav-hidden="false"
     data-te-sidenav-position="relative"
@@ -24,6 +24,7 @@
           >
           </span>
           <span>{{ item.title }}</span>
+          
         </a>
       </li>
     </ul>

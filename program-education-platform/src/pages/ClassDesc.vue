@@ -148,67 +148,19 @@
       <!-- Section: Design Block -->
     </div>
 
-    <div class="flex w-full justify-center">
-      <SideBar :items="items" class="w-1/5" />
+    <div class="flex w-full justify-center  ">
+      <SideBar :IsShow="false" :items="items" class="w-1/5 self-start" />
       <SideBarDesc :items="items" class="w-2/3" />
     </div>
   </div>
   <!-- Container for demo purpose -->
 </template>
 <script setup>
-import SideBar from './SideBar.vue'
-import SideBarDesc from './SideBarDesc.vue'
+import SideBar from '../components/SideBar.vue'
+import SideBarDesc from '../components/SideBarDesc.vue'
 import { ref } from 'vue'
+import Data from '../data/data'
 
-const items = ref([
-  {
-    id: 1,
-    title: 'Category 1',
-    links: [
-      {
-        id: 1,
-        title: 'Link 1',
-        url: '#'
-      },
-      {
-        id: 2,
-        title: 'Link 2',
-        url: '#'
-      },
-      {
-        id: 3,
-        title: 'Link 3',
-        url: '#'
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Category 2',
-    links: [
-      {
-        id: 4,
-        title: 'Link 1',
-        url: '#'
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Category 3',
-    links: [
-      {
-        id: 5,
-        title: 'Link 1',
-        url: '#'
-      },
-      {
-        id: 6,
-        title: 'Link 2',
-        url: '#'
-      }
-    ]
-  }
-])
+const items = ref(Data.classInfo)
 </script>
 <style lang=""></style>

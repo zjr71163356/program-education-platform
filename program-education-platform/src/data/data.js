@@ -49,4 +49,55 @@ const tableData = [
   }
 ]
 
-export default tableData
+const classInfo = [
+  {
+    id: 1,
+    title: 'Category 1',
+    links: [
+      {
+        id: 1,
+        title: 'Link 1',
+        url: '#'
+      },
+      {
+        id: 2,
+        title: 'Link 2',
+        url: '#'
+      },
+      {
+        id: 3,
+        title: 'Link 3',
+        url: '#'
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Category 2',
+    links: [
+      {
+        id: 4,
+        title: 'Link 1',
+        url: '#'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Category 3',
+    links: [
+      {
+        id: 5,
+        title: 'Link 1',
+        url: '#'
+      },
+      {
+        id: 6,
+        title: 'Link 2',
+        url: '#'
+      }
+    ]
+  }
+]
+
+export default { tableData, classInfo }
