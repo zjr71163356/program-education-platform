@@ -148,8 +148,8 @@
       <!-- Section: Design Block -->
     </div>
 
-    <div class="flex  w-full justify-center ">
-      <SideBar :items="items" class="w-1/5"  />
+    <div class="flex w-full justify-center">
+      <SideBar :items="items" class="w-1/5" />
       <SideBarDesc :items="items" class="w-2/3" />
     </div>
   </div>
@@ -160,7 +160,6 @@ import SideBar from './SideBar.vue'
 import SideBarDesc from './SideBarDesc.vue'
 import { ref } from 'vue'
 
-
 const items = ref([
   {
     id: 1,
@@ -169,19 +168,19 @@ const items = ref([
       {
         id: 1,
         title: 'Link 1',
-        url: '#',
+        url: '#'
       },
       {
         id: 2,
         title: 'Link 2',
-        url: '#',
+        url: '#'
       },
       {
         id: 3,
         title: 'Link 3',
-        url: '#',
-      },
-    ],
+        url: '#'
+      }
+    ]
   },
   {
     id: 2,
@@ -190,8 +189,8 @@ const items = ref([
       {
         id: 4,
         title: 'Link 1',
-        url: '#',
-      },
+        url: '#'
+      }
     ]
   },
   {
@@ -201,18 +200,15 @@ const items = ref([
       {
         id: 5,
         title: 'Link 1',
-        url: '#',
+        url: '#'
       },
       {
         id: 6,
         title: 'Link 2',
-        url: '#',
-      },
+        url: '#'
+      }
     ]
   }
 ])
-
-
-
 </script>
 <style lang=""></style>
