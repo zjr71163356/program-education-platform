@@ -1,6 +1,6 @@
 <template lang="">
   <div class="flex justify-around w-full">
-    <ClassContentSideBar class="w-1/6"></ClassContentSideBar>
+    <ClassContentSideBar class="w-1/6 self-start"></ClassContentSideBar>
     <Centered></Centered>
   </div>
 
