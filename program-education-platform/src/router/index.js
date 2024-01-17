@@ -4,15 +4,19 @@ import HomeView from '../pages/HomeView.vue'
 import ClassItem from '../components/ClassItem.vue'
 import ClassList from '@/pages/ClassList.vue'
 import MyClassList from '@/pages/MyClassList.vue'
-import QuestionBank from '@/pages/QuestionBank.vue'
+import QuestionBank from '@/pages/ProblemBank.vue'
 import SignIn from '@/components/SignIn.vue'
 import ClassDesc from '@/pages/ClassDesc.vue'
 import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue'
 import TestPage from '@/components/TestPage.vue'
+import ProblemDesc from '@/pages/ProblemDesc.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
   routes: [
     {
       path: '/',
@@ -64,6 +68,11 @@ const router = createRouter({
       path: '/TestPage',
       name: 'TestPage',
       component: TestPage
+    },
+    {
+      path: '/ProblemDesc',
+      name: 'ProblemDesc',
+      component: ProblemDesc
     }
   ]
 })

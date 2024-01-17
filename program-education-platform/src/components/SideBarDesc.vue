@@ -20,6 +20,7 @@
           class="!visible relative m-0 list-none p-0 data-[te-collapse-show]:block"
           data-te-sidenav-collapse-ref
         >
+        <router-link :to="{name:'ClassContent'}">
           <li
             v-for="itemchild in item.links"
             class="relative"
@@ -32,6 +33,7 @@
               >{{ itemchild.title }}</a
             >
           </li>
+          </router-link>
         </ul>
       </div>
     </div>
