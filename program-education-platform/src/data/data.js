@@ -107,5 +107,5 @@ const classInfo = [
     ]
   }
 ]
-
-export default { tableData, classInfo }
+const languageList = ['python', 'java', 'cpp', 'javascript']
+export default { tableData, classInfo,languageList }
