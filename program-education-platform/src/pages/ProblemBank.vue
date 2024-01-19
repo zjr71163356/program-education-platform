@@ -5,14 +5,18 @@
         <h1>题库</h1>
       </div>
     </template>
-    <router-link :to="{ name: 'ProblemDesc' }">
+
     <el-table :data="tableData" stripe style="width: 100%">
       <el-table-column prop="problemId" label="Id" width="80" />
-        <el-table-column prop="title" label="标题" width="500" />
-        <el-table-column prop="tag" label="标签">
-          <template #default="scope">
-            <div class="flex">
-              <el-tag
+      <el-table-column prop="title" label="标题" width="500">
+        <template #default="scope">
+          <router-link :to="{ name: 'ProblemDesc' }">{{scope.row.title}}</router-link>
+        </template>
+      </el-table-column>
+      <el-table-column prop="tag" label="标签">
+        <template #default="scope">
+          <div class="flex">
+            <el-tag
               v-for="(tag, index) in scope.row.tag"
               :type="tagtype[index]"
               :key="index"
@@ -25,7 +29,6 @@
       <el-table-column prop="difficulty" label="难度" />
       <el-table-column prop="acceptRate" label="通过率" />
     </el-table>
-  </router-link>
 
     <template #footer>
       <div class="example-pagination-block">

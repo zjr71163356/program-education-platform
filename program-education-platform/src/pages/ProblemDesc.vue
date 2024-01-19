@@ -22,7 +22,7 @@
       <div class="bg-white">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
       </div>
-      <CodeEditer :selectedlanguage="language"/>
+      <CodeEditer :selectedlanguage="language" />
       <Footer class="bg-white footer-h p-5" />
     </div>
   </div>

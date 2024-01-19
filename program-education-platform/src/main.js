@@ -3,15 +3,23 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-// TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com
-import { install as VueMonacoEditorPlugin } from '@guolao/vue-monaco-editor'
-const app = createApp(App)
+import { basicSetup } from 'codemirror'
+import VueCodemirror from 'vue-codemirror'
 
-app.use(router)
-app.use(VueMonacoEditorPlugin, {
-  paths: {
-    // The recommended CDN config
-    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs'
-  }
+const app = createApp(App)
+console.log(basicSetup)
+
+app.use(VueCodemirror, {
+  // optional default global options
+
+  autofocus: true,
+  disabled: false,
+  indentWithTab: true,
+  tabSize: 2,
+  placeholder: 'Code goes here...',
+  extensions: [basicSetup]
+  // ...
 })
+app.use(router)
+
 app.mount('#app')

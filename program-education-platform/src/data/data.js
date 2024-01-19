@@ -107,5 +107,5 @@ const classInfo = [
     ]
   }
 ]
-const languageList = ['python', 'java', 'cpp', 'javascript']
+const languageList = ['cpp','python', 'java', 'javascript']
 export default { tableData, classInfo,languageList }
