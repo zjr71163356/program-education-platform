@@ -2,7 +2,7 @@
   <codemirror
     v-model="code"
     placeholder="Code goes here..."
-    :style="{ height: '400px' }"
+    :style="{ height: '85%' }"
     :autofocus="true"
     :indent-with-tab="true"
     :tab-size="2"
@@ -90,3 +90,8 @@ export default defineComponent({
   }
 })
 </script>
+<style scoped>
+.CodeEditer-h {
+  height: calc(100vh - 90px);
+}
+</style>
