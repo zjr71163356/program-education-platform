@@ -9,9 +9,10 @@ import SignIn from '@/components/SignIn.vue'
 import ClassDesc from '@/pages/ClassDesc.vue'
 import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue'
-import TestPage from '@/components/TestPage.vue'
+ 
 import ProblemDesc from '@/pages/ProblemDesc.vue'
-
+import ProblemSolution from '@/pages/ProblemSolution.vue'
+import PostDesc from '@/pages/PostDesc.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
@@ -64,15 +65,21 @@ const router = createRouter({
       component: ClassContent,
       props: true
     },
-    {
-      path: '/TestPage',
-      name: 'TestPage',
-      component: TestPage
-    },
+
     {
       path: '/ProblemDesc',
       name: 'ProblemDesc',
       component: ProblemDesc
+    },
+    {
+      path: '/ProblemSolution',
+      name: 'ProblemSolution',
+      component: ProblemSolution
+    },
+    {
+      path: '/PostDesc',
+      name: 'PostDesc',
+      component: PostDesc
     }
   ]
 })

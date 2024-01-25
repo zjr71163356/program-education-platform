@@ -1,17 +1,14 @@
 <template>
   <codemirror
     v-model="code"
-    placeholder="Code goes here..."
+    placeholder="此处编辑代码"
     :style="{ height: '85%' }"
     :autofocus="true"
     :indent-with-tab="true"
     :tab-size="2"
     :extensions="extensions"
-    :mode="mode"
     @ready="handleReady"
-    @change="log('change', $event)"
-    @focus="log('focus', $event)"
-    @blur="log('blur', $event)"
+ 
   />
 </template>
 

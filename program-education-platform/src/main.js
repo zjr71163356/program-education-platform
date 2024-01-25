@@ -7,11 +7,11 @@ import { basicSetup } from 'codemirror'
 import VueCodemirror from 'vue-codemirror'
 
 const app = createApp(App)
-console.log(basicSetup)
+
 
 app.use(VueCodemirror, {
   // optional default global options
-
+  
   autofocus: true,
   disabled: false,
   indentWithTab: true,
@@ -20,6 +20,6 @@ app.use(VueCodemirror, {
   extensions: [basicSetup]
   // ...
 })
-app.use(router)
 
+app.use(router)
 app.mount('#app')

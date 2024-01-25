@@ -8,7 +8,7 @@
         :previewTheme="state.theme"
         :codestate="codestate"
       />
-      <Footer/>
+        <FooterBanner/>
     </div>
   </div>
 </template>
