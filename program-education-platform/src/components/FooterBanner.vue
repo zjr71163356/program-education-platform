@@ -1,6 +1,6 @@
 <template lang="">
   <div class="flex justify-between h-20 content-center flex-wrap">
-    <div class="flex">
+    <div class="flex cursor-pointer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -19,7 +19,7 @@
     </div>
     <slot name="button"/>
 
-    <div class="flex">
+    <div class="flex cursor-pointer">
       <span> 下一个</span
       ><svg
         xmlns="http://www.w3.org/2000/svg"

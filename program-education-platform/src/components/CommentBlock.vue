@@ -5,15 +5,18 @@
     class="flex flex-col justify-between py-3"
   >
     <div class="flex flex-col min-w-0 gap-x-4 grow">
-      <div class="flex">
+      <div class="flex items-center gap-x-2">
         <img
-          class="h-6 w-6 flex-none rounded-full bg-gray-50 mr-2"
+          class="h-6 w-6 flex-none rounded-full bg-gray-50"
           :src="'https://ui-avatars.com/api/?name=' + comment['from_username']"
           alt=""
         />
-        <p class="text-sm leading-6 text-gray-900 grow">{{ comment['from_username'] }}</p>
-        <p class="mt-1 text-xs leading-5 text-gray-500">
-          发布于: <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'] }}</time>
+        <p class="text-sm leading-6 text-gray-900">{{ comment['from_username'] }}</p>
+        <p class="  text-xs leading-5 text-gray-500 justify-self-end    ">
+        <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'] }}</time>
+        </p>
+        <p v-if="comment.to_username" class="justify-self-start text-gray-500">
+          回复了 {{ comment['to_username'] }}的评论
         </p>
       </div>
 
@@ -48,9 +51,12 @@
       </div>
     </div>
     <CommentPlugin v-if="showComment[index]" class="grow w-full" :small="true" />
-    <ul class="w-11/12 self-end bg-slate-200 px-6 rounded-lg">    <CommentBlock v-if="comment.replies && comment.replies.length > 0" :comments="comment.replies"  /></ul>
-
- 
+    <ul class="w-11/12 self-end bg-slate-200 px-6 rounded-lg my-1">
+      <CommentBlock
+        v-if="comment.replies && comment.replies.length > 0"
+        :comments="comment.replies"
+      />
+    </ul>
   </li>
 </template>
 <script setup>

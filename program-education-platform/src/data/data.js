@@ -124,8 +124,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容1。',
-        to_userId: 123,
-        to_username: 'JohnDoe',
+ 
         timestamp: '2024-01-27 13:00:00',
         likes: 5
       },
@@ -157,8 +156,6 @@ export const comments = [
         from_userId: 789,
         from_username: 'Alice',
         content: '这是一条回复。',
-        to_userId: 456,
-        to_username: 'JaneDoe',
         timestamp: '2024-01-28 10:00:00',
         likes: 7
       },
@@ -184,17 +181,7 @@ export const comments = [
     timestamp: '2024-01-29 14:20:00',
     likes: 9,
     replies: [
-      {
-        Id: 5,
-        commentId: 3,
-        from_userId: 123,
-        from_username: 'JohnDoe',
-        content: '我有一个问题。',
-        to_userId: 789,
-        to_username: 'Alice',
-        timestamp: '2024-01-29 14:45:00',
-        likes: 8
-      }
+ 
     ]
   },
   // Additional comments
@@ -213,8 +200,7 @@ export const comments = [
         from_userId: 789,
         from_username: 'Alice',
         content: '回复内容3。',
-        to_userId: 456,
-        to_username: 'JaneDoe',
+ 
         timestamp: '2024-01-30 09:00:00',
         likes: 0
       }
@@ -235,8 +221,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容4。',
-        to_userId: 123,
-        to_username: 'JohnDoe',
+ 
         timestamp: '2024-01-31 11:30:00',
         likes: 8
       }
@@ -257,8 +242,7 @@ export const comments = [
         from_userId: 123,
         from_username: 'JohnDoe',
         content: '回复内容5。',
-        to_userId: 789,
-        to_username: 'Alice',
+ 
         timestamp: '2024-02-01 16:00:00',
         likes: 7
       }
@@ -279,8 +263,7 @@ export const comments = [
         from_userId: 789,
         from_username: 'Alice',
         content: '回复内容6。',
-        to_userId: 456,
-        to_username: 'JaneDoe',
+ 
         timestamp: '2024-02-02 10:00:00',
         likes: 5
       }
@@ -301,8 +284,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容7。',
-        to_userId: 123,
-        to_username: 'JohnDoe',
+ 
         timestamp: '2024-02-03 12:15:00',
         likes: 4
       }
