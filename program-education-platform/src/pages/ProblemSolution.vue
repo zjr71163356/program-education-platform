@@ -38,9 +38,11 @@
               :src="'https://ui-avatars.com/api/?name=' + Posts['user']"
               alt=""
             />
-            <div class="min-w-0 flex-auto">
-              <p class="text-lg font-semibold leading-6 text-gray-900">{{ Posts['title'] }}</p>
-            </div>
+            <router-link :to="{ name: 'PostDesc' }">
+              <div class="min-w-0 flex-auto">
+                <p class="text-lg font-semibold leading-6 text-gray-900">{{ Posts['title'] }}</p>
+              </div>
+            </router-link>
           </div>
           <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             <p class="text-sm leading-6 text-gray-900">{{ Posts['user'] }}</p>
@@ -48,6 +50,7 @@
               发布于: <time datetime="2023-01-23T13:23Z">{{ Posts['time'] }}</time>
             </p>
           </div>
+         
         </li>
       </ul>
       <el-pagination layout="prev, pager, next" :total="1000" />
@@ -56,7 +59,6 @@
   <!-- Card -->
 </template>
 <script setup>
-import { Posts, PostsList } from '@/data/data'
-console.log(Posts)
+import { PostsList } from '@/data/data'
 </script>
 <style></style>

@@ -108,6 +108,209 @@ const classInfo = [
   }
 ]
 const languageList = ['cpp', 'python', 'java', 'javascript']
+export const comments = [
+  {
+    Id: 1,
+    postId: 456,
+    from_userId: 123,
+    from_username: 'JohnDoe',
+    content: '这是一条评论。',
+    timestamp: '2024-01-27 12:30:00',
+    likes: 0,
+    replies: [
+      {
+        Id: 1,
+        commentId: 1,
+        from_userId: 456,
+        from_username: 'JaneDoe',
+        content: '回复内容1。',
+        to_userId: 123,
+        to_username: 'JohnDoe',
+        timestamp: '2024-01-27 13:00:00',
+        likes: 5
+      },
+      {
+        Id: 2,
+        commentId: 1,
+        from_userId: 789,
+        from_username: 'Alice',
+        content: '回复内容2。',
+        to_userId: 456,
+        to_username: 'JaneDoe',
+        timestamp: '2024-01-27 13:15:00',
+        likes: 5
+      }
+    ]
+  },
+  {
+    Id: 2,
+    postId: 789,
+    from_userId: 456,
+    from_username: 'JaneDoe',
+    content: '另一条评论。',
+    timestamp: '2024-01-28 09:45:00',
+    likes: 6,
+    replies: [
+      {
+        Id: 3,
+        commentId: 2,
+        from_userId: 789,
+        from_username: 'Alice',
+        content: '这是一条回复。',
+        to_userId: 456,
+        to_username: 'JaneDoe',
+        timestamp: '2024-01-28 10:00:00',
+        likes: 7
+      },
+      {
+        Id: 4,
+        commentId: 2,
+        from_userId: 123,
+        from_username: 'JohnDoe',
+        content: '感谢你的回复。',
+        to_userId: 789,
+        to_username: 'Alice',
+        timestamp: '2024-01-28 10:30:00',
+        likes: 8
+      }
+    ]
+  },
+  {
+    Id: 3,
+    postId: 123,
+    from_userId: 789,
+    from_username: 'Alice',
+    content: '这是另一条评论。',
+    timestamp: '2024-01-29 14:20:00',
+    likes: 9,
+    replies: [
+      {
+        Id: 5,
+        commentId: 3,
+        from_userId: 123,
+        from_username: 'JohnDoe',
+        content: '我有一个问题。',
+        to_userId: 789,
+        to_username: 'Alice',
+        timestamp: '2024-01-29 14:45:00',
+        likes: 8
+      }
+    ]
+  },
+  // Additional comments
+  {
+    Id: 4,
+    postId: 789,
+    from_userId: 456,
+    from_username: 'JaneDoe',
+    content: '又一条评论。',
+    timestamp: '2024-01-30 08:30:00',
+    likes: 8,
+    replies: [
+      {
+        Id: 6,
+        commentId: 4,
+        from_userId: 789,
+        from_username: 'Alice',
+        content: '回复内容3。',
+        to_userId: 456,
+        to_username: 'JaneDoe',
+        timestamp: '2024-01-30 09:00:00',
+        likes: 0
+      }
+    ]
+  },
+  {
+    Id: 5,
+    postId: 123,
+    from_userId: 123,
+    from_username: 'JohnDoe',
+    content: '另外一条评论。',
+    timestamp: '2024-01-31 11:15:00',
+    likes: 0,
+    replies: [
+      {
+        Id: 7,
+        commentId: 5,
+        from_userId: 456,
+        from_username: 'JaneDoe',
+        content: '回复内容4。',
+        to_userId: 123,
+        to_username: 'JohnDoe',
+        timestamp: '2024-01-31 11:30:00',
+        likes: 8
+      }
+    ]
+  },
+  {
+    Id: 6,
+    postId: 456,
+    from_userId: 789,
+    from_username: 'Alice',
+    content: '再一条评论。',
+    timestamp: '2024-02-01 15:45:00',
+    likes: 0,
+    replies: [
+      {
+        Id: 8,
+        commentId: 6,
+        from_userId: 123,
+        from_username: 'JohnDoe',
+        content: '回复内容5。',
+        to_userId: 789,
+        to_username: 'Alice',
+        timestamp: '2024-02-01 16:00:00',
+        likes: 7
+      }
+    ]
+  },
+  {
+    Id: 7,
+    postId: 123,
+    from_userId: 456,
+    from_username: 'JaneDoe',
+    content: '一条评论。',
+    timestamp: '2024-02-02 09:30:00',
+    likes: 7,
+    replies: [
+      {
+        Id: 9,
+        commentId: 7,
+        from_userId: 789,
+        from_username: 'Alice',
+        content: '回复内容6。',
+        to_userId: 456,
+        to_username: 'JaneDoe',
+        timestamp: '2024-02-02 10:00:00',
+        likes: 5
+      }
+    ]
+  },
+  {
+    Id: 8,
+    postId: 789,
+    from_userId: 123,
+    from_username: 'JohnDoe',
+    content: '这是最后一条评论。',
+    timestamp: '2024-02-03 12:00:00',
+    likes: 7,
+    replies: [
+      {
+        Id: 10,
+        commentId: 8,
+        from_userId: 456,
+        from_username: 'JaneDoe',
+        content: '回复内容7。',
+        to_userId: 123,
+        to_username: 'JohnDoe',
+        timestamp: '2024-02-03 12:15:00',
+        likes: 4
+      }
+    ]
+  }
+  // Add more comments as needed
+]
+
 export const SubmitResultDict = {
   题目: 1001,
   用户: '虚无void',
@@ -117,14 +320,6 @@ export const SubmitResultDict = {
   用时: '0 / 2000 ms',
   状态: '编译错误',
   评测时间: '2024/01/23 16:06:10'
-}
-export const Posts = {
-  title: '这是第一个帖子',
-  user: '虚无void',
-  time: '2024/01/23 16:06:09',
-  like: 10,
-  avatar:
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 
 export const PostsList = [
@@ -197,9 +392,7 @@ export const PostsList = [
     like: 22,
     avatar:
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  },
- 
-
+  }
 ]
 
 export default { tableData, classInfo, languageList }
