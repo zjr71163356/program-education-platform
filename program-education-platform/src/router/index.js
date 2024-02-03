@@ -9,10 +9,11 @@ import SignIn from '@/components/SignIn.vue'
 import ClassDesc from '@/pages/ClassDesc.vue'
 import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue'
- 
+
 import ProblemDesc from '@/pages/ProblemDesc.vue'
 import ProblemSolution from '@/pages/ProblemSolution.vue'
 import PostDesc from '@/pages/PostDesc.vue'
+import PostAdd from '@/pages/PostAdd.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
@@ -80,6 +81,11 @@ const router = createRouter({
       path: '/PostDesc',
       name: 'PostDesc',
       component: PostDesc
+    },
+    {
+      path: '/PostAdd',
+      name: 'PostAdd',
+      component: PostAdd
     }
   ]
 })

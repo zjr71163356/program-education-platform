@@ -3,8 +3,9 @@
   <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-2/3">
     <!-- Card header -->
     <div class="border-b-2 border-neutral-100 px-6 py-4 dark:border-neutral-500">
-      <h5 class="flex items-center justify-start dark:text-neutral-300">
+      <h5 class="flex items-center justify-between dark:text-neutral-300  ">
         <span class="mr-2 text-xl"> Title </span>
+       <router-link :to="{name:'PostAdd'}"> <button type="button" class="rounded-md bg-blue-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">发布讨论</button></router-link>
       </h5>
     </div>
 
@@ -50,7 +51,6 @@
               发布于: <time datetime="2023-01-23T13:23Z">{{ Posts['time'] }}</time>
             </p>
           </div>
-         
         </li>
       </ul>
       <el-pagination layout="prev, pager, next" :total="1000" />
