@@ -3,7 +3,7 @@
 
   <div class="flex w-screen">
     <div
-      class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 custome-h overflow-auto"
+      class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2  container-height overflow-auto"
     >
       <div class="border border-neutral-100 px-6 py-4 dark:border-neutral-500">
         <h5 class="flex items-center justify-start text-neutral-500 dark:text-neutral-300">
@@ -17,11 +17,11 @@
       </div>
     </div>
     <div
-      class="flex flex-col block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 custome-h overflow-auto"
+      class="flex flex-col block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 container-height overflow-auto"
     >
       <div class="bg-slate-100 flex justify-between content-center">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
-        <div class="w-1/5 flex">
+        <div class="w-1/4 flex">
           <router-link :to="{ name: 'PostList' }" class="self-center">
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
@@ -104,5 +104,8 @@ const openSubmitResult = () => {
 }
 .footer-h {
   height: 6%;
+}
+.container-height {
+  height: calc(100vh - 48px);
 }
 </style>

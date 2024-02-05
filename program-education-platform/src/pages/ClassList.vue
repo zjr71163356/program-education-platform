@@ -9,7 +9,7 @@
     </div>
 
     <!-- Card body -->
-    <div class="p-6 flex flex-wrap items-center justify-center">
+    <div class=" flex flex-wrap items-center justify-center">
       <!-- Text -->
       <div v-for="o in 25" :key="o" class="text item w-1/4">
         <ClassItem />
