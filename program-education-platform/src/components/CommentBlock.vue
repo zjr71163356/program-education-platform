@@ -51,9 +51,9 @@
       </div>
     </div>
     <CommentPlugin v-if="showComment[index]" class="grow w-full" :small="true" />
-    <ul class="w-11/12 self-end bg-slate-200 px-6 rounded-lg my-1">
+    <ul v-if="comment.replies && comment.replies.length > 0"  class="w-11/12 self-end bg-slate-200 px-6 rounded-lg my-1">
       <CommentBlock
-        v-if="comment.replies && comment.replies.length > 0"
+        
         :comments="comment.replies"
       />
     </ul>

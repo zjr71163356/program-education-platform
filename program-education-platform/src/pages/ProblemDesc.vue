@@ -22,7 +22,7 @@
       <div class="bg-slate-100 flex justify-between content-center">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
         <div class="w-1/5 flex">
-          <router-link :to="{ name: 'ProblemSolution' }" class="self-center">
+          <router-link :to="{ name: 'PostList' }" class="self-center">
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
             >
@@ -32,7 +32,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                class="w-6 h-8"
               >
                 <path
                   stroke-linecap="round"
@@ -44,7 +44,7 @@
               <div class="self-center">讨论</div>
             </div>
           </router-link>
-          <router-link :to="{ name: 'ProblemSolution' }" class="self-center">
+          <router-link :to="{ name: 'PostList' }" class="self-center">
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
             >
@@ -54,7 +54,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6 self-center"
+                class="w-6 h-8 self-center"
               >
                 <path
                   stroke-linecap="round"
@@ -68,7 +68,7 @@
         </div>
       </div>
       <CodeEditer :selectedlanguage="language" />
-      <FooterBanner class="bg-white footer-h p-5]">
+      <FooterBanner class="bg-white footer-h p-5 ">
         <template #button>
           <button
             @click="openSubmitResult"

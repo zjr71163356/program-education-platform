@@ -11,7 +11,7 @@ import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue'
 
 import ProblemDesc from '@/pages/ProblemDesc.vue'
-import ProblemSolution from '@/pages/ProblemSolution.vue'
+import PostList from '@/pages/PostList.vue'
 import PostDesc from '@/pages/PostDesc.vue'
 import PostAdd from '@/pages/PostAdd.vue'
 const router = createRouter({
@@ -73,9 +73,9 @@ const router = createRouter({
       component: ProblemDesc
     },
     {
-      path: '/ProblemSolution',
-      name: 'ProblemSolution',
-      component: ProblemSolution
+      path: '/PostList',
+      name: 'PostList',
+      component: PostList
     },
     {
       path: '/PostDesc',

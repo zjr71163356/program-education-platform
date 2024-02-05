@@ -376,5 +376,10 @@ export const PostsList = [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
   }
 ]
-
+export const PostInfo={
+  user: '虚无void',
+  time: '2024/02/07 14:45:18',
+  like: 20,
+  title:'实验二: 分治法算法的设计与实现'
+}
 export default { tableData, classInfo, languageList }
