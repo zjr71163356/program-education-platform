@@ -14,6 +14,7 @@ import ProblemDesc from '@/pages/ProblemDesc.vue'
 import PostList from '@/pages/PostList.vue'
 import PostDesc from '@/pages/PostDesc.vue'
 import PostAdd from '@/pages/PostAdd.vue'
+import PersonalCenter from '@/pages/PersonalCenter.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
@@ -86,6 +87,10 @@ const router = createRouter({
       path: '/PostAdd',
       name: 'PostAdd',
       component: PostAdd
+    },{
+      path: '/PersonalCenter',
+      name: 'PersonalCenter',
+      component: PersonalCenter
     }
   ]
 })

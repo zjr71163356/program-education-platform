@@ -93,7 +93,23 @@
                 </MenuItem>
               </MenuItems>
             </transition>
+            
           </Menu>
+          <div class="flex space-x-4 ml-2">
+            <RouterLink
+              v-for="item in navigation2"
+              :key="item.name"
+              :to="item.href"
+              :class="[
+                item.current
+                  ? 'bg-blue-900 text-white'
+                  : 'text-gray-300 hover:bg-blue-700 hover:text-white',
+                'rounded-md px-3 py-2 text-sm font-medium'
+              ]"
+              :aria-current="item.current ? 'page' : undefined"
+              >{{ item.name }}</RouterLink
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -132,6 +148,10 @@ export default {
       { name: '课程', href: { name: 'ClassList' }, current: false },
       { name: '题库', href: { name: 'QuestionBank' }, current: false }
     ])
+    const navigation2 = ref([
+      { name: '个人中心', href: { name: 'PersonalCenter' }, current: false }
+     ])
+
     watch(
       () => router.name,
       () => {
@@ -139,10 +159,13 @@ export default {
         navigation.value.forEach((item) => {
           item.current = item.href.name === router.name
         })
+        navigation2.value.forEach((item) => {
+          item.current = item.href.name === router.name
+        })
       }
     )
     return {
-      navigation
+      navigation,navigation2
     }
   }
 }
