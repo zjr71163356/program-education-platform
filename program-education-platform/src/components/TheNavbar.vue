@@ -19,7 +19,7 @@
               <RouterLink
                 v-for="item in navigation"
                 :key="item.name"
-                :to="item.href"
+                :to="{ name:item.href.name }"
                 :class="[
                   item.current
                     ? 'bg-blue-900 text-white'
@@ -142,14 +142,14 @@ export default {
     RouterLink
   },
   setup() {
-    const router = useRoute()
+    let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
       { name: '课程', href: { name: 'ClassList' }, current: false },
       { name: '题库', href: { name: 'QuestionBank' }, current: false }
     ])
     const navigation2 = ref([
-      { name: '个人中心', href: { name: 'PersonalCenter' }, current: false }
+      { name: '个人中心', href: { name: 'MyClassList' }, current: false }
      ])
 
     watch(
@@ -162,8 +162,9 @@ export default {
         navigation2.value.forEach((item) => {
           item.current = item.href.name === router.name
         })
+        
       }
-    )
+    , { immediate: true })
     return {
       navigation,navigation2
     }

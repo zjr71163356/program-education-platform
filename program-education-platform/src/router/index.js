@@ -3,17 +3,21 @@ import HomeView from '../pages/HomeView.vue'
 
 import ClassItem from '../components/ClassItem.vue'
 import ClassList from '@/pages/ClassList.vue'
-import MyClassList from '@/pages/MyClassList.vue'
+import MyClassList from '@/components/MyClassList.vue'
 import QuestionBank from '@/pages/ProblemBank.vue'
 import SignIn from '@/components/SignIn.vue'
 import ClassDesc from '@/pages/ClassDesc.vue'
 import ClassContent from '@/pages/ClassContent.vue'
-import SideBar from '@/components/SideBar.vue'
+import SideBar from '@/components/SideBar.vue' 
+import MyProblemSolution from '@/components/MyProblemSolution.vue' 
+import MyDiscussionPost from '@/components/MyDiscussionPost.vue' 
+import MyHistorySubmission from '@/components/MyHistorySubmission.vue' 
 
 import ProblemDesc from '@/pages/ProblemDesc.vue'
 import PostList from '@/pages/PostList.vue'
 import PostDesc from '@/pages/PostDesc.vue'
 import PostAdd from '@/pages/PostAdd.vue'
+import SubmitResultDescPage from '@/pages/SubmitResultDescPage.vue'
 import PersonalCenter from '@/pages/PersonalCenter.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,11 +40,7 @@ const router = createRouter({
       name: 'ClassList',
       component: ClassList
     },
-    {
-      path: '/MyClassList',
-      name: 'MyClassList',
-      component: MyClassList
-    },
+
     {
       path: '/QuestionBank',
       name: 'QuestionBank',
@@ -87,10 +87,38 @@ const router = createRouter({
       path: '/PostAdd',
       name: 'PostAdd',
       component: PostAdd
-    },{
+    },
+    {
+      path: '/SubmitResultDescPage',
+      name: 'SubmitResultDescPage',
+      component: SubmitResultDescPage
+    },
+    {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: PersonalCenter
+      component: PersonalCenter,
+      children: [
+        {
+          path: 'MyClassList',
+          name: 'MyClassList',
+          component: MyClassList
+        },
+        {
+          path: 'MyProblemSolution',
+          name: 'MyProblemSolution',
+          component: MyProblemSolution
+        },
+        {
+          path: 'MyDiscussionPost',
+          name: 'MyDiscussionPost',
+          component: MyDiscussionPost
+        },
+        {
+          path: 'MyHistorySubmission',
+          name: 'MyHistorySubmission',
+          component: MyHistorySubmission
+        }
+      ]
     }
   ]
 })

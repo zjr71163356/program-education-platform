@@ -1,17 +1,17 @@
 <template>
   <div class="common-layout">
     <div id="myNavbar">
-      <MyNavbar class="" />
+      <TheNavbar class="" />
     </div>
 
     <div id="myContainer" class="   container-height">
-      <div class="flex justify-center p-0"><router-view /></div>
+      <div class="flex justify-center p-0 "> <router-view /></div>
     </div>
   </div>
 </template>
 <script setup>
 import { RouterView } from 'vue-router'
-import MyNavbar from './components/MyNavbar.vue'
+import TheNavbar from './components/TheNavbar.vue'
 </script>
 
 <style scoped>

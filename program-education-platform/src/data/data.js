@@ -294,6 +294,7 @@ export const comments = [
 ]
 
 export const SubmitResultDict = {
+  题目Id: 1,
   题目: 1001,
   用户: '虚无void',
   提交时间: '2024/01/23 16:06:09',
@@ -303,6 +304,108 @@ export const SubmitResultDict = {
   状态: '编译错误',
   评测时间: '2024/01/23 16:06:10'
 }
+export const historyRecords =[
+  {
+    submittime: '2023/05/12 07:33:26',
+    state: 'Accepted',
+    titleId: 137,
+    title: 'Title 10',
+    user: 'User 14',
+    compiler: 'C',
+    memory: 4461,
+    runtime: 7.14
+  },
+  {
+    submittime: '2022/02/19 16:40:09',
+    state: 'Rejected',
+    titleId: 600,
+    title: 'Title 71',
+    user: 'User 28',
+    compiler: 'Python',
+    memory: 2560,
+    runtime: 1.33
+  },
+  {
+    submittime: '2023/03/01 21:32:14',
+    state: 'Rejected',
+    titleId: 745,
+    title: 'Title 46',
+    user: 'User 36',
+    compiler: 'C',
+    memory: 3323,
+    runtime: 10.59
+  },
+  {
+    submittime: '2022/03/24 18:02:25',
+    state: 'Accepted',
+    titleId: 427,
+    title: 'Title 75',
+    user: 'User 12',
+    compiler: 'Python',
+    memory: 688,
+    runtime: 2.34
+  },
+  {
+    submittime: '2022/12/03 15:48:55',
+    state: 'Accepted',
+    titleId: 782,
+    title: 'Title 46',
+    user: 'User 8',
+    compiler: 'Java',
+    memory: 3421,
+    runtime: 5.09
+  },
+  {
+    submittime: '2023/10/19 22:13:42',
+    state: 'Rejected',
+    titleId: 495,
+    title: 'Title 54',
+    user: 'User 22',
+    compiler: 'Java',
+    memory: 523,
+    runtime: 8.24
+  },
+  {
+    submittime: '2022/12/24 11:20:19',
+    state: 'Accepted',
+    titleId: 912,
+    title: 'Title 36',
+    user: 'User 12',
+    compiler: 'C',
+    memory: 1766,
+    runtime: 10.97
+  },
+  {
+    submittime: '2023/01/31 07:10:27',
+    state: 'Pending',
+    titleId: 240,
+    title: 'Title 76',
+    user: 'User 32',
+    compiler: 'C++',
+    memory: 603,
+    runtime: 5.88
+  },
+  {
+    submittime: '2023/04/30 20:12:01',
+    state: 'Rejected',
+    titleId: 480,
+    title: 'Title 71',
+    user: 'User 35',
+    compiler: 'Python',
+    memory: 2518,
+    runtime: 6.02
+  },
+  {
+    submittime: '2022/10/31 11:31:19',
+    state: 'Accepted',
+    titleId: 366,
+    title: 'Title 78',
+    user: 'User 28',
+    compiler: 'Python',
+    memory: 872,
+    runtime: 4.35
+  }
+]
 
 export const PostsList = [
   {
