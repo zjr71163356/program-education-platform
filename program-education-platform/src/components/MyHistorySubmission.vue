@@ -32,36 +32,5 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { historyRecords } from '@/data/data'
-const tableData = [
-  {
-    date: '2016-05-03',
-    title: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-02',
-    title: 'John',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-04',
-    title: 'Morgan',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles'
-  }
-]
+
 </script>

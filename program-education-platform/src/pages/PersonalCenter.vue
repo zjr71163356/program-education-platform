@@ -21,16 +21,7 @@
                       'group flex gap-x-3 rounded-md p-5 text-sm leading-6 font-semibold whitespace-nowrap' // Add 'whitespace-nowrap' class here
                     ]"
                   >
-                    <component
-                      :is="item.icon"
-                      :class="[
-                        item.current
-                          ? 'text-blue-600'
-                          : 'text-gray-400 group-hover:text-blue-600',
-                        'h-6 w-6 shrink-0'
-                      ]"
-                      aria-hidden="true"
-                    />
+ 
                     {{ item.name }}
                   </a>
                 </router-link>
@@ -59,10 +50,10 @@ import {
 } from '@heroicons/vue/24/outline'
 const router = useRoute()
 const navigation = ref([
-  { name: '我的课程', href: { name: 'MyClassList' }, icon: HomeIcon, current: false },
-  { name: '我的题解', href: {name:'MyProblemSolution'}, icon: UsersIcon, current: false },
-  { name: '我的讨论帖', href:{name:'MyDiscussionPost'}, icon: FolderIcon, current: false },
-  { name: '历史提交', href: {name:'MyHistorySubmission'}, icon: DocumentDuplicateIcon, current: false }
+  { name: '我的课程', href: { name: 'MyClassList' },   current: false },
+  { name: '我的题解', href: {name:'MyProblemSolution'},   current: false },
+  { name: '我的讨论帖', href:{name:'MyDiscussionPost'}, current: false },
+  { name: '历史提交', href: {name:'MyHistorySubmission'},   current: false }
 ])
 
 watch(

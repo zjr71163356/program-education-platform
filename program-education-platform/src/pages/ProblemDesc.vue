@@ -3,7 +3,7 @@
 
   <div class="flex w-screen">
     <div
-      class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2  container-height overflow-auto"
+      class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 container-height overflow-auto"
     >
       <div class="border border-neutral-100 px-6 py-4 dark:border-neutral-500">
         <h5 class="flex items-center justify-start text-neutral-500 dark:text-neutral-300">
@@ -21,7 +21,7 @@
     >
       <div class="bg-slate-100 flex justify-between content-center">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
-        <div class="w-1/4 flex">
+        <div class="w-1/2 flex justify-end">
           <router-link :to="{ name: 'PostList' }" class="self-center">
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
@@ -65,10 +65,32 @@
               <div class="self-center">题解</div>
             </div>
           </router-link>
+          <router-link :to="{ name: 'CurrentHistroySubmission' }" class="self-center">
+            <div
+              class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+
+              <div class="self-center">历史提交</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <CodeEditer :selectedlanguage="language" />
-      <FooterBanner class="bg-white footer-h p-5 ">
+      <FooterBanner class="bg-white footer-h p-5">
         <template #button>
           <button
             @click="openSubmitResult"

@@ -11,6 +11,7 @@ import ClassContent from '@/pages/ClassContent.vue'
 import SideBar from '@/components/SideBar.vue' 
 import MyProblemSolution from '@/components/MyProblemSolution.vue' 
 import MyDiscussionPost from '@/components/MyDiscussionPost.vue' 
+import CurrentHistroySubmission from '@/components/CurrentHistroySubmission.vue' 
 import MyHistorySubmission from '@/components/MyHistorySubmission.vue' 
 
 import ProblemDesc from '@/pages/ProblemDesc.vue'
@@ -55,6 +56,11 @@ const router = createRouter({
       path: '/ClassDesc',
       name: 'ClassDesc',
       component: ClassDesc
+    },
+    {
+      path: '/CurrentHistroySubmission',
+      name: 'CurrentHistroySubmission',
+      component: CurrentHistroySubmission
     },
     {
       path: '/SideBar',
