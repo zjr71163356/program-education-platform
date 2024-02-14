@@ -51,12 +51,9 @@
 </template>
 
 <script setup>
-import { ref, watch, defineProps, watchEffect } from 'vue'
-import { MdPreview } from 'md-editor-v3'
+ 
 import 'md-editor-v3/lib/preview.css'
-import code from '@/data/testcode.txt?raw'
-
-import { oneDark } from '@codemirror/theme-one-dark'
+ 
 const id = 'preview-only'
 
 import { SubmitResultDict } from '@/data/data'

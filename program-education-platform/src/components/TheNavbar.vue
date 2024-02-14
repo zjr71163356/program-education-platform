@@ -1,5 +1,5 @@
-<template >
-  <Disclosure as="nav" class="bg-blue-800 " v-slot="{ open }">
+<template>
+  <Disclosure as="nav" class="bg-blue-800" v-slot="{ open }">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-12 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -19,7 +19,7 @@
               <RouterLink
                 v-for="item in navigation"
                 :key="item.name"
-                :to="{ name:item.href.name }"
+                :to="{ name: item.href.name }"
                 :class="[
                   item.current
                     ? 'bg-blue-900 text-white'
@@ -71,13 +71,13 @@
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
+                  <RouterLink
+                   :to="{ name: 'TheProfile' }"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    >个人资料</a
+                    >个人资料</RouterLink
                   >
                 </MenuItem>
-   
+
                 <MenuItem v-slot="{ active }">
                   <a
                     href="#"
@@ -87,7 +87,6 @@
                 </MenuItem>
               </MenuItems>
             </transition>
-            
           </Menu>
           <div class="flex space-x-4 ml-2">
             <RouterLink
@@ -140,11 +139,9 @@ export default {
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
       { name: '课程', href: { name: 'ClassList' }, current: false },
-      { name: '题库', href: { name: 'QuestionBank' }, current: false }
+      { name: '题库', href: { name: 'ProblemBank' }, current: false }
     ])
-    const navigation2 = ref([
-      { name: '个人中心', href: { name: 'MyClassList' }, current: false }
-     ])
+    const navigation2 = ref([{ name: '个人中心', href: { name: 'MyClassList' }, current: false }])
 
     watch(
       () => router.name,
@@ -156,11 +153,12 @@ export default {
         navigation2.value.forEach((item) => {
           item.current = item.href.name === router.name
         })
-        
-      }
-    , { immediate: true })
+      },
+      { immediate: true }
+    )
     return {
-      navigation,navigation2
+      navigation,
+      navigation2
     }
   }
 }

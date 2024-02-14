@@ -1,25 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
 
-import ClassItem from '../components/ClassItem.vue'
-import ClassList from '@/pages/ClassList.vue'
-import MyClassList from '@/components/MyClassList.vue'
-import QuestionBank from '@/pages/ProblemBank.vue'
-import SignIn from '@/components/SignIn.vue'
-import ClassDesc from '@/pages/ClassDesc.vue'
-import ClassContent from '@/pages/ClassContent.vue'
-import SideBar from '@/components/SideBar.vue' 
-import MyProblemSolution from '@/components/MyProblemSolution.vue' 
-import MyDiscussionPost from '@/components/MyDiscussionPost.vue' 
-import CurrentHistroySubmission from '@/components/CurrentHistroySubmission.vue' 
-import MyHistorySubmission from '@/components/MyHistorySubmission.vue' 
-
-import ProblemDesc from '@/pages/ProblemDesc.vue'
-import PostList from '@/pages/PostList.vue'
-import PostDesc from '@/pages/PostDesc.vue'
-import PostAdd from '@/pages/PostAdd.vue'
-import SubmitResultDescPage from '@/pages/SubmitResultDescPage.vue'
-import PersonalCenter from '@/pages/PersonalCenter.vue'
+ 
+ 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
@@ -34,95 +17,100 @@ const router = createRouter({
     {
       path: '/ClassItem',
       name: 'ClassItem',
-      component: ClassItem
+      component: () => import('../components/ClassItem.vue')
     },
     {
       path: '/ClassList',
       name: 'ClassList',
-      component: ClassList
+      component: () => import('../pages/ClassList.vue')
     },
 
     {
-      path: '/QuestionBank',
-      name: 'QuestionBank',
-      component: QuestionBank
+      path: '/ProblemBank',
+      name: 'ProblemBank',
+      component: () => import('../pages/ProblemBank.vue')
     },
     {
       path: '/SignIn',
       name: 'SignIn',
-      component: SignIn
+      component: () => import('../components/SignIn.vue')
     },
     {
       path: '/ClassDesc',
       name: 'ClassDesc',
-      component: ClassDesc
+      component: () => import('../pages/ClassDesc.vue')
     },
     {
       path: '/CurrentHistroySubmission',
       name: 'CurrentHistroySubmission',
-      component: CurrentHistroySubmission
+      component: () => import('../components/CurrentHistroySubmission.vue')
     },
     {
       path: '/SideBar',
       name: 'SideBar',
-      component: SideBar
+      component: () => import('../components/SideBar.vue')
+    },
+    {
+      path: '/TheProfile',
+      name: 'TheProfile',
+      component: () => import('../pages/TheProfile.vue')
     },
     {
       path: '/ClassContent',
       name: 'ClassContent',
-      component: ClassContent,
+      component: () => import('../pages/ClassContent.vue'),
       props: true
     },
 
     {
       path: '/ProblemDesc',
       name: 'ProblemDesc',
-      component: ProblemDesc
+      component: () => import('../pages/ProblemDesc.vue')
     },
     {
       path: '/PostList',
       name: 'PostList',
-      component: PostList
+      component: ()=> import('../pages/PostList.vue')
     },
     {
       path: '/PostDesc',
       name: 'PostDesc',
-      component: PostDesc
+      component: ()=> import('../pages/PostDesc.vue')
     },
     {
       path: '/PostAdd',
       name: 'PostAdd',
-      component: PostAdd
+      component: ()=> import('../pages/PostAdd.vue')
     },
     {
       path: '/SubmitResultDescPage',
       name: 'SubmitResultDescPage',
-      component: SubmitResultDescPage
+      component: ()=> import('../pages/SubmitResultDescPage.vue')
     },
     {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: PersonalCenter,
+      component: () => import('../pages/PersonalCenter.vue'),
       children: [
         {
           path: 'MyClassList',
           name: 'MyClassList',
-          component: MyClassList
+          component: () => import('../components/MyClassList.vue')
         },
         {
           path: 'MyProblemSolution',
           name: 'MyProblemSolution',
-          component: MyProblemSolution
+          component: ()=> import('../components/MyProblemSolution.vue')
         },
         {
           path: 'MyDiscussionPost',
           name: 'MyDiscussionPost',
-          component: MyDiscussionPost
+          component: ()=> import('../components/MyDiscussionPost.vue')
         },
         {
           path: 'MyHistorySubmission',
           name: 'MyHistorySubmission',
-          component: MyHistorySubmission
+          component: ()=> import('../components/MyHistorySubmission.vue')
         }
       ]
     }
