@@ -110,7 +110,9 @@
 import { ref } from 'vue'
 import mdtext from '@/data/doc/test.md?raw'
 import { MdPreview } from 'md-editor-v3'
-
+import FooterBanner from '@/components/user/layout/FooterBanner.vue'
+import CodeEditer from '@/components/user/problem/CodeEditer.vue'
+import SubmitResult from '@/components/user/problem/SubmitResult.vue'
 const id = 'problem'
 const language = ref('')
 const text = ref(mdtext)

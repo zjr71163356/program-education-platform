@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import ClassItem from '../components/ClassItem.vue'
+import ClassItem from './ClassItem.vue'
 export default {
   components: { ClassItem },
   data() {

@@ -48,6 +48,6 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+ 
 import { historyRecords } from '@/data/data'
 </script>

@@ -156,10 +156,10 @@
   <!-- Container for demo purpose -->
 </template>
 <script setup>
-import SideBar from '../components/SideBar.vue'
-import SideBarDesc from '../components/SideBarDesc.vue'
+import SideBar from '../../components/user/layout/SideBar.vue'
+import SideBarDesc from '../../components/user/class/SideBarDesc.vue'
 import { ref } from 'vue'
-import Data from '../data/data'
+import Data from '../../data/data'
 
 const items = ref(Data.classInfo)
 </script>

@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import Data from '../data/data'
+import Data from '../../data/data'
 import { ref } from 'vue'
 const tagtype = ['success', 'info', 'warning', 'danger']
 const tableData = ref(Data.tableData)

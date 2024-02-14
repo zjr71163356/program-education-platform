@@ -17,38 +17,38 @@ const router = createRouter({
     {
       path: '/ClassItem',
       name: 'ClassItem',
-      component: () => import('../components/ClassItem.vue')
+      component: () => import('../components/user/class/ClassItem.vue')
     },
     {
       path: '/ClassList',
       name: 'ClassList',
-      component: () => import('../pages/ClassList.vue')
+      component: () => import('../pages/class/ClassList.vue')
     },
 
     {
       path: '/ProblemBank',
       name: 'ProblemBank',
-      component: () => import('../pages/ProblemBank.vue')
+      component: () => import('../pages/problem/ProblemBank.vue')
     },
     {
       path: '/SignIn',
       name: 'SignIn',
-      component: () => import('../components/SignIn.vue')
+      component: () => import('../components/user/SignIn.vue')
     },
     {
       path: '/ClassDesc',
       name: 'ClassDesc',
-      component: () => import('../pages/ClassDesc.vue')
+      component: () => import('../pages/class/ClassDesc.vue')
     },
     {
       path: '/CurrentHistroySubmission',
       name: 'CurrentHistroySubmission',
-      component: () => import('../components/CurrentHistroySubmission.vue')
+      component: () => import('../components/user/problem/CurrentHistroySubmission.vue')
     },
     {
       path: '/SideBar',
       name: 'SideBar',
-      component: () => import('../components/SideBar.vue')
+      component: () => import('../components/user/layout/SideBar.vue')
     },
     {
       path: '/TheProfile',
@@ -58,34 +58,34 @@ const router = createRouter({
     {
       path: '/ClassContent',
       name: 'ClassContent',
-      component: () => import('../pages/ClassContent.vue'),
+      component: () => import('../pages/class/ClassContent.vue'),
       props: true
     },
 
     {
       path: '/ProblemDesc',
       name: 'ProblemDesc',
-      component: () => import('../pages/ProblemDesc.vue')
+      component: () => import('../pages/problem/ProblemDesc.vue')
     },
     {
       path: '/PostList',
       name: 'PostList',
-      component: ()=> import('../pages/PostList.vue')
+      component:  () => import('@/pages/post/PostList.vue')
     },
     {
       path: '/PostDesc',
       name: 'PostDesc',
-      component: ()=> import('../pages/PostDesc.vue')
+      component:  () => import('@/pages/post/PostDesc.vue')
     },
     {
       path: '/PostAdd',
       name: 'PostAdd',
-      component: ()=> import('../pages/PostAdd.vue')
+      component:  () => import('@/pages/post/PostAdd.vue')
     },
     {
       path: '/SubmitResultDescPage',
       name: 'SubmitResultDescPage',
-      component: ()=> import('../pages/SubmitResultDescPage.vue')
+      component: ()=> import('../pages/problem/SubmitResultDescPage.vue')
     },
     {
       path: '/PersonalCenter',
@@ -95,22 +95,27 @@ const router = createRouter({
         {
           path: 'MyClassList',
           name: 'MyClassList',
-          component: () => import('../components/MyClassList.vue')
+          component: () => import('../components/user/class/MyClassList.vue')
         },
         {
           path: 'MyProblemSolution',
           name: 'MyProblemSolution',
-          component: ()=> import('../components/MyProblemSolution.vue')
+          component: ()=> import('../components/user/post/MyProblemSolution.vue')
         },
         {
           path: 'MyDiscussionPost',
           name: 'MyDiscussionPost',
-          component: ()=> import('../components/MyDiscussionPost.vue')
+          component: ()=> import('../components/user/post/MyDiscussionPost.vue')
         },
         {
           path: 'MyHistorySubmission',
           name: 'MyHistorySubmission',
-          component: ()=> import('../components/MyHistorySubmission.vue')
+          component: ()=> import('../components/user/problem/MyHistorySubmission.vue')
+        },
+        {
+          path: 'ClassManage',
+          name: 'ClassManage',
+          component: ()=> import('../components/user/problem/MyHistorySubmission.vue')
         }
       ]
     }

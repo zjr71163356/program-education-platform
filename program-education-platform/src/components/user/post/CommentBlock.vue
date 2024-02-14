@@ -61,6 +61,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import CommentPlugin from './CommentPlugin.vue'
 const props = defineProps({
   comments: Array
 })

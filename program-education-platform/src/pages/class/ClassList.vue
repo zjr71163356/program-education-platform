@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import ClassItem from '../components/ClassItem.vue'
+import ClassItem from '../../components/user/class/ClassItem.vue'
 export default {
   components: { ClassItem }
 }

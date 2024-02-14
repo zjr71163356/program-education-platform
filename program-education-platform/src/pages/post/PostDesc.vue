@@ -99,6 +99,7 @@ import { ref } from 'vue'
 import data from '@/data/doc/problemsolution.md?raw'
 import { MdPreview } from 'md-editor-v3'
 import { comments, PostInfo } from '@/data/data'
+import CommentBlock from '@/components/user/post/CommentBlock.vue'
 
 const id = 'problem'
 
