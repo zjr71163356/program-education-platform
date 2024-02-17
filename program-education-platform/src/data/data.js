@@ -124,7 +124,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容1。',
- 
+
         timestamp: '2024-01-27 13:00:00',
         likes: 5
       },
@@ -180,9 +180,7 @@ export const comments = [
     content: '这是另一条评论。',
     timestamp: '2024-01-29 14:20:00',
     likes: 9,
-    replies: [
- 
-    ]
+    replies: []
   },
   // Additional comments
   {
@@ -200,7 +198,7 @@ export const comments = [
         from_userId: 789,
         from_username: 'Alice',
         content: '回复内容3。',
- 
+
         timestamp: '2024-01-30 09:00:00',
         likes: 0
       }
@@ -221,7 +219,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容4。',
- 
+
         timestamp: '2024-01-31 11:30:00',
         likes: 8
       }
@@ -242,7 +240,7 @@ export const comments = [
         from_userId: 123,
         from_username: 'JohnDoe',
         content: '回复内容5。',
- 
+
         timestamp: '2024-02-01 16:00:00',
         likes: 7
       }
@@ -263,7 +261,7 @@ export const comments = [
         from_userId: 789,
         from_username: 'Alice',
         content: '回复内容6。',
- 
+
         timestamp: '2024-02-02 10:00:00',
         likes: 5
       }
@@ -284,7 +282,7 @@ export const comments = [
         from_userId: 456,
         from_username: 'JaneDoe',
         content: '回复内容7。',
- 
+
         timestamp: '2024-02-03 12:15:00',
         likes: 4
       }
@@ -304,7 +302,7 @@ export const SubmitResultDict = {
   状态: '编译错误',
   评测时间: '2024/01/23 16:06:10'
 }
-export const historyRecords =[
+export const historyRecords = [
   {
     submittime: '2023/05/12 07:33:26',
     state: 'Accepted',
@@ -479,54 +477,203 @@ export const PostsList = [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
   }
 ]
-export const PostInfo={
+export const PostInfo = {
   user: '虚无void',
   time: '2024/02/07 14:45:18',
   like: 20,
-  title:'实验二: 分治法算法的设计与实现'
+  title: '实验二: 分治法算法的设计与实现'
 }
-export const classdata=[
+export const classdata = [
   {
-    "name": "JavaScript基础入门",
-    "chapterCount": 10,
-    "tag": ["JavaScript", "编程基础"],
-    "Introduction": "这门课程旨在帮助初学者建立对JavaScript编程的基本理解。通过十个章节，学生将学到JavaScript的基础语法、变量、数据类型、控制流等内容，为进一步学习打下坚实基础。"
+    name: 'JavaScript基础入门',
+    chapterCount: 10,
+    tag: ['JavaScript', '编程基础'],
+    Introduction:
+      '这门课程旨在帮助初学者建立对JavaScript编程的基本理解。通过十个章节，学生将学到JavaScript的基础语法、变量、数据类型、控制流等内容，为进一步学习打下坚实基础。'
   },
   {
-    "name": "前端开发实战入门",
-    "chapterCount": 15,
-    "tag": ["JavaScript", "前端开发"],
-    "Introduction": "本课程将深入介绍JavaScript在前端开发中的应用。学生将学到DOM操作、事件处理、Ajax等前端开发基础知识，并通过实际项目实战演练，提升实际编码能力。"
+    name: '前端开发实战入门',
+    chapterCount: 15,
+    tag: ['JavaScript', '前端开发'],
+    Introduction:
+      '本课程将深入介绍JavaScript在前端开发中的应用。学生将学到DOM操作、事件处理、Ajax等前端开发基础知识，并通过实际项目实战演练，提升实际编码能力。'
   },
   {
-    "name": "Node.js后端开发入门",
-    "chapterCount": 12,
-    "tag": ["JavaScript", "后端开发", "Node.js"],
-    "Introduction": "这门课程专注于使用JavaScript进行后端开发，介绍Node.js的基本概念、Express框架、数据库连接等内容。学生将通过构建简单的后端应用，了解全栈开发的基本流程。"
+    name: 'Node.js后端开发入门',
+    chapterCount: 12,
+    tag: ['JavaScript', '后端开发', 'Node.js'],
+    Introduction:
+      '这门课程专注于使用JavaScript进行后端开发，介绍Node.js的基本概念、Express框架、数据库连接等内容。学生将通过构建简单的后端应用，了解全栈开发的基本流程。'
   },
   {
-    "name": "React框架深入解析",
-    "chapterCount": 20,
-    "tag": ["JavaScript", "前端开发", "React"],
-    "Introduction": "本课程将深入探讨React框架，包括组件、状态管理、路由等高级主题。学生将通过实际项目实践，掌握React在现代前端开发中的核心概念和最佳实践。"
+    name: 'React框架深入解析',
+    chapterCount: 20,
+    tag: ['JavaScript', '前端开发', 'React'],
+    Introduction:
+      '本课程将深入探讨React框架，包括组件、状态管理、路由等高级主题。学生将通过实际项目实践，掌握React在现代前端开发中的核心概念和最佳实践。'
   },
   {
-    "name": "Python编程基础",
-    "chapterCount": 12,
-    "tag": ["Python", "编程基础"],
-    "Introduction": "这门课程旨在帮助初学者建立对Python编程的基本理解。通过十二个章节，学生将学到Python的基础语法、数据类型、函数等内容，为编写简单脚本和应用程序打下基础。"
+    name: 'Python编程基础',
+    chapterCount: 12,
+    tag: ['Python', '编程基础'],
+    Introduction:
+      '这门课程旨在帮助初学者建立对Python编程的基本理解。通过十二个章节，学生将学到Python的基础语法、数据类型、函数等内容，为编写简单脚本和应用程序打下基础。'
   },
   {
-    "name": "Java面向对象编程",
-    "chapterCount": 15,
-    "tag": ["Java", "面向对象"],
-    "Introduction": "本课程将深入介绍Java编程中的面向对象概念。学生将学到类、继承、多态等面向对象编程的基础知识，并通过实际案例进行实践，提升对Java编程的理解和应用能力。"
+    name: 'Java面向对象编程',
+    chapterCount: 15,
+    tag: ['Java', '面向对象'],
+    Introduction:
+      '本课程将深入介绍Java编程中的面向对象概念。学生将学到类、继承、多态等面向对象编程的基础知识，并通过实际案例进行实践，提升对Java编程的理解和应用能力。'
   },
   {
-    "name": "C++高级编程技术",
-    "chapterCount": 18,
-    "tag": ["C++", "高级编程"],
-    "Introduction": "这门课程专注于C++编程语言的高级主题。学生将学到模板、多线程编程、异常处理等高级技术，并通过实际项目演练，深入理解C++在系统级和应用级编程中的应用。"
+    name: 'C++高级编程技术',
+    chapterCount: 18,
+    tag: ['C++', '高级编程'],
+    Introduction:
+      '这门课程专注于C++编程语言的高级主题。学生将学到模板、多线程编程、异常处理等高级技术，并通过实际项目演练，深入理解C++在系统级和应用级编程中的应用。'
+  }
+]
+export const classoutline = [
+  {
+    title: '介绍编程和学习路径',
+    chapterNumber: 1,
+    subchapters: [
+      {
+        title: '为什么学习编程',
+        chapterNumber: 1.1
+      },
+      {
+        title: '选择编程语言',
+        chapterNumber: 1.2
+      }
+    ]
+  },
+  {
+    title: '安装和设置开发环境',
+    chapterNumber: 2,
+    subchapters: [
+      {
+        title: '选择开发工具',
+        chapterNumber: 2.1
+      },
+      {
+        title: '配置编辑器',
+        chapterNumber: 2.2
+      }
+    ]
+  },
+  {
+    title: '编写并运行你的第一个程序',
+    chapterNumber: 3,
+    subchapters: [
+      {
+        title: '编写简单的Hello World程序',
+        chapterNumber: 3.1
+      },
+      {
+        title: '运行程序并查看输出',
+        chapterNumber: 3.2
+      }
+    ]
+  },
+  {
+    title: '理解变量和不同的数据类型',
+    chapterNumber: 4,
+    subchapters: [
+      {
+        title: '声明和使用变量',
+        chapterNumber: 4.1
+      },
+      {
+        title: '学习不同的数据类型',
+        chapterNumber: 4.2
+      }
+    ]
+  },
+  {
+    title: '探索条件语句和循环结构',
+    chapterNumber: 5,
+    subchapters: [
+      {
+        title: '使用if语句进行条件判断',
+        chapterNumber: 5.1
+      },
+      {
+        title: '学习for和while循环',
+        chapterNumber: 5.2
+      }
+    ]
+  },
+  {
+    title: '学习如何创建和使用函数',
+    chapterNumber: 6,
+    subchapters: [
+      {
+        title: '定义和调用函数',
+        chapterNumber: 6.1
+      },
+      {
+        title: '函数参数和返回值',
+        chapterNumber: 6.2
+      }
+    ]
+  },
+  {
+    title: '使用数组和列表进行数据处理',
+    chapterNumber: 7,
+    subchapters: [
+      {
+        title: '创建和操作数组',
+        chapterNumber: 7.1
+      },
+      {
+        title: '使用列表进行数据处理',
+        chapterNumber: 7.2
+      }
+    ]
+  },
+  {
+    title: '掌握面向对象编程的基础概念',
+    chapterNumber: 8,
+    subchapters: [
+      {
+        title: '了解类和对象',
+        chapterNumber: 8.1
+      },
+      {
+        title: '继承和多态',
+        chapterNumber: 8.2
+      }
+    ]
+  },
+  {
+    title: '解决错误和异常的处理技巧',
+    chapterNumber: 9,
+    subchapters: [
+      {
+        title: '常见错误类型',
+        chapterNumber: 9.1
+      },
+      {
+        title: '异常处理方法',
+        chapterNumber: 9.2
+      }
+    ]
+  },
+  {
+    title: '应用所学知识进行实际项目开发',
+    chapterNumber: 10,
+    subchapters: [
+      {
+        title: '选择项目和制定计划',
+        chapterNumber: 10.1
+      },
+      {
+        title: '项目开发和测试',
+        chapterNumber: 10.2
+      }
+    ]
   }
 ]
 

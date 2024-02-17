@@ -1,8 +1,8 @@
 <template lang="">
   <el-steps :active="1" align-center class="mt-5">
-    <el-step title="Step 1" />
-    <el-step title="Step 2" />
-    <el-step title="Step 3" />
+    <el-step title="添加课程信息" />
+    <el-step title="添加课程章节详情" />
+    <el-step title="完成" />
   </el-steps>
 
   <div class="mt-5 flex flex-col items-center">
@@ -45,12 +45,12 @@
         </el-form-item>
         <el-form-item label="课程封面">
           <el-button plain @click="dialogVisible = true">点击此处上传封面 </el-button>
-          <el-dialog v-model="dialogVisible" title="上传封面" width="500"  >
-           <router-view></router-view>
+          <el-dialog v-model="dialogVisible" title="上传封面" width="500">
+            <component :is="currentStepComponent"></component>
             <template #footer>
               <div class="dialog-footer">
                 <el-button @click="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click="dialogVisible = false"> 确定 </el-button>
+                <el-button @click="nextStep">下一步</el-button>
               </div>
             </template>
           </el-dialog>
@@ -63,10 +63,11 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, nextTick } from 'vue'
+import { ref, reactive, nextTick, computed } from 'vue'
 import { ElInput } from 'element-plus'
 import { useRouter } from 'vue-router' // Add this import statement
-
+import UploadPicture from './UploadPicture.vue'
+import CutPicture from './CutPicture.vue'
 const textarea1 = ref('')
 const inputValue = ref('')
 const dynamicTags = ref([])
@@ -102,5 +103,26 @@ const form = reactive({
 
 const onSubmit = () => {
   router.push({ name: 'ClassAddStepTwo' }) // Replace this line
+}
+const currentStep = ref(1)
+
+const currentStepComponent = computed(() => {
+  switch (currentStep.value) {
+    case 1:
+      return UploadPicture
+    case 2:
+      return CutPicture
+    // 添加更多的步骤...
+    default:
+      return null
+  }
+})
+
+const nextStep = () => {
+  currentStep.value++
+  if (currentStep.value === 3) {
+    dialogVisible.value = false
+    currentStep.value = 1
+  }
 }
 </script>
