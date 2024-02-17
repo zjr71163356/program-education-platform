@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card " >
+  <el-card class="box-card w-4/5" >
     <template #header>
       <div class="card-header">
         <h1>题库</h1>
@@ -18,7 +18,7 @@
           <div class="flex">
             <el-tag
               v-for="(tag, index) in scope.row.tag"
-              :type="tagtype[index]"
+              :type="stringToTag(tag)"
               :key="index"
               class="margin"
               >{{ tag }}
@@ -41,7 +41,8 @@
 <script setup>
 import Data from '../../data/data'
 import { ref } from 'vue'
-const tagtype = ['success', 'info', 'warning', 'danger']
+import {stringToTag} from '@/utils/tools.js'
+ 
 const tableData = ref(Data.tableData)
 </script>
 

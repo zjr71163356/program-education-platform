@@ -17,7 +17,7 @@ import TheNavbar from './components/user/layout/TheNavbar.vue'
 <style scoped>
 RouterLink {
   text-decoration: none;
-  display: block;
+ 
 }
 .container-height {
   height: calc(100vh - 48px);

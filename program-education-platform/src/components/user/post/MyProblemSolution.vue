@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" stripe  style="width: 100%">
+  <el-table :data="tableData"    style="width: 100%">
     <el-table-column label="标题" prop="title" >
     <template #default="{ row }">
       <router-link class="text-sky-400" :to="{ name: 'PostDesc', params: { id: row.id } }">{{

@@ -41,21 +41,15 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router' // Import the 'router' object from the 'vue-router' package
-import {
  
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon
-} from '@heroicons/vue/24/outline'
 const router = useRoute()
 const navigation = ref([
   { name: '我的课程', href: { name: 'MyClassList' },   current: false },
   { name: '我的题解', href: {name:'MyProblemSolution'},   current: false },
   { name: '我的讨论帖', href:{name:'MyDiscussionPost'}, current: false },
   { name: '历史提交', href: {name:'MyHistorySubmission'},   current: false },
-  { name: '课程管理', href: {name:'MyHistorySubmission'},   current: false },
-  { name: '题目管理', href: {name:'MyHistorySubmission'},   current: false }
+  { name: '课程管理', href: {name:'ClassManage'},   current: false },
+  { name: '题目管理', href: {name:'ProblemManage'},   current: false }
 ])
 
 watch(

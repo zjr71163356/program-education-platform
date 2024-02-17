@@ -1,6 +1,6 @@
 <template>
   <!-- Card -->
-  <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-center w-4/5">
+  <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-center w-full">
     <!-- Card header -->
     <div class="border-b-2 border-neutral-100 px-6 py-4 dark:border-neutral-500">
       <h5 class="flex items-center justify-center text-neutral-500 dark:text-neutral-300 text-3xl">

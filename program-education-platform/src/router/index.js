@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
 
- 
- 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
@@ -48,7 +46,7 @@ const router = createRouter({
     {
       path: '/SideBar',
       name: 'SideBar',
-      component: () => import('../components/user/layout/SideBar.vue')
+      component: () => import('../components/user/class/SideBar.vue')
     },
     {
       path: '/TheProfile',
@@ -70,27 +68,27 @@ const router = createRouter({
     {
       path: '/PostList',
       name: 'PostList',
-      component:  () => import('@/pages/post/PostList.vue')
+      component: () => import('@/pages/post/PostList.vue')
     },
     {
       path: '/PostDesc',
       name: 'PostDesc',
-      component:  () => import('@/pages/post/PostDesc.vue')
+      component: () => import('@/pages/post/PostDesc.vue')
     },
     {
       path: '/PostAdd',
       name: 'PostAdd',
-      component:  () => import('@/pages/post/PostAdd.vue')
+      component: () => import('@/pages/post/PostAdd.vue')
     },
     {
       path: '/SubmitResultDescPage',
       name: 'SubmitResultDescPage',
-      component: ()=> import('../pages/problem/SubmitResultDescPage.vue')
+      component: () => import('../pages/problem/SubmitResultDescPage.vue')
     },
     {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: () => import('../pages/PersonalCenter.vue'),
+      component: () => import('../pages/PersonalCenterTest.vue'),
       children: [
         {
           path: 'MyClassList',
@@ -100,22 +98,37 @@ const router = createRouter({
         {
           path: 'MyProblemSolution',
           name: 'MyProblemSolution',
-          component: ()=> import('../components/user/post/MyProblemSolution.vue')
+          component: () => import('../components/user/post/MyProblemSolution.vue')
         },
         {
           path: 'MyDiscussionPost',
           name: 'MyDiscussionPost',
-          component: ()=> import('../components/user/post/MyDiscussionPost.vue')
+          component: () => import('../components/user/post/MyDiscussionPost.vue')
         },
         {
           path: 'MyHistorySubmission',
           name: 'MyHistorySubmission',
-          component: ()=> import('../components/user/problem/MyHistorySubmission.vue')
+          component: () => import('../components/user/problem/MyHistorySubmission.vue')
         },
         {
-          path: 'ClassManage',
-          name: 'ClassManage',
-          component: ()=> import('../components/user/problem/MyHistorySubmission.vue')
+          path: 'ClassListManage',
+          name: 'ClassListManage',
+          component: () => import('@/components/teacher/class/ClassListManage.vue')
+        },
+        {
+          path: 'ProblemManage',
+          name: 'ProblemManage',
+          component: () => import('@/components/teacher/problem/ProblemManage.vue')
+        },
+        {
+          path: 'ClassAddStepOne',
+          name: 'ClassAddStepOne',
+          component: () => import('@/components/teacher/class/ClassAddStepOne.vue')
+        },
+        {
+          path: 'ClassAddStepTwo',
+          name: 'ClassAddStepTwo',
+          component: () => import('@/components/teacher/class/ClassAddStepTwo.vue')
         }
       ]
     }

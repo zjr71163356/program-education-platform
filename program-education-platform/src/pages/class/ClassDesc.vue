@@ -156,7 +156,7 @@
   <!-- Container for demo purpose -->
 </template>
 <script setup>
-import SideBar from '../../components/user/layout/SideBar.vue'
+import SideBar from '../../components/user/class/SideBar.vue'
 import SideBarDesc from '../../components/user/class/SideBarDesc.vue'
 import { ref } from 'vue'
 import Data from '../../data/data'
