@@ -478,6 +478,7 @@ export const PostsList = [
   }
 ]
 export const PostInfo = {
+  Id: 1,
   user: '虚无void',
   time: '2024/02/07 14:45:18',
   like: 20,
@@ -674,6 +675,88 @@ export const classoutline = [
         chapterNumber: 10.2
       }
     ]
+  }
+]
+export const userList = [
+  {
+    userId: 1,
+    username: 'user1',
+    avatar: 'https://example.com/avatar1.jpg',
+    role: '管理员',
+    password: 'secure_password1',
+    account: 'account_user1'
+  },
+  {
+    userId: 2,
+    username: 'user2',
+    avatar: 'https://example.com/avatar2.jpg',
+    role: '教师',
+    password: 'secure_password2',
+    account: 'account_user2'
+  },
+  {
+    userId: 3,
+    username: 'user3',
+    avatar: 'https://example.com/avatar3.jpg',
+    role: '学生',
+    password: 'secure_password3',
+    account: 'account_user3'
+  },
+  {
+    userId: 4,
+    username: 'user4',
+    avatar: 'https://example.com/avatar4.jpg',
+    role: '学生',
+    password: 'secure_password4',
+    account: 'account_user4'
+  },
+  {
+    userId: 5,
+    username: 'user5',
+    avatar: 'https://example.com/avatar5.jpg',
+    role: '学生',
+    password: 'secure_password5',
+    account: 'account_user5'
+  },
+  {
+    userId: 6,
+    username: 'user6',
+    avatar: 'https://example.com/avatar6.jpg',
+    role: '学生',
+    password: 'secure_password6',
+    account: 'account_user6'
+  },
+  {
+    userId: 7,
+    username: 'user7',
+    avatar: 'https://example.com/avatar7.jpg',
+    role: '学生',
+    password: 'secure_password7',
+    account: 'account_user7'
+  },
+  {
+    userId: 8,
+    username: 'user8',
+    avatar: 'https://example.com/avatar8.jpg',
+    role: '学生',
+    password: 'secure_password8',
+    account: 'account_user8'
+  },
+  {
+    userId: 9,
+    username: 'user9',
+    avatar: 'https://example.com/avatar9.jpg',
+    role: '学生',
+    password: 'secure_password9',
+    account: 'account_user9'
+  },
+  {
+    userId: 10,
+    username: 'user10',
+    avatar: 'https://example.com/avatar10.jpg',
+    role: '学生',
+    password: 'secure_password10',
+    account: 'account_user10'
   }
 ]
 

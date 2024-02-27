@@ -12,8 +12,8 @@
           alt=""
         />
         <p class="text-sm leading-6 text-gray-900">{{ comment['from_username'] }}</p>
-        <p class="  text-xs leading-5 text-gray-500 justify-self-end    ">
-        <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'] }}</time>
+        <p class="text-xs leading-5 text-gray-500 justify-self-end">
+          <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'] }}</time>
         </p>
         <p v-if="comment.to_username" class="justify-self-start text-gray-500">
           回复了 {{ comment['to_username'] }}的评论
@@ -42,26 +42,51 @@
 
           <p class="text-gray-500">{{ comment['likes'] }}</p>
         </div>
+
         <div
           class="flex items-center text-gray-500 cursor-pointer"
           @click="toggleCommentVis(index)"
         >
           回复
         </div>
+
+        <div
+          class="flex items-center text-gray-500 cursor-pointer"
+          @click="showdeleteDialog(index)"
+        >
+          删除
+        </div>
       </div>
     </div>
     <CommentPlugin v-if="showComment[index]" class="grow w-full" :small="true" />
-    <ul v-if="comment.replies && comment.replies.length > 0"  class="w-11/12 self-end bg-slate-200 px-6 rounded-lg my-1">
-      <CommentBlock
-        
-        :comments="comment.replies"
-      />
+    <ul
+      v-if="comment.replies && comment.replies.length > 0"
+      class="w-11/12 self-end bg-slate-200 px-6 rounded-lg my-1"
+    >
+      <CommentBlock :comments="comment.replies" />
     </ul>
   </li>
+  <DeleteDialog :isVisible="dialogVisible" @confirm-delete="handleDelete" />
 </template>
 <script setup>
 import { ref } from 'vue'
 import CommentPlugin from './CommentPlugin.vue'
+const DeleteId = ref('')
+const showdeleteDialog = (Id) => {
+  DeleteId.value = Id
+  dialogVisible.value = true
+}
+const dialogVisible = ref(false)
+const handleDelete = (userConfirmed) => {
+  dialogVisible.value = false
+  if (userConfirmed) {
+    // 如果用户确认删除，那么删除数据
+    console.log('delete')
+  } else {
+    // 如果用户没有确认删除，那么不做任何事情
+    console.log('cancel')
+  }
+}
 const props = defineProps({
   comments: Array
 })

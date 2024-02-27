@@ -28,6 +28,7 @@
       </el-table-column>
       <el-table-column prop="difficulty" label="难度" />
       <el-table-column prop="acceptRate" label="通过率" />
+     
     </el-table>
 
     <template #footer>
@@ -39,7 +40,7 @@
 </template>
 
 <script setup>
-import Data from '../../data/data'
+import Data from '../../../data/data'
 import { ref } from 'vue'
 import {stringToTag} from '@/utils/tools.js'
  

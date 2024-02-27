@@ -55,10 +55,12 @@
             </template>
           </el-dialog>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">保存并下一步</el-button>
-        </el-form-item>
+ 
       </el-form>
+    </div>
+    <div class="flex gap-5">
+      <el-button>保存</el-button>
+      <el-button type="primary" @click="onSubmit">下一步</el-button>
     </div>
   </div>
 </template>

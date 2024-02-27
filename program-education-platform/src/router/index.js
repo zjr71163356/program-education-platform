@@ -26,12 +26,12 @@ const router = createRouter({
     {
       path: '/ProblemBank',
       name: 'ProblemBank',
-      component: () => import('../pages/problem/ProblemBank.vue')
+      component: () => import('../components/user/problem/ProblemBank.vue')
     },
     {
       path: '/SignIn',
       name: 'SignIn',
-      component: () => import('../components/user/SignIn.vue')
+      component: () => import('../components/user/profile/SignIn.vue')
     },
     {
       path: '/ClassDesc',
@@ -86,9 +86,14 @@ const router = createRouter({
       component: () => import('../pages/problem/SubmitResultDescPage.vue')
     },
     {
+      path: '/EditPassword',
+      name: 'EditPassword',
+      component: () => import('../components/user/profile/EditPassword.vue')
+    },
+    {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: () => import('../pages/PersonalCenterTest.vue'),
+      component: () => import('../pages/PersonalCenter.vue'),
       children: [
         {
           path: 'MyClassList',
@@ -118,7 +123,7 @@ const router = createRouter({
         {
           path: 'ProblemManage',
           name: 'ProblemManage',
-          component: () => import('@/components/teacher/problem/ProblemManage.vue')
+          component: () => import('@/components/teacher/problem/ProblemBankManage.vue')
         },
         {
           path: 'ClassAddStepOne',
@@ -129,7 +134,43 @@ const router = createRouter({
           path: 'ClassAddStepTwo',
           name: 'ClassAddStepTwo',
           component: () => import('@/components/teacher/class/ClassAddStepTwo.vue')
-        }
+        },
+        {
+          path: 'ClassAddStepThree',
+          name: 'ClassAddStepThree',
+          component: () => import('@/components/teacher/class/ClassAddStepThree.vue')
+        },
+        {
+          path: 'ProblemAddStepOne',
+          name: 'ProblemAddStepOne',
+          component: () => import('@/components/teacher/problem/ProblemAddStepOne.vue')
+        },
+        {
+          path: 'ProblemAddStepTwo',
+          name: 'ProblemAddStepTwo',
+          component: () => import('@/components/teacher/problem/ProblemAddStepTwo.vue')
+        },
+        {
+          path: 'ProblemAddStepThree',
+          name: 'ProblemAddStepThree',
+          component: () => import('@/components/teacher/problem/ProblemAddStepThree.vue')
+        },
+        {
+          path: 'UserList',
+          name: 'UserList',
+          component: () => import('@/components/admin/UserList.vue')
+        },
+        {
+          path: 'UserDesc/:id',
+          name: 'UserDesc',
+          component: () => import('@/components/admin/UserDesc.vue'),
+          props: true
+        },
+        {
+          path: 'EditUserPassword',
+          name: 'EditUserPassword',
+          component: () => import('@/components/admin/EditUserPassword.vue')
+        },
       ]
     }
   ]

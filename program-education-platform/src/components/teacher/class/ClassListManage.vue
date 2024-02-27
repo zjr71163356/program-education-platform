@@ -2,9 +2,7 @@
   <el-table :data="classdata" style="width: 100%">
     <el-table-column prop="name" label="课程名称">
       <template #default="{ row }">
-        <router-link class="text-sky-400" :to="{ name: 'ClassDesc'  }">{{
-          row.name
-        }}</router-link>
+        <router-link class="text-sky-400" :to="{ name: 'ClassDesc' }">{{ row.name }}</router-link>
       </template>
     </el-table-column>
     <el-table-column prop="chapterCount" label="章节数量" />
@@ -23,14 +21,11 @@
     </el-table-column>
     <el-table-column prop="Introduction" label="简介" :show-overflow-tooltip="true" />
     <el-table-column align="right">
-      <template #header> </template>
       <template #default>
-        <router-link :to="{ name: 'ClassAddStepOne' }">
-          <div class="flex justify-center">
-            <el-button size="small" type="primary">编辑</el-button>
-     
-          </div>
-        </router-link>
+        <div class="flex justify-center">
+          <el-button size="small" type="primary" @click="toEdit">编辑</el-button>
+          <el-button size="small" type="danger">删除</el-button>
+        </div>
       </template>
     </el-table-column>
   </el-table>
@@ -39,5 +34,10 @@
 <script setup>
 import { classdata } from '@/data/data.js'
 import { stringToTag } from '@/utils/tools.js'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const toEdit = () => {
+  router.push({ name: 'ClassAddStepOne' })
+}
 </script>
 <style lang=""></style>
