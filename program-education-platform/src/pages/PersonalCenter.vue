@@ -134,8 +134,8 @@ const menuItems = [
         label: '用户列表'
       },
       {
-        index: 'ProblemAddStepOne',
-        route: { name: 'ProblemAddStepOne' },
+        index: 'AddUser',
+        route: { name: 'AddUser' },
         icon: DocumentAdd,
         label: '添加题目'
       }

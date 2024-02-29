@@ -28,7 +28,10 @@
                   >头像</label
                 >
                 <div class="mt-2 flex items-center gap-x-3">
-                  <img   class="h-12 w-12 flex-none rounded-full bg-gray-50" :src="'https://ui-avatars.com/api/?name=' + userInfo.username" />
+                  <img
+                    class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                    :src="'https://ui-avatars.com/api/?name=' + userInfo.username"
+                  />
                   <button
                     type="button"
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -62,31 +65,7 @@
                   </div>
                 </div>
               </div>
-              <div class="sm:col-span-4">
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
-                  >用户Id</label
-                >
-                <div class="mt-2">
-                  <div
-                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
-                  >
-                    <span
-                      class="flex select-none items-center pl-3 text-gray-500 sm:text-sm"
-                    ></span>
 
-                    <input
-                      type="text"
-                      name="userid"
-                      id="userid"
-                      autocomplete="userid"
-                      class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder=""
-                      v-model="userid"
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
               <div class="sm:col-span-4">
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
                   >账号</label
@@ -135,33 +114,32 @@
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
                   >密码
                 </label>
-          
-                  <div class="mt-2 w-full">
-                    <div
-                      class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
-                    >
-                      <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                      </span>
 
-                      <input
-                        :type="showPassword==='显示密码'?'password':'text'"
-                        name="username"
-                        id="username"
-                        autocomplete="username"
-                        class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder=""
-                        v-model="userInfo.password"
-                      />
-                      <button
+                <div class="mt-2 w-full">
+                  <div
+                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
+                  >
+                    <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
+                    </span>
+
+                    <input
+                      :type="showPassword === '显示密码' ? 'password' : 'text'"
+                      name="username"
+                      id="username"
+                      autocomplete="username"
+                      class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder=""
+                      v-model="userInfo.password"
+                    />
+                    <button
                       type="button"
                       class="justify-self-start rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                    @click="toggleShowPassword">
+                      @click="toggleShowPassword"
+                    >
                       {{ showPassword }}
                     </button>
-                    </div>
                   </div>
-     
-           
+                </div>
               </div>
 
               <!-- <hr/> -->
@@ -179,27 +157,23 @@
       </form>
     </div>
   </div>
- 
+  <!-- Card -->
 </template>
 
 <script setup>
- 
-import { useRoute } from 'vue-router'
-import { userList } from '@/data/data.js'
-import {  ref } from 'vue'
-const route = useRoute()
-const userid = route.params.id
-const userInfo = ref(userList[userid - 1])
+import { ref } from 'vue'
+
+const userInfo = ref('')
 const showPassword = ref('显示密码')
 const toggleShowPassword = () => {
   if (showPassword.value === '显示密码') {
     showPassword.value = '隐藏密码'
- 
   } else {
     showPassword.value = '显示密码'
-   
   }
 }
 
- 
+// watch(()=>userInfo.value.role,(newVal,oldVal)=>{
+//   console.log(newVal,oldVal)
+// })
 </script>

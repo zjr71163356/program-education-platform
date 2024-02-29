@@ -171,6 +171,11 @@ const router = createRouter({
           name: 'EditUserPassword',
           component: () => import('@/components/admin/EditUserPassword.vue')
         },
+        {
+          path: 'AddUser',
+          name: 'AddUser',
+          component: () => import('@/components/admin/AddUser.vue')
+        },
       ]
     }
   ]

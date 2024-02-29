@@ -114,4 +114,6 @@ const options=[
   },
 ]
 </script>
-<style lang=""></style>
+<style scoped>:deep(.el-input__inner) {
+  --tw-ring-shadow: 0 0 #000000;
+}</style>

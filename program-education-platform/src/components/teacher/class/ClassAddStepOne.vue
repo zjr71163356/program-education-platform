@@ -128,3 +128,8 @@ const nextStep = () => {
   }
 }
 </script>
+<style scoped>
+:deep(.el-input__inner) {
+  --tw-ring-shadow: 0 0 #000000;
+}
+</style>
