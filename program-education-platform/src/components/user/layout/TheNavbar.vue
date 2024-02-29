@@ -46,7 +46,7 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src="https://ui-avatars.com/api/?name="
                   alt=""
                 />
               </MenuButton>
@@ -73,10 +73,11 @@
                 <MenuItem v-slot="{ active }">
                   <a
                     href="#"
+                    @click="logout"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >退出账号</a
                   >
-                </MenuItem>
+                </MenuItem  >
               </MenuItems>
             </transition>
           </Menu>
@@ -113,6 +114,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { RouterLink, useRoute } from 'vue-router'
 import { watch, ref } from 'vue'
+import { ElMessage } from 'element-plus'
 export default {
   components: {
     Disclosure,
@@ -126,7 +128,15 @@ export default {
     XMarkIcon,
     RouterLink
   },
+  methods: {
+    logout() {
+      localStorage.removeItem('token')
+      console.log('logout')
+      ElMessage.success('退出成功')
+    }
+  },
   setup() {
+
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
@@ -148,6 +158,10 @@ export default {
       },
       { immediate: true }
     )
+    const logout=()=>{
+      localStorage.removeItem('token')
+      console.log('logout')
+    }
     return {
       navigation,
       navigation2

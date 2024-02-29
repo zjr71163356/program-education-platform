@@ -1,33 +1,28 @@
-
 <template>
-
-  <div class="bg-white h-screen w-screen  fixed top-0 left-0">
+  <div class="bg-white h-screen w-screen fixed top-0 left-0">
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <SuccessAlert class="w-1/5 self-center" :message="'登录'" :IsShow="IsShowSuccess" />
+      <ErrorAlert class="w-1/5 self-center" :message="'登录失败，请检查用户名是否存在以及密码是否正确'" :IsShow="IsShowError" />
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          class="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
-        />
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           登录你的账号
         </h2>
       </div>
-
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="#" method="POST">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
-              >邮箱地址</label
+              >账号</label
             >
             <div class="mt-2">
               <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
+                id="account"
+                name="account"
+                type="account"
+                autocomplete="account"
                 required=""
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="ps-3 pe-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                v-model="loginModel.account"
               />
             </div>
           </div>
@@ -37,11 +32,6 @@
               <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
                 >密码</label
               >
-              <div class="text-sm">
-                <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >忘记密码?</a
-                >
-              </div>
             </div>
             <div class="mt-2">
               <input
@@ -50,7 +40,8 @@
                 type="password"
                 autocomplete="current-password"
                 required=""
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                v-model="loginModel.password"
               />
             </div>
           </div>
@@ -58,28 +49,60 @@
           <div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              @click="login"
             >
               登录
             </button>
           </div>
         </form>
-
-        <p class="mt-10 text-center text-sm text-gray-500">
-          还未注册?
-          {{ ' ' }}
-          <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >马上注册</a
-          >
-        </p>
+        <router-link :to="{name:'TheRegister'}">
+          <p class="mt-10 text-center text-sm text-gray-500">
+            还未注册?
+            {{ ' ' }}
+            <a href="#" class="font-semibold leading-6 text-blue-600 hover:text-blue-500"
+              >马上注册</a
+            >
+          </p>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {}
-</script>
-<style scoped>
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+ 
+import SuccessAlert from '@/components/user/SuccessAlert.vue'
+const router = useRouter()
+const loginModel = ref({
+  account:'',
 
-</style>
+  password: ''
+})
+const IsShowSuccess = ref(false)
+const IsShowError = ref(false)
+const login = async () => {
+ 
+  // const response = await fetch('/api/login', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({ username, password })
+  // })
+  // const { token } = await response.json()
+  const token = '123'
+  if (token) {
+    localStorage.setItem('token', token)
+    IsShowSuccess.value = true
+    setTimeout(() => {
+      IsShowSuccess.value = false
+      router.push('/')
+    }, 1000)
+ 
+  }
+}
+</script>
+<style scoped></style>

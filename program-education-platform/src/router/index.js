@@ -34,6 +34,11 @@ const router = createRouter({
       component: () => import('../components/user/profile/SignIn.vue')
     },
     {
+      path: '/TheRegister',
+      name: 'TheRegister',
+      component: () => import('../components/user/profile/TheRegister.vue')
+    },
+    {
       path: '/ClassDesc',
       name: 'ClassDesc',
       component: () => import('../pages/class/ClassDesc.vue')
@@ -181,4 +186,9 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.name !== 'SignIn' &&to.name!=='TheRegister'&& !token) next({ name: 'SignIn' })
+  else next()
+})
 export default router
