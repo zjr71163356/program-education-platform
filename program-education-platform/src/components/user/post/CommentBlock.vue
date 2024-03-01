@@ -24,7 +24,7 @@
         <p class="my-3">{{ comment['content'] }}</p>
       </div>
       <div class="flex items-center justify-between self-start gap-x-3">
-        <div class="flex items-center cursor-pointer">
+        <!-- <div class="flex items-center cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -41,7 +41,7 @@
           </svg>
 
           <p class="text-gray-500">{{ comment['likes'] }}</p>
-        </div>
+        </div> -->
 
         <div
           class="flex items-center text-gray-500 cursor-pointer"

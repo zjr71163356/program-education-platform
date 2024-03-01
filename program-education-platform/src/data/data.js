@@ -537,6 +537,7 @@ export const classdata = [
 ]
 export const classoutline = [
   {
+    courseId: 1,
     title: '介绍编程和学习路径',
     chapterNumber: 1,
     subchapters: [

@@ -98,7 +98,7 @@ const router = createRouter({
     {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: () => import('../pages/PersonalCenter.vue'),
+      component: () => import('../components/user/layout/PersonalCenter.vue'),
       children: [
         {
           path: 'MyClassList',
@@ -186,7 +186,7 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   if (to.name !== 'SignIn' &&to.name!=='TheRegister'&& !token) next({ name: 'SignIn' })
   else next()

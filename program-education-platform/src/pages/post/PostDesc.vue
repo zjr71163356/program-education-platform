@@ -22,7 +22,7 @@
           <time datetime="2023-01-23T13:23Z">{{ PostInfo['time'] }}</time>
         </p>
       </div>
-      <div class="mt-3 text-gray-900 flex">
+      <!-- <div class="mt-3 text-gray-900 flex">
         推荐合计:
         <div class="ml-3">
           <svg
@@ -41,7 +41,7 @@
           </svg>
           <p class="text-center">{{ PostInfo['like'] }}</p>
         </div>
-      </div>
+      </div> -->
       <div class="flex justify-end w-full">
         <el-button type="primary" :icon="Edit" circle />
         <el-button type="danger" :icon="Delete" circle  @click="showdeleteDialog(PostInfo['Id'])"/>
@@ -51,7 +51,7 @@
     <div class="p-6">
       <MdPreview :editorId="id" :modelValue="text" />
     </div>
-    <div class="flex w-1/5 text-gray-500 justify-between mb-5">
+    <!-- <div class="flex w-1/5 text-gray-500 justify-between mb-5">
       <div class="cursor-pointer" @click="toggleRecommend(true)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@
         </svg>
         <p>不推荐</p>
       </div>
-    </div>
+    </div> -->
     <CommentPlugin />
 
     <ul role="list" class="divide-y divide-gray-100 w-4/5">

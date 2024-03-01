@@ -137,7 +137,7 @@ const menuItems = [
         index: 'AddUser',
         route: { name: 'AddUser' },
         icon: DocumentAdd,
-        label: '添加题目'
+        label: '添加用户'
       }
     ]
   }
