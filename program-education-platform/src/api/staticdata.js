@@ -1,0 +1,1 @@
+export const  tagColorList=['', 'success','danger','warning','info' ]

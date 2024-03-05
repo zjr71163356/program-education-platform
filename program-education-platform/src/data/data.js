@@ -300,18 +300,22 @@ export const SubmitResultDict = {
   内存: '0 / 65536 KB',
   用时: '0 / 2000 ms',
   状态: '编译错误',
-  评测时间: '2024/01/23 16:06:10'
+
 }
 export const historyRecords = [
   {
-    submittime: '2023/05/12 07:33:26',
-    state: 'Accepted',
-    titleId: 137,
+    record_id: 137,
+    problem_id: 1001,
+    user_id: 14,
+    user_name:'userXXX',
     title: 'Title 10',
-    user: 'User 14',
+    result_state: 'Accepted',
     compiler: 'C',
     memory: 4461,
-    runtime: 7.14
+    runtime: 7.14,
+    submit_time: '2023/05/12 07:33:26',
+    code:'',
+    compiler_output:''
   },
   {
     submittime: '2022/02/19 16:40:09',
@@ -760,5 +764,6 @@ export const userList = [
     account: 'account_user10'
   }
 ]
+
 
 export default { tableData, classInfo, languageList }

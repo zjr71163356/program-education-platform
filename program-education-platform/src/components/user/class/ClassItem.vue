@@ -1,40 +1,43 @@
 <template>
   <div
-    class="bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500"
+    class="bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500 overflow-hidden"
   >
-    <h3 class="mb-3 text-xl font-bold text-blue-600">{{ title }}</h3>
+    <h3 class="mb-3 text-xl font-bold text-blue-600">{{ classItemData.courseName }}</h3>
     <div class="relative">
       <img
         class="w-full rounded-xl"
-        src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+        :src="classItemData.imageUrl + 'auto=format&fit=crop&w=1050&h=700&q=80'"
+ 
         alt="Colors"
       />
-      <p
-        class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg"
-      >
-        FREE
-      </p>
+ 
     </div>
 
-    <div class="my-4">
-      <div class="flex space-x-1 items-center">
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-blue-600 mb-1.5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    <div class="my-4 flex flex-col w-full">
+      <div class="flex space-x-1 items-center w-full">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+ 
+          stroke="currentColor"
+          class="h-6 w-6 text-blue-600 mb-1.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+          />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+        </svg>
+        <div class="w-4/5 flex gap-2">
+          <el-tag
+            v-for="(tagInfo, id) in classItemData.courseTags"
+            :type="tagColorList[tagInfo.tagColor - 1]"
+            :key="id"
+            >{{ tagInfo.tagName }}</el-tag
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </span>
-        <p>{{ duration }}</p>
+        </div>
       </div>
       <div class="flex space-x-1 items-center">
         <span>
@@ -48,34 +51,38 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
         </span>
-        <p>{{ parts }}</p>
+        <p>章节数量:{{ classItemData.chapterCount }}</p>
       </div>
       <div class="flex space-x-1 items-center">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-blue-600 mb-1.5"
             fill="none"
             viewBox="0 0 24 24"
+ 
             stroke="currentColor"
+            class="h-6 w-6 text-blue-600 mb-1.5"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+              d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
             />
           </svg>
         </span>
-        <p>{{ language }}</p>
+        <span class="overflow-hidden text-ellipsis inline-block w-full whitespace-nowrap">{{
+          classItemData.introduction
+        }}</span>
       </div>
       <router-link :to="{ name: 'ClassDesc' }">
-        <button  v-if="!deletemode" class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg">
+        <button
+          v-if="!deletemode"
+          class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg"
+        >
           进入
         </button>
       </router-link>
@@ -91,21 +98,22 @@
 
 <script>
 import { defineComponent } from 'vue'
-
+import { tagColorList } from '@/api/staticdata'
 export default defineComponent({
   props: {
     deletemode: {
       type: Boolean,
       default: false
+    },
+    classItemData: {
+      type: Object,
+      default: () => {}
     }
   },
   name: 'ClassItem',
   data() {
     return {
-      title: 'JavaScript初学者入门',
-      duration: '1小时34分钟23秒',
-      parts: '3个部分',
-      language: 'JavaScript'
+      tagColorList
     }
   }
 })
