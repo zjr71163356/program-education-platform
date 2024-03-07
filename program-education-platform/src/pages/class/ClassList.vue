@@ -11,7 +11,7 @@
     <!-- Card body -->
     <div class="flex flex-wrap items-center justify-center">
       <!-- Text -->
-      <div v-for="(data,id) in courses" :key="id" class="text item w-1/4">
+      <div v-for="(data, id) in courses" :key="id" class="text item w-1/4">
         <ClassItem :classItemData="data" />
       </div>
     </div>
@@ -19,18 +19,23 @@
 </template>
 <script setup>
 import ClassItem from '../../components/user/class/ClassItem.vue'
-import { getCourseInformation } from '@/api/api.js'
-
-import { ref  } from 'vue'
+import CourseServices from '@/api/CourseServices.js'
+import { onMounted } from 'vue'
+import { ref } from 'vue'
 // import { classdata } from '@/data/data'
-const courses = ref([]);
+const courses = ref([])
+onMounted(async () => {
+  await getAllCoursesList()
+})
 
-getCourseInformation().then(data => {
-  courses.value = data;
-}).catch(error => {
-  console.error(error);
-});
- 
+async function getAllCoursesList() {
+  try {
+    const data = await CourseServices.getAllCoursesOverViewList()
+    courses.value = data
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 <style>
 .text {
@@ -50,3 +55,4 @@ getCourseInformation().then(data => {
   align-items: center;
 }
 </style>
+@/api/CourseServices.js

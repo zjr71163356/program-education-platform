@@ -22,6 +22,7 @@
     "@heroicons/vue": "^2.1.1",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/forms": "^0.5.7",
+    "@vavt/markdown-theme": "^3.2.1",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",

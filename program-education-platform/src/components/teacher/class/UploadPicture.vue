@@ -10,27 +10,21 @@
     :limit="3"
     :on-exceed="handleExceed"
   >
-    <el-button type="primary">Click to upload</el-button>
+    <el-button type="primary">点击上传图片</el-button>
     <template #tip>
       <div class="el-upload__tip">
-        jpg/png files with a size less than 500KB.
+        只能上传jpg/png文件，且不超过500kb
+         
       </div>
     </template>
   </el-upload>
 </template>
 <script setup>
 import { ref } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage } from 'element-plus';
 
 const fileList = ref([
-  {
-    name: 'element-plus-logo.svg',
-    url: 'https://element-plus.org/images/element-plus-logo.svg',
-  },
-  {
-    name: 'element-plus-logo2.svg',
-    url: 'https://element-plus.org/images/element-plus-logo.svg',
-  },
+ 
 ]);
 
 const handleRemove = (file, uploadFiles) => {
@@ -43,9 +37,9 @@ const handlePreview = (uploadFile) => {
 
 const handleExceed = (files, uploadFiles) => {
   ElMessage.warning(
-    `The limit is 3, you selected ${files.length} files this time, add up to ${
-      files.length + uploadFiles.length
-    } totally`
+    // `The limit is 3, you selected ${files.length} files this time, add up to ${
+    //   files.length + uploadFiles.length
+    // } totally`
   );
 };
 

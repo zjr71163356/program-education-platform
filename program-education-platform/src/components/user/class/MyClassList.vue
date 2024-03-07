@@ -21,7 +21,7 @@
           <!-- Text -->
         
           <div v-for="o in 25" :key="o" class="text item w-1/4">
-            <ClassItem :deletemode="deleteMode"/>
+            <!-- <ClassItem :deletemode="deleteMode"/> -->
           </div>
         </div>
 

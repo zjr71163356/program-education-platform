@@ -10,6 +10,10 @@ export function stringToTag(inputString) {
     return tagList[hash%5];
 }
 
+export function tagColorRender(tagColorId) {
+    let tagList=['','success','warning','danger','info']
+  return tagList[tagColorId-1]
+}
 // 示例用法
 const myString = "HelloWorld";
 const hashedValue = stringToTag(myString);

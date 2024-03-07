@@ -39,9 +39,10 @@ const router = createRouter({
       component: () => import('../components/user/profile/TheRegister.vue')
     },
     {
-      path: '/ClassDesc',
+      path: '/ClassDesc/:courseId',
       name: 'ClassDesc',
-      component: () => import('../pages/class/ClassDesc.vue')
+      component: () => import('../pages/class/ClassDesc.vue'),
+      props: true
     },
     {
       path: '/CurrentHistroySubmission',
@@ -59,7 +60,7 @@ const router = createRouter({
       component: () => import('../pages/TheProfile.vue')
     },
     {
-      path: '/ClassContent',
+      path: '/ClassContent/:subChapterId',
       name: 'ClassContent',
       component: () => import('../pages/class/ClassContent.vue'),
       props: true

@@ -63,4 +63,4 @@ const generateRandomHistoryRecord = () => ({
 // const historyRecords = Array.from({ length: numberOfRecords }, generateRandomHistoryRecord)
 
 // console.log(historyRecords)
-getImgURL('course programming',1)
+getImgURL('programming',1)
