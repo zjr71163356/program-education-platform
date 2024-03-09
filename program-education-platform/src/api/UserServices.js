@@ -13,6 +13,22 @@ const apiClient = axios.create({
 })
 
 const UserServices = {
+  async userLogin(user) {
+    try {
+      const formData = new FormData()
+      formData.append('Account', user.Account)
+      formData.append('Password', user.Password)
+      const response = await apiClient.post('/Login', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(formData)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async userRegister(user) {
     try {
       const formData = new FormData()

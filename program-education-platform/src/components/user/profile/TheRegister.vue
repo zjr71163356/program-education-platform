@@ -210,7 +210,7 @@ const UserRegister = async () => {
       // console.log('user', user);
       const result = await UserServices.userRegister(user)
       console.log('注册:', result)
-      const token = 'user'
+      const token = 'User'
       if (token) {
         localStorage.setItem('token', token)
         IsShowSuccess.value = true
