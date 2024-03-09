@@ -1,5 +1,5 @@
 import axios from 'axios'
-const base_url = 'https://localhost:7231/api/'
+const base_url = 'https://localhost:7231/api/Courses'
 const apiClient = axios.create({
   baseURL: base_url,
   headers: {
@@ -9,28 +9,35 @@ const apiClient = axios.create({
 })
 
 const CourseServices = {
-  async getAllCoursesOverViewList() {
+  async getAllCoursesOverViewList(filterQuery = null, pageNumber = 1, pageSize = null) {
     try {
-      const response = await apiClient.get('Courses')
-      console.log(response.data)
+      const searchParams = new URLSearchParams()
+      searchParams.set('pageNumber', pageNumber)
+      if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
+      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+      
+      const response =
+        await apiClient.get(`?${searchParams.toString()} `)
+      // console.log(`Courses?${searchParams.toString()} `)
+      // console.log(response.data)
       return response.data
     } catch (error) {
       console.error(error)
     }
   },
 
-  async getCoursesById(courseId){
+  async getCoursesById(courseId) {
     try {
-      const response = await apiClient.get(`Courses/CourseDesc?courseId=${courseId}`)
+      const response = await apiClient.get(`/CourseDesc?courseId=${courseId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
       console.error(error)
     }
   },
-  async getCourseSubChapterById(subChapterId){
+  async getCourseSubChapterById(subChapterId) {
     try {
-      const response = await apiClient.get(`Courses/CourseSubChapters?subChapterId=${subChapterId}`)
+      const response = await apiClient.get(`/CourseSubChapters?subChapterId=${subChapterId}`)
       console.log(response.data)
       return response.data
     } catch (error) {

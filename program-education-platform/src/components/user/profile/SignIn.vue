@@ -9,7 +9,7 @@
         </h2>
       </div>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6"   method="POST">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
               >账号</label
@@ -60,8 +60,8 @@
           <p class="mt-10 text-center text-sm text-gray-500">
             还未注册?
             {{ ' ' }}
-            <a href="#" class="font-semibold leading-6 text-blue-600 hover:text-blue-500"
-              >马上注册</a
+            <span  class="font-semibold leading-6 text-blue-600 hover:text-blue-500"
+              >马上注册</span
             >
           </p>
         </router-link>

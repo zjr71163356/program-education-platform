@@ -9,10 +9,19 @@
     </div>
 
     <!-- Card body -->
-    <div class="flex flex-wrap items-center justify-center">
+    <div class="flex flex-wrap justify-center">
       <!-- Text -->
       <div v-for="(data, id) in courses" :key="id" class="text item w-1/4">
         <ClassItem :classItemData="data" />
+      </div>
+
+      <div class="flex justify-center w-full">
+        <el-pagination
+          layout="prev, pager, next"
+          :total="total"
+          :page-size="6"
+          v-model:current-page="currentpage"
+        />
       </div>
     </div>
   </div>
@@ -20,17 +29,24 @@
 <script setup>
 import ClassItem from '../../components/user/class/ClassItem.vue'
 import CourseServices from '@/api/CourseServices.js'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { ref } from 'vue'
 // import { classdata } from '@/data/data'
+const currentpage = ref(1)
+const total = ref(0)
 const courses = ref([])
 onMounted(async () => {
-  await getAllCoursesList()
+  await getAllCoursesList(null, currentpage.value, 6)
+  const data = await CourseServices.getAllCoursesOverViewList(null, 1, null)
+  total.value = data.length
+  console.log(total.value)
 })
-
-async function getAllCoursesList() {
+watch(currentpage, async (newVal, oldVal) => {
+  await getAllCoursesList(null, newVal, 6)
+})
+async function getAllCoursesList(fitlerQuery = null, pageNumber = 1, pageSize = 6) {
   try {
-    const data = await CourseServices.getAllCoursesOverViewList()
+    const data = await CourseServices.getAllCoursesOverViewList(fitlerQuery, pageNumber, pageSize)
     courses.value = data
   } catch (error) {
     console.log(error)
