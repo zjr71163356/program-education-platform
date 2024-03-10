@@ -4,11 +4,24 @@
     <el-step title="添加课程章节详情" />
     <el-step title="完成" />
   </el-steps>
+  <!-- <el-button plain @click="dialogVisible = true"> Click to open the Dialog </el-button> -->
+
+  <el-dialog v-model="dialogVisible" title="Tips" :before-close="handleClose">
+    <template #header> 编辑内容 </template>
+    <MdEditor v-model="text" class="my-5" />
+
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="dialogVisible = false"> 保存 </el-button>
+      </div>
+    </template>
+  </el-dialog>
 
   <div class="mt-5 flex flex-col items-center">
     <div class="my-5 font-semibold">添加课程章节详情</div>
     <div class="w-2/3">
-      <el-table :data="tableData" style="width: 100%" :row-key="row=>row.id">
+      <el-table :data="tableData" style="width: 100%" :row-key="(row) => row.id">
         <el-table-column type="index"> </el-table-column>
         <el-table-column label="标题" prop="title">
           <template #default="{ row }">
@@ -17,15 +30,18 @@
         </el-table-column>
         <el-table-column align="right">
           <template #default="scope">
-            <el-button  plain @click="addSubchapter(scope.$index)">添加子章节</el-button>
+            <el-button plain @click="addSubchapter(scope.$index)">添加子章节</el-button>
+            <el-button color="#F56C6C" @click="removeChapter(scope.$index)">
+              <el-icon color="white"> <CloseBold /></el-icon>
+            </el-button>
           </template>
         </el-table-column>
 
         <el-table-column align="right" type="expand">
           <template #default="scope">
             <el-table
-              :data="scope.row.subchapters"
-              style="width: 80%; float: right"
+              :data="scope.row.subChapters"
+              style="width: 90%; float: right"
               :show-header="false"
             >
               <el-table-column type="index">
@@ -41,20 +57,16 @@
                 </template>
               </el-table-column>
               <el-table-column align="center">
-                <template #default="{ row }">
-                  <el-upload
-                    v-model:file-list="fileList"
-                    class="upload-demo"
-                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-                    multiple
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :before-remove="beforeRemove"
-                    :limit="3"
-                    :on-exceed="handleExceed"
+                <template #default="subchapter">
+                  <el-button type="primary" @click="editMarkdown(subchapter.row.subChapterId)"
+                    >编辑内容</el-button
                   >
-                    <el-button type="primary">上传.md文件</el-button>
-                  </el-upload>
+                  <el-button
+                    color="#F56C6C"
+                    @click="removeSubchapter(scope.$index, subchapter.$index)"
+                  >
+                    <el-icon color="white"> <CloseBold /></el-icon>
+                  </el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -71,51 +83,60 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue'
- import { useRouter } from 'vue-router' // Add this import statement
-
+import { reactive, onMounted, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router' // Add this import statement
+import { CloseBold } from '@element-plus/icons-vue'
+import CourseServices from '@/api/CourseServices'
+import { MdEditor } from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 const router = useRouter() // Add this line
-const tableData = ref([
-  {
-    id: 1,
-    title: '',
-    subchapters: [
-      {
-        title: '',
-        content: ''
-      },
-      {
-        title: '',
-        content: ''
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: '',
-    subchapters: [
-      {
-        title: 'SSS',
-        content: ''
-      }
-    ]
-  }
-])
-const laststep=()=>{
-  router.push({ name: 'ClassAddStepOne' }) // Replace this line
+const route = useRoute()
+const tableData = ref([])
+const input = ref('')
+const form = reactive({})
+const text = ref('Hello Editor!')
+import { ElMessageBox } from 'element-plus'
+
+const editMarkdown = async (subChapterId) => {
+  dialogVisible.value = true
+  const data = await CourseServices.getCourseSubChapterById(subChapterId)
+  console.log(data)
+  text.value = data.markdownContent
 }
+
+const dialogVisible = ref(false)
+
+const handleClose = () => {
+  dialogVisible.value = false
+}
+
+onMounted(async () => {
+  const res = await CourseServices.getCoursesById(route.params.courseId)
+  console.log(route.params.courseId)
+  tableData.value = res.courseChapters
+  console.log(res)
+})
+
+const laststep = () => {
+  router.go(-1) // Rollback one page
+}
+
 const nextstep = () => {
   router.push({ name: 'ClassAddStepThree' }) // Replace this line
 }
-const input = ref('')
-const form = reactive({})
 const addChapter = () => {
-  tableData.value.push({ title: '', subchapters: [] })
+  tableData.value.push({ title: '', subChapters: [] })
 }
 const addSubchapter = (chapterid) => {
   console.log(chapterid)
-  console.log(tableData.value[chapterid].subchapters)
-  tableData.value[chapterid].subchapters.push({ title: '', content: '' })
+  console.log(tableData.value[chapterid].subChapters)
+  tableData.value[chapterid].subChapters.push({ title: '', content: '' })
+}
+const removeChapter = (chapterid) => {
+  tableData.value.splice(chapterid, 1)
+}
+const removeSubchapter = (chapterid, subchapterid) => {
+  tableData.value[chapterid].subChapters.splice(subchapterid, 1)
 }
 </script>
 <style scoped>

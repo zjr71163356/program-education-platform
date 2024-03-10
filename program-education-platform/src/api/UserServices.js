@@ -1,5 +1,6 @@
 import axios from 'axios'
 import https from 'https' // Import the 'https' module
+ 
 const base_url = 'https://localhost:7231/api/Users'
 const apiClient = axios.create({
   baseURL: base_url,
@@ -66,12 +67,29 @@ const UserServices = {
     } catch (error) {
       console.error(error)
     }
+  },
+  async uploadImage(image) {
+      try {
+ 
+        const formData = new FormData()
+        formData.append('image', image.file)
+        formData.append('token','561fc1d59e3e2eb22eb449459cac5916')
+        const response = await axios.post('https://www.imgtp.com/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': '561fc1d59e3e2eb22eb449459cac5916',
+ 
+          }
+        })
+        console.log(response.data)
+        return response.data
+      }
+      catch (error) {
+        console.error(error)
+      }
+
   }
 }
-// const user = {
-//   Account: 'loginModel.value.account2',
-//   UserName: 'loginModel.value.usernam6e',
-//   Password: ' loginModel.value.password'
-// }
-// await UserServices.userRegister(user)
+ 
+
 export default UserServices

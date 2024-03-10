@@ -70,10 +70,8 @@ async function getAllCoursesList(fitlerQuery, pageNumber, pageSize) {
   }
 }
 const toEdit = (courseId) => {
-  router.push({ name: 'ClassAddStepOne', query: { courseId: courseId } })
+  router.push({ name: 'ClassUpdateStepOne', params: { courseId: courseId } })
 }
-onMounted(async () => {
-  await getAllCoursesList()
-})
+ 
 </script>
 <style lang=""></style>

@@ -6,7 +6,7 @@
     <div class="relative">
       <img
         class="w-full rounded-xl"
-        :src="classItemData.imageUrl + 'auto=format&fit=crop&w=1050&h=700&q=80'"
+        :src="classItemData.imageUrl + '?auto=format&fit=crop&w=1050&h=700&q=80'"
  
         alt="Colors"
       />

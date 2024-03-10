@@ -15,9 +15,8 @@ const CourseServices = {
       searchParams.set('pageNumber', pageNumber)
       if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
       if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      
-      const response =
-        await apiClient.get(`?${searchParams.toString()} `)
+
+      const response = await apiClient.get(`?${searchParams.toString()} `)
       // console.log(`Courses?${searchParams.toString()} `)
       // console.log(response.data)
       return response.data
@@ -43,6 +42,28 @@ const CourseServices = {
     } catch (error) {
       console.error(error)
     }
+  },
+  async addCourseStepOne(course) {
+    try {
+      const requestBody = JSON.stringify(course)
+      // console.log(requestBody);
+      const response = await apiClient.post('/AddStepOne', requestBody)
+      // console.log(response.data);
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async updateCourseStepOne(courseId, course) {
+    try {
+      const requestBody = JSON.stringify(course)
+      const response = await apiClient.put(`/UpdateStepOne/${courseId}`, requestBody)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+
+
   }
 }
 export default CourseServices

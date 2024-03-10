@@ -137,14 +137,21 @@ const router = createRouter({
           component: () => import('@/components/teacher/class/ClassAddStepOne.vue')
         },
         {
-          path: 'ClassAddStepTwo',
+          path: 'ClassAddStepTwo/:courseId',
           name: 'ClassAddStepTwo',
-          component: () => import('@/components/teacher/class/ClassAddStepTwo.vue')
+          component: () => import('@/components/teacher/class/ClassAddStepTwo.vue'),
+          props: true
         },
         {
           path: 'ClassAddStepThree',
           name: 'ClassAddStepThree',
           component: () => import('@/components/teacher/class/ClassAddStepThree.vue')
+        },
+        {
+          path: 'ClassUpdateStepOne/:courseId',
+          name: 'ClassUpdateStepOne',
+          component: () => import('@/components/teacher/class/ClassAddStepOne.vue'),
+          props: true
         },
         {
           path: 'ProblemAddStepOne',
