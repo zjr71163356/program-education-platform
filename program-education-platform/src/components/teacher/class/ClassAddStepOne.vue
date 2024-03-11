@@ -71,6 +71,7 @@ import { useRouter, useRoute } from 'vue-router' // Add this import statement
 import UploadPicture from './UploadPicture.vue'
 import { tagColorList } from '@/api/staticdata'
 import CourseServices from '@/api/CourseServices'
+import { ElMessage } from 'element-plus'
 const inputValue = ref('')
 const dynamicTags = ref([])
 const inputVisible = ref(false)
@@ -143,22 +144,28 @@ const onSubmit = async (formRef, type) => {
       console.log('error submit!', fields)
     }
   })
- 
+
   if (result) {
     console.log('courseId:' + route.params.courseId)
-    console.log( dynamicTags.value);
-    console.log(form.value);
+    console.log(dynamicTags.value)
+    console.log(form.value)
     try {
       let result = ''
       if (route.params.courseId) {
         result = await CourseServices.updateCourseStepOne(route.params.courseId, form.value)
         if (type == 'next')
-          router.push({ name: 'ClassAddStepTwo', params: { courseId: route.params.courseId } })   
+          router.push({ name: 'ClassAddStepTwo', params: { courseId: route.params.courseId } })
       } else {
         result = await CourseServices.addCourseStepOne(form.value)
         if (type == 'next')
-          router.push({ name: 'ClassAddStepTwo', params: { courseId: result.courseId } })  
+          router.push({ name: 'ClassAddStepTwo', params: { courseId: result.courseId } })
       }
+
+      ElMessage({
+        type: 'success',
+        message: '保存成功'
+      })
+
       console.log(result)
     } catch (e) {
       console.log(e)

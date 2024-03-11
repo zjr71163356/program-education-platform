@@ -10,7 +10,7 @@
           <div class="flex items-center h-1/2">
             <div class="block shrink-0 grow-0 basis-auto w-1/3 p-2">
               <img
-                :src="course.imageUrl + 'auto=format&fit=crop&w=1050&h=1050&q=80'"
+                :src="course.imageUrl + '?auto=format&fit=crop&w=1050&h=1050&q=80'"
                 class="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
               />
             </div>

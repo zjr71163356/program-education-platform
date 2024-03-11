@@ -1,5 +1,5 @@
 <template>
-  <div class="common-layout">
+  <div class=" ">
     <div id="myNavbar">
       <TheNavbar class="" />
     </div>
