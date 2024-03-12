@@ -1,6 +1,6 @@
 import axios from 'axios'
 import https from 'https' // Import the 'https' module
- 
+
 const base_url = 'https://localhost:7231/api/Users'
 const apiClient = axios.create({
   baseURL: base_url,
@@ -14,6 +14,33 @@ const apiClient = axios.create({
 })
 
 const UserServices = {
+  async deleteUserCourse(userId,courseId) {
+    try {
+      const response = await apiClient.delete(`/RemoveCourseFromMyList?userId=${userId}&courseId=${courseId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async addUserCourse(userCourse) {
+    try {
+      const response = await apiClient.post(`/AddUserCourse`,userCourse)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getUserCourseList(userId) {
+    try {
+      const response = await apiClient.get(`/GetUserCourseList/${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async userLogin(user) {
     try {
       const formData = new FormData()
@@ -68,28 +95,33 @@ const UserServices = {
       console.error(error)
     }
   },
+  async isUserCourseRepeat(userId, courseId) {
+    try {
+      const response = await apiClient.get(`/isUserCourseRepeat?userId=${userId}&courseId=${courseId}`)
+ 
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  
   async uploadImage(image) {
-      try {
- 
-        const formData = new FormData()
-        formData.append('image', image.file)
-        formData.append('token','561fc1d59e3e2eb22eb449459cac5916')
-        const response = await axios.post('https://www.imgtp.com/api/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': '561fc1d59e3e2eb22eb449459cac5916',
- 
-          }
-        })
-        console.log(response.data)
-        return response.data
-      }
-      catch (error) {
-        console.error(error)
-      }
-
+    try {
+      const formData = new FormData()
+      formData.append('image', image.file)
+      formData.append('token', '561fc1d59e3e2eb22eb449459cac5916')
+      const response = await axios.post('https://www.imgtp.com/api/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: '561fc1d59e3e2eb22eb449459cac5916'
+        }
+      })
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
- 
 
 export default UserServices

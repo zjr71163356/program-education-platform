@@ -7,10 +7,8 @@
       <img
         class="w-full rounded-xl"
         :src="classItemData.imageUrl + '?auto=format&fit=crop&w=1050&h=700&q=80'"
- 
         alt="Colors"
       />
- 
     </div>
 
     <div class="my-4 flex flex-col w-full">
@@ -19,7 +17,6 @@
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
- 
           stroke="currentColor"
           class="h-6 w-6 text-blue-600 mb-1.5"
         >
@@ -63,7 +60,6 @@
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
- 
             stroke="currentColor"
             class="h-6 w-6 text-blue-600 mb-1.5"
           >
@@ -78,7 +74,7 @@
           classItemData.introduction
         }}</span>
       </div>
-      <router-link :to="{ name: 'ClassDesc' ,params:{courseId:classItemData.courseId}}">
+      <router-link :to="{ name: 'ClassDesc', params: { courseId: classItemData.courseId } }">
         <button
           v-if="!deletemode"
           class="mt-4 text-xl w-full text-white bg-blue-600 py-2 rounded-xl shadow-lg"
@@ -89,6 +85,7 @@
       <button
         v-if="deletemode"
         class="mt-4 text-xl w-full text-white bg-red-600 py-2 rounded-xl shadow-lg"
+        @click="deleteCourse"
       >
         移除
       </button>
@@ -99,6 +96,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { tagColorList } from '@/api/staticdata'
+ 
 export default defineComponent({
   props: {
     deletemode: {
@@ -114,6 +112,11 @@ export default defineComponent({
   data() {
     return {
       tagColorList
+    }
+  },
+  methods: {
+    deleteCourse() {
+      this.$emit('deleteCourse', this.classItemData.courseId)
     }
   }
 })

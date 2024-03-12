@@ -27,6 +27,7 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
+              v-loading="loading"
               class="w-1/2 relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all"
             >
               <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900 mb-5"
@@ -35,12 +36,13 @@
 
               <div class="bg-slate-100 w-full flex flex-wrap text-center rounded-lg">
                 <div
-                  v-for="(value, key) in SubmitResultDict"
+                  v-for="(value, key) in resultDict"
                   :key="key"
+                
                   class="flex flex-col w-1/3 my-1"
                 >
-                  <span class="text-sm text-gray-500">{{ key }}</span>
-                  <span>{{ value }}</span>
+                  <span class="text-sm text-gray-500"   v-if="key !== '编译器输出'">{{ key }}</span>
+                  <span   v-if="key !== '编译器输出'" >{{ value }}</span>
                 </div>
               </div>
               <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left">
@@ -54,12 +56,14 @@
                 </div>
 
                 <!-- Card body -->
-                <div class="p-6 bg-slate-700"></div>
+                <div class="p-6 bg-slate-700 text-white ">
+                  {{ resultDict['编译器输出'] }}
+                </div>
               </div>
-              <div class="mt-3  flex justify-end  ">
+              <div class="mt-3 flex justify-end">
                 <button
                   type="button"
-                  class="   inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 right-0"
+                  class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 right-0"
                   @click="closeEvent"
                 >
                   返回
@@ -74,30 +78,40 @@
 </template>
 
 <script setup>
-import { ref, watch, defineProps, watchEffect } from 'vue'
+import { ref, watch, defineProps } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
-import { SubmitResultDict } from '@/data/data'
 const open = ref(false)
 const props = defineProps({
   IsOpen: {
     type: Boolean,
     default: false
+  },
+  SubmitResultDict: {
+    type: Object
   }
 })
+const resultDict = ref({})
 const emit = defineEmits(['update:IsOpen'])
 const closeEvent = () => {
   open.value = false
   emit('update:IsOpen', false)
-  console.log('closeEvent')
+  // console.log('closeEvent')
 }
-watchEffect(() => {
-  console.log('open', open)
-})
+const loading = ref(true)
+
+watch(
+  () => props.SubmitResultDict,
+  (newVal, oldVal) => {
+    console.log('newVal', newVal)
+    resultDict.value = newVal
+    loading.value = false
+  }
+)
 watch(
   () => props.IsOpen,
   (newVal, oldVal) => {
-    console.log('newVal', newVal)
+    // console.log('newVal', newVal)
     open.value = newVal
   }
 )

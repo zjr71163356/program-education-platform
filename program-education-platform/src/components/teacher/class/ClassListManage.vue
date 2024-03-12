@@ -25,11 +25,11 @@
     </el-table-column>
     <el-table-column prop="introduction" label="简介" :show-overflow-tooltip="true" />
     <el-table-column align="right">
-      <template #default="{ row }">
+      <template #default="scope">
         <div class="flex justify-center">
           <!-- {{ row.courseId }} -->
-          <el-button size="small" type="primary" @click="toEdit(row.courseId)">编辑</el-button>
-          <el-button size="small" type="danger">删除</el-button>
+          <el-button size="small" type="primary" @click="toEdit(scope.row.courseId)">编辑</el-button>
+          <el-button size="small" type="danger" @click="deleteCourse(scope.row.courseId,scope.$index)">删除</el-button>
         </div>
       </template>
     </el-table-column>
@@ -46,6 +46,7 @@ import { tagColorRender } from '@/utils/tools.js'
 import { useRouter } from 'vue-router'
 import CourseServices from '@/api/CourseServices.js'
 import { onMounted, ref, watch } from 'vue'
+import { ElMessageBox, ElMessage } from 'element-plus'
 const currentpage = ref(1)
 const total = ref(0)
 const router = useRouter()
@@ -72,6 +73,23 @@ async function getAllCoursesList(fitlerQuery, pageNumber, pageSize) {
 const toEdit = (courseId) => {
   router.push({ name: 'ClassUpdateStepOne', params: { courseId: courseId } })
 }
- 
+const deleteCourse = async (courseId,index) => {
+  ElMessageBox.confirm('删除当前主章节?', 'Warning', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+  .then(async () => {
+    const res=await CourseServices.deleteCourseById(courseId)
+    courses.value.splice(index, 1)
+      console.log(res)
+      ElMessage({
+        type: 'success',
+        message: '删除成功'
+      })
+    })
+
+
+}
 </script>
 <style lang=""></style>

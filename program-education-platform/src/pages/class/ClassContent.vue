@@ -15,7 +15,7 @@
           :codestate="codestate"
         />
       </div>
-      <FooterBanner
+      <FooterBannerCourseDesc
         class="justify-self-end pb-5"
         :SubChapterIndex="subChapterIndex"
         :ChapterIndex="chapterIndex"

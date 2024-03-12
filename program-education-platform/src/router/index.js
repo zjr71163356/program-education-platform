@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/ProblemBank',
       name: 'ProblemBank',
-      component: () => import('../components/user/problem/ProblemBank.vue')
+      component: () => import('../pages/problem/ProblemBank.vue')
     },
     {
       path: '/SignIn',
@@ -67,9 +67,10 @@ const router = createRouter({
     },
 
     {
-      path: '/ProblemDesc',
+      path: '/ProblemDesc/:problemId',
       name: 'ProblemDesc',
-      component: () => import('../pages/problem/ProblemDesc.vue')
+      component: () => import('../pages/problem/ProblemDesc.vue'),
+      props: true
     },
     {
       path: '/PostList',

@@ -6,18 +6,18 @@
       class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 container-height overflow-auto"
     >
       <div class="border border-neutral-100 px-6 py-4 dark:border-neutral-500">
-        <h5 class="flex items-center justify-start text-neutral-500 dark:text-neutral-300">
-          <span class="mr-2"> TITLE </span>
+        <h5 class="flex items-center justify-start text-xl">
+          <span class="mr-2"> {{ TheProblem.title }} </span>
         </h5>
       </div>
       <!-- Card body -->
       <div>
         <!-- Title -->
-        <MdPreview :editorId="id" :modelValue="text" />
+        <MdPreview :modelValue="text" />
       </div>
     </div>
     <div
-      class="flex flex-col block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 container-height overflow-auto"
+      class="flex flex-col block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-1/2 container-height overflow-hidden"
     >
       <div class="bg-slate-100 flex justify-between content-center">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
@@ -89,8 +89,12 @@
           </router-link>
         </div>
       </div>
-      <CodeEditer :selectedlanguage="language" />
-      <FooterBanner class="bg-white footer-h p-5">
+      <CodeEditer
+        :selectedlanguage="language"
+        v-model:IsSendCode="isSendCode"
+        @code-submitted="receiveCode"
+      />
+      <FooterBannerProblemDesc class="bg-white footer-h p-5">
         <template #button>
           <button
             @click="openSubmitResult"
@@ -100,27 +104,116 @@
             提交代码
           </button>
         </template>
-      </FooterBanner>
+      </FooterBannerProblemDesc>
     </div>
   </div>
-  <SubmitResult v-model:IsOpen="isOpen" />
+  <SubmitResult v-model:IsOpen="isOpen" :SubmitResultDict="Submission" />
   <!-- Card -->
 </template>
 <script setup>
-import { ref } from 'vue'
-import mdtext from '@/data/doc/test.md?raw'
+import { onMounted, ref } from 'vue'
+
 import { MdPreview } from 'md-editor-v3'
-import FooterBanner from '@/components/user/layout/FooterBanner.vue'
+import FooterBannerProblemDesc from '@/components/user/layout/FooterBannerProblemDesc.vue'
 import CodeEditer from '@/components/user/problem/CodeEditer.vue'
 import SubmitResult from '@/components/user/problem/SubmitResult.vue'
-const id = 'problem'
-const language = ref('')
-const text = ref(mdtext)
+import { useRoute } from 'vue-router'
+import ProblemServices from '@/api/ProblemServices'
+import { getDate, getMaxTimeAndMemory } from '@/utils/tools'
+
+const prop = defineProps({
+  problemId: {
+    type: String
+  }
+})
+
+const TheProblem = ref('')
+const route = useRoute()
+const problemId = ref(prop.problemId)
+const language = ref('C++')
+const text = ref('')
 const isOpen = ref(false)
+const isSendCode = ref(false)
+const Submission = ref({})
+
+const userId = JSON.parse(localStorage.getItem('token')).userId
+
 const openSubmitResult = () => {
   console.log('openSubmitResult')
+  isSendCode.value = true
   isOpen.value = true
 }
+const resultCheck = async (resultList) => {
+  let description = 'Accepted'
+  let compiler_output = ''
+  const array = resultList.submissions
+
+  array.forEach((submission) => {
+    if (submission.status.description !== 'Accepted') {
+      description = submission.status.description
+      compiler_output = atob(submission.compile_output)
+      return // 停止循环
+    }
+  })
+
+  return { description, compiler_output }
+}
+
+const receiveCode = async (codeFromEditer) => {
+  // console.log('receiveCode')
+  console.log(codeFromEditer)
+  isSendCode.value = false
+  const testData = await ProblemServices.getProblemTestData(problemId.value)
+  console.log(testData)
+  const tokenList = await ProblemServices.submitProblemCode(
+    language.value,
+    codeFromEditer,
+    testData
+  )
+
+  await new Promise((resolve) => {
+    setTimeout(function () {
+      console.log('等待三秒结束。')
+      resolve() // 等待结束后执行 resolve
+    }, 3000)
+  })
+  console.log(tokenList)
+  const data = await ProblemServices.getSubmission(tokenList)
+  console.log(data)
+
+  const { maxTime, maxMemory } = await getMaxTimeAndMemory(data)
+  const submitTime = await getDate()
+  const { description, compiler_output } = await resultCheck(data)
+  console.log(maxTime, maxMemory)
+  Submission.value = {
+    题目Id: prop.problemId,
+    题目: TheProblem.value.title,
+    用户Id: userId,
+    提交时间: submitTime,
+    语言: language.value,
+    内存: `${maxMemory} / 125MB`,
+    用时: `${maxTime} /1s `,
+    状态: description,
+    编译器输出: compiler_output
+  }
+  console.log(Submission.value)
+}
+
+onMounted(async () => {
+  console.log(route.params)
+  console.log('mounted')
+  console.log(problemId.value)
+  await ProblemServices.getProblemById(problemId.value)
+    .then((problem) => {
+      TheProblem.value = problem
+      console.log(problem)
+
+      text.value = problem.problemContent
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 </script>
 <style scoped>
 .custome-h {

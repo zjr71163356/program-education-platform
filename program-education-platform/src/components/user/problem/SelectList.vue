@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import data from '@/data/data.js'
+ 
 export default {
   data() {
     return {
-      languageList: data.languageList,
-      selectedlanguage: '' // Initialize selected language as empty
+      languageList:['C++','Java','Python','JavaScript'],
+      selectedlanguage: 'C++' // Initialize selected language as empty
     }
   },
   mounted() {

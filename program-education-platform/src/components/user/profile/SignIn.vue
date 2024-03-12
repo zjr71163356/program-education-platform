@@ -92,10 +92,13 @@ const login = async () => {
       Password: loginModel.value.password
     }
     const data = await UserServices.userLogin(user)
+    console.log(data);
     if (data.role) {
-      const token = data.role
+     const  token= JSON.stringify(data)
+     const role= data.role
       if (token) {
         localStorage.setItem('token', token)
+        localStorage.setItem('role', role)
         IsShowSuccess.value = true
         setTimeout(() => {
           IsShowSuccess.value = false

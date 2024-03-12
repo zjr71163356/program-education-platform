@@ -8,7 +8,6 @@
     :tab-size="2"
     :extensions="extensions"
     @ready="handleReady"
- 
   />
 </template>
 
@@ -31,32 +30,45 @@ export default defineComponent({
     selectedlanguage: {
       type: String,
       Required: true
+    },
+    IsSendCode: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
     selectedlanguage: {
       immediate: true,
       handler(val) {
-        if (val === 'javascript') {
+        if (val === 'JavaScript') {
           this.extensions = [javascript(), oneDark]
-        } else if (val === 'cpp') {
-          
+        } else if (val === 'C++') {
           this.extensions = [cpp(), oneDark]
-        } else if (val == 'java') {
+        } else if (val == 'Java') {
           this.extensions = [java(), oneDark]
-        } else if (val == 'python') {
+        } else if (val == 'Python') {
           this.extensions = [python(), oneDark]
         } else {
           this.extensions = [cpp(), oneDark]
         }
       }
+    },
+    IsSendCode: {
+      handler(val) {
+          if (val == true) {
+            console.log('code-submitted');
+         
+            this.$emit('code-submitted', this.code);
+             
+          }
+        }
     }
   },
   setup() {
     // Disable autocomplete for Python language
 
     // rest of the setup code...
-
+    const isSendCode=ref(false)
     const code = ref(`console.log('Hello, world!')`)
     const extensions = [oneDark]
 
@@ -67,22 +79,13 @@ export default defineComponent({
     }
 
     // Status is available at all times via Codemirror EditorView
-    const getCodemirrorStates = () => {
-      const state = view.value.state
-      const ranges = state.selection.ranges
-      const selected = ranges.reduce((r, range) => r + range.to - range.from, 0)
-      const cursor = ranges[0].anchor
-      const length = state.doc.length
-      const lines = state.doc.lines
-      // more state info ...
-      // return ...
-    }
+ 
 
     return {
       code,
       extensions,
       handleReady,
-
+      isSendCode
     }
   }
 })

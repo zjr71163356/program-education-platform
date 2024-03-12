@@ -22,7 +22,7 @@ const returnToClassList = () => {
   router.push({ name: 'ClassListManage' })
 }
 const laststep = () => {
-  router.push({ name: 'ClassAddStepTwo' })
+  router.go(-1)
 }
 </script>
 <style lang=""></style>

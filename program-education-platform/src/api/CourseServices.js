@@ -87,8 +87,8 @@ const CourseServices = {
     try {
       // const requestBody = JSON.stringify(courseChapters)
       // console.log( {"courseChapters":requestBody});
-      const response = await apiClient.put(`/UpdateStepTwo/${courseId}`, courseChapters )
-      
+      const response = await apiClient.put(`/UpdateStepTwo/${courseId}`, courseChapters)
+
       return response.data
     } catch (error) {
       console.error(error)
@@ -126,6 +126,15 @@ const CourseServices = {
   async deleteChapterById(chapterId) {
     try {
       const response = await apiClient.delete(`/CourseChapter/${chapterId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async deleteCourseById(courseId) {
+    try {
+      const response = await apiClient.delete(`/${courseId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
