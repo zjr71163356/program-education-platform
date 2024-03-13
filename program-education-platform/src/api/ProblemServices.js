@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const base_url = 'https://localhost:7231/api/Problems'
 const apiClient = axios.create({
   baseURL: base_url,
@@ -7,31 +8,57 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 })
+const SubmitAndResultOptions = {
+  method: 'POST',
+  url: 'http://localhost:2358/submissions',
+  params: {
+    base64_encoded: 'true',
+    wait: 'true',
+    fields: '*'
+  },
+  headers: {
+    'content-type': 'application/json',
+    'Content-Type': 'application/json'
+  }
+}
+
 const getSubmissionOptions = {
   method: 'GET',
-  url: 'https://judge0-ce.p.rapidapi.com/submissions/batch',
+  url: 'http://localhost:2358/submissions/batch',
   params: {
     tokens:
       'c0f05466-fb89-44bf-9418-a1b61fb3181c,c0cf66f3-2531-4790-864b-491b92db397b,602a3e4d-8bd7-4eba-a551-c580787ffc01 ',
     base64_encoded: 'true',
     fields: '*'
-  },
-  headers: {
-    'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
-    'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
   }
+  // headers: {
+  //   'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
+  //   'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+  // }
 }
 const submitOptions = {
   method: 'POST',
-  url: 'https://judge0-ce.p.rapidapi.com/submissions/batch',
+  url: 'http://localhost:2358/submissions/batch',
   params: {
     base64_encoded: 'true'
   },
   headers: {
     'content-type': 'application/json',
-    'Content-Type': 'application/json',
-    'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
-    'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+    'Content-Type': 'application/json'
+    // 'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
+    // 'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+  }
+}
+
+ 
+
+const MySysOptions = {
+  method: 'GET',
+  url: 'http://localhost:2358/system_info',
+
+  headers: {
+    'content-type': 'application/json',
+    'Content-Type': 'application/json'
   }
 }
 const ProblemServices = {
@@ -70,12 +97,12 @@ const ProblemServices = {
       const base64Encoded = btoa(code)
       const submissions = []
       for (let i = 0; i < testData.length; i++) {
-        const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '');
-        const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '');
+        const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
+        const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '')
         submissions.push({
           language_id: language_id,
           source_code: base64Encoded,
-          stdin:btoa(inputWithoutNewlines),
+          stdin: btoa(inputWithoutNewlines),
           expected_output: btoa(outputWithoutNewlines)
         })
       }
@@ -93,7 +120,6 @@ const ProblemServices = {
       })
       console.log(response.data)
       return response.data
-
     } catch (error) {
       console.error(error)
     }
@@ -110,11 +136,50 @@ const ProblemServices = {
       console.error(error)
     }
   },
+  async SendGetSubmission(language, code, testData) {
+    const languageIds = {
+      'C++': 52,
+      Java: 62,
+      JavaScript: 63,
+      Python: 71
+    }
+    const source_code = btoa(code)
+    const language_id = languageIds[language]
+    let resultList = []
+    for (let i = 0; i < testData.length; i++) {
+      const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
+      const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '')
+      // console.log(inputWithoutNewlines, outputWithoutNewlines)
+      const stdin = btoa(inputWithoutNewlines)
+      const expected_output = btoa(outputWithoutNewlines)
+      const data = {
+        language_id: language_id,
+        source_code: source_code,
+        stdin: stdin,
+        expected_output: expected_output
+      }
+      SubmitAndResultOptions.data = data
+      const res = await axios.request(SubmitAndResultOptions)
+      resultList.push(res.data)
+      console.log(res.data, i)
+      // console.log(SubmitAndResultOptions)
+    }
+    console.log(resultList)
+    return resultList
+  },
   async getProblemTestData(problemId) {
     try {
       const response = await apiClient.get(`/GetTestDatasByProblemId/${problemId}`)
       console.log(response.data)
       return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getSystemInfo() {
+    try {
+      const res = await axios.request(MySysOptions)
+      console.log(res.data)
     } catch (error) {
       console.error(error)
     }

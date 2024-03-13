@@ -136,7 +136,7 @@ const isOpen = ref(false)
 const isSendCode = ref(false)
 const Submission = ref({})
 
-const userId = JSON.parse(localStorage.getItem('token')).userId
+const userName = JSON.parse(localStorage.getItem('token')).userName
 
 const openSubmitResult = () => {
   console.log('openSubmitResult')
@@ -146,9 +146,8 @@ const openSubmitResult = () => {
 const resultCheck = async (resultList) => {
   let description = 'Accepted'
   let compiler_output = ''
-  const array = resultList.submissions
 
-  array.forEach((submission) => {
+  resultList.forEach((submission) => {
     if (submission.status.description !== 'Accepted') {
       description = submission.status.description
       compiler_output = atob(submission.compile_output)
@@ -165,22 +164,9 @@ const receiveCode = async (codeFromEditer) => {
   isSendCode.value = false
   const testData = await ProblemServices.getProblemTestData(problemId.value)
   console.log(testData)
-  const tokenList = await ProblemServices.submitProblemCode(
-    language.value,
-    codeFromEditer,
-    testData
-  )
 
-  await new Promise((resolve) => {
-    setTimeout(function () {
-      console.log('等待三秒结束。')
-      resolve() // 等待结束后执行 resolve
-    }, 3000)
-  })
-  console.log(tokenList)
-  const data = await ProblemServices.getSubmission(tokenList)
-  console.log(data)
-
+  const data = await ProblemServices.SendGetSubmission(language.value, codeFromEditer, testData)
+ 
   const { maxTime, maxMemory } = await getMaxTimeAndMemory(data)
   const submitTime = await getDate()
   const { description, compiler_output } = await resultCheck(data)
@@ -188,11 +174,11 @@ const receiveCode = async (codeFromEditer) => {
   Submission.value = {
     题目Id: prop.problemId,
     题目: TheProblem.value.title,
-    用户Id: userId,
+    用户名: userName,
     提交时间: submitTime,
     语言: language.value,
-    内存: `${maxMemory} / 125MB`,
-    用时: `${maxTime} /1s `,
+    内存: `${maxMemory}MB/125MB`,
+    用时: `${maxTime}s/1s `,
     状态: description,
     编译器输出: compiler_output
   }
@@ -203,6 +189,7 @@ onMounted(async () => {
   console.log(route.params)
   console.log('mounted')
   console.log(problemId.value)
+  await ProblemServices.getSystemInfo()
   await ProblemServices.getProblemById(problemId.value)
     .then((problem) => {
       TheProblem.value = problem

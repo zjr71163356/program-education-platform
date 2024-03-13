@@ -33,9 +33,9 @@ export async function getDate() {
 export async function getMaxTimeAndMemory(resultList) {
   let maxTime = -Infinity
   let maxMemory = -Infinity
-  const array  = resultList.submissions;
  
-  array.forEach( result  => {
+ 
+  resultList.forEach( result  => {
       const time = parseFloat(result.time)
       const memory = parseFloat(result.memory)
 
@@ -46,7 +46,8 @@ export async function getMaxTimeAndMemory(resultList) {
         maxMemory = memory
       }
     })
- 
+   
+  maxMemory = (maxMemory / 1024).toFixed(1); // Convert maxMemory from KB to MB with 1 decimal place
 
   return { maxTime, maxMemory }
 }

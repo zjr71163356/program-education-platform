@@ -41,8 +41,8 @@
                 
                   class="flex flex-col w-1/3 my-1"
                 >
-                  <span class="text-sm text-gray-500"   v-if="key !== '编译器输出'">{{ key }}</span>
-                  <span   v-if="key !== '编译器输出'" >{{ value }}</span>
+                  <span class="text-sm text-gray-500" v-if="key !== '编译器输出'">{{ key }}</span>
+                  <span v-if="key !== '编译器输出'" :class="{'text-green-500': key === '状态' && value === 'Accepted', 'text-red-500': key === '状态' && value === 'Wrong Answer'}">{{ value }}</span>
                 </div>
               </div>
               <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left">
@@ -113,6 +113,7 @@ watch(
   (newVal, oldVal) => {
     // console.log('newVal', newVal)
     open.value = newVal
+    loading.value=true
   }
 )
 </script>

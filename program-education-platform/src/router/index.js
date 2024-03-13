@@ -88,11 +88,6 @@ const router = createRouter({
       component: () => import('@/pages/post/PostAdd.vue')
     },
     {
-      path: '/SubmitResultDescPage',
-      name: 'SubmitResultDescPage',
-      component: () => import('../pages/problem/SubmitResultDescPage.vue')
-    },
-    {
       path: '/EditPassword',
       name: 'EditPassword',
       component: () => import('../components/user/profile/EditPassword.vue')
@@ -189,15 +184,15 @@ const router = createRouter({
           path: 'AddUser',
           name: 'AddUser',
           component: () => import('@/components/admin/AddUser.vue')
-        },
+        }
       ]
     }
   ]
 })
 
- router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  if (to.name !== 'SignIn' &&to.name!=='TheRegister'&& !token) next({ name: 'SignIn' })
+  if (to.name !== 'SignIn' && to.name !== 'TheRegister' && !token) next({ name: 'SignIn' })
   else next()
 })
 export default router
