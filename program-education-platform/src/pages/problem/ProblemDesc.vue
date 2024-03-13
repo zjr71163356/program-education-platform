@@ -160,10 +160,10 @@ const resultCheck = async (resultList) => {
 
 const receiveCode = async (codeFromEditer) => {
   // console.log('receiveCode')
-  console.log(codeFromEditer)
+  // console.log(codeFromEditer)
   isSendCode.value = false
   const testData = await ProblemServices.getProblemTestData(problemId.value)
-  console.log(testData)
+  // console.log(testData)
 
   const data = await ProblemServices.SendGetSubmission(language.value, codeFromEditer, testData)
  
@@ -182,13 +182,13 @@ const receiveCode = async (codeFromEditer) => {
     状态: description,
     编译器输出: compiler_output
   }
-  console.log(Submission.value)
+  // console.log(Submission.value)
 }
 
 onMounted(async () => {
-  console.log(route.params)
-  console.log('mounted')
-  console.log(problemId.value)
+  // console.log(route.params)
+  // console.log('mounted')
+  // console.log(problemId.value)
   await ProblemServices.getSystemInfo()
   await ProblemServices.getProblemById(problemId.value)
     .then((problem) => {
