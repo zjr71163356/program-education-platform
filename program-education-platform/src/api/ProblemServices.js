@@ -50,8 +50,6 @@ const submitOptions = {
   }
 }
 
- 
-
 const MySysOptions = {
   method: 'GET',
   url: 'http://localhost:2358/system_info',
@@ -62,6 +60,23 @@ const MySysOptions = {
   }
 }
 const ProblemServices = {
+  async deleteTestData(dataId) {
+    try {
+      const response = await apiClient.delete(`/DeleteTestData/${dataId}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async deleteProblem(problemId) {
+    try {
+      const response = await apiClient.delete(`/DeleteProblem?problemId=${problemId}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
   async getProblemList(filterQuery, pageNumber, pageSize) {
     try {
       const searchParams = new URLSearchParams()
@@ -176,10 +191,51 @@ const ProblemServices = {
       console.error(error)
     }
   },
+  async getTestData(dataId) {
+    try {
+      const response = await apiClient.get(`/GetTestData/${dataId}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getSystemInfo() {
     try {
       const res = await axios.request(MySysOptions)
       console.log(res.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async addProblem(problem) {
+    try {
+      const response = await apiClient.post('/AddProblem', problem)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async addTestData(testData) {
+    try {
+      const response = await apiClient.post('/AddTestData', testData)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async updateProblemStepOne(problemId, problem) {
+    try {
+      const response = await apiClient.put(`/UpdateProblemStepOne/${problemId}`, problem)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  async updateTestData(dataId, testData) {
+    try {
+      const response = await apiClient.put(`/UpdateTestData/${dataId}`, testData)
+      return response.data
     } catch (error) {
       console.error(error)
     }

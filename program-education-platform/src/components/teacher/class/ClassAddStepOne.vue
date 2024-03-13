@@ -104,7 +104,7 @@ const formRules = ref({
   courseName: [{ required: true, message: '请输入课程名称', trigger: ['blur', 'change'] }],
   chapterCount: [{ required: true, message: '请输入章节数', trigger: 'blur' }],
   introduction: [{ required: true, message: '请输入课程简介', trigger: 'blur' }],
-  dynamicTags: [{ validator: validateDynamicTags, trigger: 'blur' }]
+  dynamicTags: [{required: true, validator: validateDynamicTags, trigger: 'blur' }]
 })
 const handleClose = (tag) => {
   dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1)

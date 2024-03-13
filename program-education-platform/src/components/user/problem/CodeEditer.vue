@@ -69,7 +69,7 @@ export default defineComponent({
 
     // rest of the setup code...
     const isSendCode=ref(false)
-    const code = ref(`console.log('Hello, world!')`)
+    const code = ref(``)
     const extensions = [oneDark]
 
     // Codemirror EditorView instance ref

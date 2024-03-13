@@ -17,10 +17,11 @@
 </template>
 <script setup>
 import { CircleCheck } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router' // Add this import statement
+import { useRouter,useRoute } from 'vue-router' // Add this import statement
 const router = useRouter() //
+const route = useRoute() //
 const laststep = () => {
-  router.push({ name: 'ProblemAddStepTwo' })
+  router.go(-1)
 }
 const returnToProblemBankManage = () => {
   router.push({ name: 'ProblemManage' })

@@ -65,7 +65,10 @@
               <div class="self-center">题解</div>
             </div>
           </router-link>
-          <router-link :to="{ name: 'CurrentHistroySubmission' }" class="self-center">
+          <router-link
+            :to="{ name: 'CurrentHistroySubmission', params: { problemId: problemId } }"
+            class="self-center"
+          >
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
             >
@@ -166,7 +169,7 @@ const receiveCode = async (codeFromEditer) => {
   // console.log(testData)
 
   const data = await ProblemServices.SendGetSubmission(language.value, codeFromEditer, testData)
- 
+
   const { maxTime, maxMemory } = await getMaxTimeAndMemory(data)
   const submitTime = await getDate()
   const { description, compiler_output } = await resultCheck(data)

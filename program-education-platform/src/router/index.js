@@ -45,9 +45,16 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/CurrentHistroySubmission',
+      path: '/CurrentHistroySubmission/:problemId',
       name: 'CurrentHistroySubmission',
-      component: () => import('../components/user/problem/CurrentHistroySubmission.vue')
+      component: () => import('../components/user/problem/MyHistorySubmission.vue'),
+      props: true
+    },
+    {
+      path: '/SubmitResultDescPage/:recordId',
+      name: 'SubmitResultDescPage',
+      component: () => import('../pages/problem/SubmitResultDescPage.vue'),
+      props: true
     },
     {
       path: '/SideBar',
@@ -155,14 +162,21 @@ const router = createRouter({
           component: () => import('@/components/teacher/problem/ProblemAddStepOne.vue')
         },
         {
-          path: 'ProblemAddStepTwo',
+          path: 'ProblemAddStepTwo/:problemId',
           name: 'ProblemAddStepTwo',
-          component: () => import('@/components/teacher/problem/ProblemAddStepTwo.vue')
+          component: () => import('@/components/teacher/problem/ProblemAddStepTwo.vue'),
+          props: true
         },
         {
           path: 'ProblemAddStepThree',
           name: 'ProblemAddStepThree',
           component: () => import('@/components/teacher/problem/ProblemAddStepThree.vue')
+        },
+        {
+          path: 'ProblemUpdateStepOne/:problemId',
+          name: 'ProblemUpdateStepOne',
+          component: () => import('@/components/teacher/problem/ProblemAddStepOne.vue'),
+          props: true
         },
         {
           path: 'UserList',

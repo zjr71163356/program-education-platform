@@ -14,9 +14,11 @@ const apiClient = axios.create({
 })
 
 const UserServices = {
-  async deleteUserCourse(userId,courseId) {
+  async deleteUserCourse(userId, courseId) {
     try {
-      const response = await apiClient.delete(`/RemoveCourseFromMyList?userId=${userId}&courseId=${courseId}`)
+      const response = await apiClient.delete(
+        `/RemoveCourseFromMyList?userId=${userId}&courseId=${courseId}`
+      )
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -25,7 +27,7 @@ const UserServices = {
   },
   async addUserCourse(userCourse) {
     try {
-      const response = await apiClient.post(`/AddUserCourse`,userCourse)
+      const response = await apiClient.post(`/AddUserCourse`, userCourse)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -97,14 +99,16 @@ const UserServices = {
   },
   async isUserCourseRepeat(userId, courseId) {
     try {
-      const response = await apiClient.get(`/isUserCourseRepeat?userId=${userId}&courseId=${courseId}`)
- 
+      const response = await apiClient.get(
+        `/isUserCourseRepeat?userId=${userId}&courseId=${courseId}`
+      )
+
       return response.data
     } catch (error) {
       console.error(error)
     }
   },
-  
+
   async uploadImage(image) {
     try {
       const formData = new FormData()
@@ -116,6 +120,29 @@ const UserServices = {
           Authorization: '561fc1d59e3e2eb22eb449459cac5916'
         }
       })
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getHistorySubmission(userId, problemId, pageNumber, pageSize) {
+    try {
+      const searchParams = new URLSearchParams()
+      searchParams.set('userId', userId)
+      if (problemId !== null) searchParams.set('problemId', problemId)
+      if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
+      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+      const response = await apiClient.get(`/GetUserSubmission?${searchParams.toString()}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getHistorySubmissionByrecordId(recordId) {
+    try {
+      const response = await apiClient.get(`/GetSubmissionRecordById/${recordId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
