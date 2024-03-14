@@ -3,16 +3,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref,watchEffect } from 'vue'
 import { MdPreview } from 'md-editor-v3'
  
 import 'md-editor-v3/lib/preview.css'
-const languaglist = {
-  'C++': 'cpp',
-  Java: 'java',
-  Python: 'python',
-  Javascript: 'javascript'
-}
+ 
 const id = 'preview-only'
 const props = defineProps({
   language: {
@@ -23,5 +18,8 @@ const props = defineProps({
     type: String
   }
 })
-const text = ref('```auto ' + props.testcode + '```')
+const text = ref('')
+watchEffect(() => {
+  text.value = '```auto \n'  + props.testcode + '\n```'
+})
 </script>

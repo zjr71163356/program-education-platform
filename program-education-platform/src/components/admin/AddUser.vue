@@ -1,179 +1,287 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <!-- Card -->
-  <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-left w-full">
-    <!-- Card body -->
-    <div class="p-6">
-      <form>
-        <div class="space-y-12">
-          <div class="border-b border-gray-900/10 pb-5">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">个人资料</h2>
+  <el-steps :active="1" align-center class="mt-5">
+    <el-step title="添加用户" />
+    <el-step title="完成" />
+  </el-steps>
 
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="col-span-full">
-                <label for="photo" class="block text-sm font-medium leading-6 text-gray-900"
-                  >头像</label
-                >
-                <div class="mt-2 flex items-center gap-x-3">
-                  <img
-                    class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    :src="'https://ui-avatars.com/api/?name=' + userInfo.username"
-                  />
-                  <button
-                    type="button"
-                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    <label
-                      for="file-upload"
-                      class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600"
-                    >
-                      <span>更新头像</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only" />
-                    </label>
-                  </button>
-                </div>
-              </div>
-              <div class="sm:col-span-4">
-                <div class="mt-2">
-                  <div>
-                    <label for="location" class="block text-sm font-medium leading-6 text-gray-900"
-                      >角色</label
-                    >
-                    <select
-                      v-model="userInfo.role"
-                      id="location"
-                      name="location"
-                      class="mt-2 block w-1/4 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6"
-                    >
-                      <option>管理员</option>
-                      <option selected="">教师</option>
-                      <option>学生</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="sm:col-span-4">
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
-                  >账号</label
-                >
-                <div class="mt-2">
-                  <div
-                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
-                  >
-                    <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    </span>
-                    <input
-                      type="text"
-                      name="userid"
-                      id="userid"
-                      autocomplete="userid"
-                      class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder=""
-                      v-model="userInfo.account"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="sm:col-span-4">
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
-                  >用户名</label
-                >
-                <div class="mt-2">
-                  <div
-                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
-                  >
-                    <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    </span>
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      autocomplete="username"
-                      class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder=""
-                      v-model="userInfo.username"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="sm:col-span-4">
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900"
-                  >密码
-                </label>
-
-                <div class="mt-2 w-full">
-                  <div
-                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md"
-                  >
-                    <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    </span>
-
-                    <input
-                      :type="showPassword === '显示密码' ? 'password' : 'text'"
-                      name="username"
-                      id="username"
-                      autocomplete="username"
-                      class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder=""
-                      v-model="userInfo.password"
-                    />
-                    <button
-                      type="button"
-                      class="justify-self-start rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                      @click="toggleShowPassword"
-                    >
-                      {{ showPassword }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- <hr/> -->
-            </div>
-          </div>
-          <div class="flex items-center justify-end gap-x-6">
-            <button
-              type="submit"
-              class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              保存
-            </button>
-          </div>
-        </div>
-      </form>
+  <div class="mt-5 flex flex-col items-center">
+    <div class="my-5 font-semibold">添加用户信息</div>
+    <div class="w-2/3">
+      <el-form :model="form" label-width="120px" :rules="formRules" ref="formRef">
+        <el-form-item label="头像" prop="avatar">
+          <el-upload class="avatar-uploader" :http-request="uploadImage">
+            <img v-if="form.avatar" :src="form.avatar" class="avatar" />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="角色" prop="role">
+          <el-select v-model="form.role" placeholder="选择角色" style="width: 240px">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+              :disabled="item.disabled"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="账号邮箱" prop="account">
+          <el-input v-model="form.account" style="width: 240px" placeholder="请输入账号" />
+        </el-form-item>
+        <el-form-item label="用户名" prop="userName">
+          <el-input v-model="form.userName" style="width: 240px" placeholder="请输入用户名" />
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input
+            v-model="form.password"
+            style="width: 240px"
+            type="password"
+            placeholder="请输入密码"
+            show-password
+          />
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="flex gap-5">
+      <el-button @click="onSubmit(formRef, 'save')">保存</el-button>
+      <el-button type="primary" @click="onSubmit(formRef, 'next')">保存并下一步</el-button>
     </div>
   </div>
   <!-- Card -->
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { Plus } from '@element-plus/icons-vue'
+import UserServices from '@/api/UserServices'
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
+const oriUserName=ref('')
+const oriAccount=ref('')
+onMounted(async () => {
+  console.log(route.params.userId)
+  await UserServices.getUserById(route.params.userId)
+    .then((res) => {
+      form.value = res
+      oriUserName.value=res.userName
+      oriAccount.value=res.account
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+const form = ref({
+  userName: '',
+  account: '',
+  password: '',
+  avatar: '',
+  role: ''
+})
+const route = useRoute()
+const formRef = ref(null)
+const router = useRouter()
 
-const userInfo = ref('')
-const showPassword = ref('显示密码')
-const toggleShowPassword = () => {
-  if (showPassword.value === '显示密码') {
-    showPassword.value = '隐藏密码'
+const validateUserName = async (rule, value, callback) => {
+  const regex = /^[\u4e00-\u9fa5a-zA-Z0-9]{2,12}$/
+
+  const isUsernameValid = regex.test(value)
+
+  if (value === '') {
+    callback(new Error('请输入用户名'))
   } else {
-    showPassword.value = '显示密码'
+    if (isUsernameValid) {
+      try {
+        if (value===oriUserName.value) {
+  
+          return
+        }
+        const result = await UserServices.isUserNameExist(value)
+        if (result) {
+          callback(new Error('用户名已存在'))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      callback(new Error('用户名格式不正确'))
+    }
   }
 }
+const validateAccount = async (rule, value, callback) => {
+  const regex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+  const isAccountValid = regex.test(value)
+
+  if (value === '') {
+    callback(new Error('请输入账号'))
+  } else {
+    if (isAccountValid) {
+      try {
+        if (value===oriAccount.value) {
+          return
+        }
+        const result = await UserServices.isUserAccountExist(value)
+        if (result) {
+          callback(new Error('账号已存在'))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      callback(new Error('账号格式不正确'))
+    }
+  }
+}
+
+const validatePassword = (rule, value, callback) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/
+  const isPasswordValid = regex.test(value)
+
+  if (value === '') {
+    callback(new Error('请输入密码'))
+  } else {
+    if (!isPasswordValid) {
+      callback(new Error('密码格式不正确'))
+    }
+    callback()
+  }
+}
+
+const validateAvatar = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('请上传头像'))
+  } else {
+    callback()
+  }
+}
+const validateRole = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('请选择角色'))
+  } else {
+    callback()
+  }
+}
+
+const formRules = ref({
+  userName: [
+    {
+      required: true,
+      validator: validateUserName,
+
+      trigger: ['blur', 'change']
+    }
+  ],
+  account: [{ required: true, validator: validateAccount, trigger: ['blur', 'change'] }],
+  password: [{ required: true, validator: validatePassword, trigger: 'blur' }],
+  role: [{ required: true, validator: validateRole, trigger: 'blur' }]
+})
+
+const onSubmit = async (formRef, type) => {
+  if (!formRef) return
+
+  const result = await formRef.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+
+  if (result) {
+    if (route.params.userId) {
+      await UserServices.updateUser(route.params.userId, form.value)
+        .then((res) => {
+          ElMessage({
+            type: 'success',
+            message: '保存成功'
+          })
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      await UserServices.addUser(form.value)
+        .then((res) => {
+          ElMessage({
+            type: 'success',
+            message: '保存成功'
+          })
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    if (type === 'next') {
+      // Emit the 'next' to the parent component
+      router.push({ name: 'AddUserFinish' })
+    }
+  }
+}
+
+const uploadImage = async (file) => {
+  try {
+    // console.log(file)
+    const result = await UserServices.uploadImage(file)
+    form.value.avatar = result.data.url
+    ElMessage({
+      type: 'success',
+      message: '保存成功'
+    })
+    // Emit the 'imgurl' to the parent component
+  } catch (e) {
+    console.log(e)
+  }
+}
+const options = [
+  {
+    value: 'admin',
+    label: '管理员'
+  },
+  {
+    value: 'teacher',
+    label: '教师'
+  },
+  {
+    value: 'student',
+    label: '学生'
+  }
+]
 
 // watch(()=>userInfo.value.role,(newVal,oldVal)=>{
 //   console.log(newVal,oldVal)
 // })
 </script>
+<style scoped>
+:deep(.el-input__inner) {
+  --tw-ring-shadow: 0 0 #000000;
+}
+.avatar-uploader .avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+</style>
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+</style>

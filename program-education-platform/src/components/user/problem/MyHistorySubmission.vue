@@ -112,9 +112,10 @@ onMounted(async () => {
     })
 })
 watch(currentpage, async (newVal, oldVal) => {
-  await UserServices.getHistorySubmission(userId, problemId, newVal, pageSize.value)
+  await UserServices.getHistorySubmission(userId, problemId.value, newVal, pageSize.value)
     .then((data) => {
       historyRecords.value = data
+      console.log(data)
     })
     .catch((error) => {
       console.log(error)

@@ -1,7 +1,7 @@
 <template lang="">
   <el-steps :active="2" align-center class="mt-5">
-    <el-step title="添加课程信息" />
-    <el-step title="添加课程章节详情" />
+    <el-step title="添加/修改课程信息" />
+    <el-step title="添加/修改课程章节详情" />
     <el-step title="完成" />
   </el-steps>
   <!-- <el-button plain @click="dialogVisible = true"> Click to open the Dialog </el-button> -->

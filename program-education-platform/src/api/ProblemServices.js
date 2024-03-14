@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { b64EncodeUnicode } from '@/utils/tools'
 const base_url = 'https://localhost:7231/api/Problems'
 const apiClient = axios.create({
   baseURL: base_url,
@@ -109,7 +109,7 @@ const ProblemServices = {
       }
       console.log(testData)
       const language_id = languageIds[language]
-      const base64Encoded = btoa(code)
+      const base64Encoded = b64EncodeUnicode(code)
       const submissions = []
       for (let i = 0; i < testData.length; i++) {
         const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
@@ -117,8 +117,8 @@ const ProblemServices = {
         submissions.push({
           language_id: language_id,
           source_code: base64Encoded,
-          stdin: btoa(inputWithoutNewlines),
-          expected_output: btoa(outputWithoutNewlines)
+          stdin: b64EncodeUnicode(inputWithoutNewlines),
+          expected_output: b64EncodeUnicode(outputWithoutNewlines)
         })
       }
 
@@ -158,15 +158,15 @@ const ProblemServices = {
       JavaScript: 63,
       Python: 71
     }
-    const source_code = btoa(code)
+    const source_code = b64EncodeUnicode(code)
     const language_id = languageIds[language]
     let resultList = []
     for (let i = 0; i < testData.length; i++) {
       const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
       const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '')
       // console.log(inputWithoutNewlines, outputWithoutNewlines)
-      const stdin = btoa(inputWithoutNewlines)
-      const expected_output = btoa(outputWithoutNewlines)
+      const stdin = b64EncodeUnicode(inputWithoutNewlines)
+      const expected_output = b64EncodeUnicode(outputWithoutNewlines)
       const data = {
         language_id: language_id,
         source_code: source_code,

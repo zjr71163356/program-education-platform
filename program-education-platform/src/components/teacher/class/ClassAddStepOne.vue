@@ -1,7 +1,7 @@
 <template lang="">
   <el-steps :active="1" align-center class="mt-5">
-    <el-step title="添加课程信息" />
-    <el-step title="添加课程章节详情" />
+    <el-step title="添加/修改课程信息" />
+    <el-step title="添加/修改课程章节详情" />
     <el-step title="完成" />
   </el-steps>
 
@@ -140,11 +140,16 @@ const onSubmit = async (formRef, type) => {
   const result = await formRef.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
+      return true
     } else {
       console.log('error submit!', fields)
+      return false
     }
   })
 
+
+
+  
   if (result) {
     console.log('courseId:' + route.params.courseId)
     console.log(dynamicTags.value)

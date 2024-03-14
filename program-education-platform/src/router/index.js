@@ -184,9 +184,9 @@ const router = createRouter({
           component: () => import('@/components/admin/UserList.vue')
         },
         {
-          path: 'UserDesc/:id',
+          path: 'UserDesc/:userId',
           name: 'UserDesc',
-          component: () => import('@/components/admin/UserDesc.vue'),
+          component: () => import('@/components/admin/AddUser.vue'),
           props: true
         },
         {
@@ -198,6 +198,11 @@ const router = createRouter({
           path: 'AddUser',
           name: 'AddUser',
           component: () => import('@/components/admin/AddUser.vue')
+        },
+        {
+          path: 'AddUserFinish',
+          name: 'AddUserFinish',
+          component: () => import('@/components/admin/AddUserFinish.vue')
         }
       ]
     }

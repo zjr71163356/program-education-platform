@@ -1,7 +1,7 @@
 <template lang="">
   <el-steps :active="2" align-center class="mt-5">
-    <el-step title="添加题库信息" />
-    <el-step title="添加题目数据" />
+    <el-step title="添加/修改题库信息" />
+    <el-step title="添加/修改数据" />
     <el-step title="完成" />
   </el-steps>
   <el-dialog v-model="dialogVisible" title="Tips" :before-close="handleClose">

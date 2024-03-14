@@ -122,11 +122,12 @@ import CodeEditer from '@/components/user/problem/CodeEditer.vue'
 import SubmitResult from '@/components/user/problem/SubmitResult.vue'
 import { useRoute } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
-import { getDate, getMaxTimeAndMemory } from '@/utils/tools'
+import UserServices from '@/api/UserServices'
+import { getDate, getMaxTimeAndMemory, UnicodeDecodeB64   } from '@/utils/tools'
 
 const prop = defineProps({
   problemId: {
-    type: String
+    type: Number
   }
 })
 
@@ -138,7 +139,7 @@ const text = ref('')
 const isOpen = ref(false)
 const isSendCode = ref(false)
 const Submission = ref({})
-
+const userId = JSON.parse(localStorage.getItem('token')).userId
 const userName = JSON.parse(localStorage.getItem('token')).userName
 
 const openSubmitResult = () => {
@@ -153,7 +154,7 @@ const resultCheck = async (resultList) => {
   resultList.forEach((submission) => {
     if (submission.status.description !== 'Accepted') {
       description = submission.status.description
-      compiler_output = atob(submission.compile_output)
+      compiler_output = UnicodeDecodeB64(submission.compile_output)
       return // 停止循环
     }
   })
@@ -175,7 +176,7 @@ const receiveCode = async (codeFromEditer) => {
   const { description, compiler_output } = await resultCheck(data)
   console.log(maxTime, maxMemory)
   Submission.value = {
-    题目Id: prop.problemId,
+    题目Id: problemId.value,
     题目: TheProblem.value.title,
     用户名: userName,
     提交时间: submitTime,
@@ -185,6 +186,29 @@ const receiveCode = async (codeFromEditer) => {
     状态: description,
     编译器输出: compiler_output
   }
+  console.log(problemId.value);
+  const addSubmission = {
+    problemId: problemId.value,
+    userId: userId,
+    userName: userName,
+    title: TheProblem.value.title,
+    resultState: description,
+    compiler: language.value,
+    memory: maxMemory,
+    runtime: maxTime,
+    submitTime: submitTime,
+    code: codeFromEditer,
+    compilerOutput: compiler_output
+  }
+  console.log(addSubmission);
+  await UserServices.addSubmissionRecord(addSubmission)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
   // console.log(Submission.value)
 }
 

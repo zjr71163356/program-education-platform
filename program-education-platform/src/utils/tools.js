@@ -1,3 +1,13 @@
+export function b64EncodeUnicode(str) {
+  return btoa(encodeURIComponent(str))
+}
+
+export function UnicodeDecodeB64(str) {
+  // 将非 URI 安全字符替换为 URI 安全字符
+
+  return atob(str)
+}
+
 export function stringToTag(inputString) {
   let tagList = ['', 'success', 'warning', 'danger', 'info']
   let hash = 0
@@ -29,26 +39,25 @@ export async function getDate() {
   return formattedCurrentDate
 }
 
- 
 export async function getMaxTimeAndMemory(resultList) {
   let maxTime = -Infinity
   let maxMemory = -Infinity
- 
- 
-  resultList.forEach( result  => {
-      const time = parseFloat(result.time)
-      const memory = parseFloat(result.memory)
 
-      if (!isNaN(time) && time > maxTime) {
-        maxTime = time
-      }
-      if (!isNaN(memory) && memory > maxMemory) {
-        maxMemory = memory
-      }
-    })
-   
-  maxMemory = (maxMemory / 1024).toFixed(1); // Convert maxMemory from KB to MB with 1 decimal place
+  resultList.forEach((result) => {
+    const time = parseFloat(result.time)
+    const memory = parseFloat(result.memory)
 
+    if (!isNaN(time) && time > maxTime) {
+      maxTime = time
+    }
+    if (!isNaN(memory) && memory > maxMemory) {
+      maxMemory = memory
+    }
+  })
+
+  if (maxTime === -Infinity) maxTime = 0
+  if (maxMemory === -Infinity) maxMemory = 0
+  maxMemory = (maxMemory / 1024).toFixed(1) // Convert maxMemory from KB to MB with 1 decimal place
   return { maxTime, maxMemory }
 }
 

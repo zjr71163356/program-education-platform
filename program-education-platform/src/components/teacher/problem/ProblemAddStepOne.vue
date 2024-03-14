@@ -1,7 +1,7 @@
 <template lang="">
   <el-steps :active="1" align-center class="mt-5">
-    <el-step title="添加题库信息" />
-    <el-step title="添加数据" />
+    <el-step title="添加/修改题库信息" />
+    <el-step title="添加/修改数据" />
     <el-step title="完成" />
   </el-steps>
   <div class="mt-5 flex flex-col items-center">
@@ -136,6 +136,7 @@ const onSubmit = async (formRef, type) => {
       console.log('submit!')
     } else {
       console.log('error submit!', fields)
+    
     }
   })
 

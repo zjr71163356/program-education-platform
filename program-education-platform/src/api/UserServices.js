@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import https from 'https' // Import the 'https' module
 
 const base_url = 'https://localhost:7231/api/Users'
@@ -34,9 +35,48 @@ const UserServices = {
       console.error(error)
     }
   },
+  async addUser(user) {
+    try {
+      const response = await apiClient.post(`/AddUser`, user)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async addSubmissionRecord(submissionRecord) {
+    try {
+      const response = await apiClient.post(`/AddUserSubmission`, submissionRecord)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getUserCourseList(userId) {
     try {
       const response = await apiClient.get(`/GetUserCourseList/${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getUserById(userId) {
+    try {
+      const response = await apiClient.get(`/GetUserById/${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getUserList(pageNumber, pageSize) {
+    try {
+      const searchParams = new URLSearchParams()
+      if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
+      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+      const response = await apiClient.get(`/GetUserList?${searchParams.toString()}`)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -148,6 +188,16 @@ const UserServices = {
     } catch (error) {
       console.error(error)
     }
+  },
+  async updateUser(userId, user) {
+    try{
+      const response = await apiClient.put(`/UpdateUser/${userId}`, user)
+      console.log(response.data)
+      return response.data
+    }catch (error) {
+      console.error(error)
+    }
+
   }
 }
 

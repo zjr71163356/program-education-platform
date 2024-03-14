@@ -40,7 +40,7 @@
           <div>
             <div class="flex items-center justify-between">
               <label for="account" class="block text-sm font-medium leading-6 text-gray-900"
-                >账号</label
+                >邮箱账号</label
               >
             </div>
             <div class="mt-2">
