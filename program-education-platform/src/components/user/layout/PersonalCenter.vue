@@ -1,10 +1,9 @@
 <template>
-  <div class="flex w-full container-height ">
-    
+  <div class="flex w-full container-height">
     <el-menu :default-active="$route.name" class=" " :router="true">
       <component
         :is="item.children ? ElSubMenu : ElMenuItem"
-        v-for="(item, key) in menuItems"
+        v-for="(item, key) in filteredMenuItems"
         :key="key"
         :index="item.index"
         :route="item.route"
@@ -37,6 +36,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import {
   Notebook,
   ChatLineRound,
@@ -49,6 +49,9 @@ import {
   User
 } from '@element-plus/icons-vue'
 import { ElMenuItem, ElSubMenu } from 'element-plus'
+const role = localStorage.getItem('role')
+ 
+console.log(role)
 // import { watch } from 'vue'
 
 // import { useRoute } from 'vue-router'
@@ -60,6 +63,20 @@ import { ElMenuItem, ElSubMenu } from 'element-plus'
 //   // 在这里进行路由变化后的逻辑处理
 // })
 
+const filteredMenuItems = computed(() => {
+  if (role === 'student') {
+    return menuItems.filter(
+      (item) =>
+        item.index !== 'ClassManage' &&
+        item.index !== 'ProblemBankManage' &&
+        item.index !== 'UserListManage'
+    )
+  } else if (role === 'teacher') {
+    return menuItems.filter((item) => item.index !== 'UserListManage')
+  } else {
+    return menuItems
+  }
+})
 const menuItems = [
   {
     index: 'MyClassList',

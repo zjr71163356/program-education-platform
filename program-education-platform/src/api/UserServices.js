@@ -15,6 +15,15 @@ const apiClient = axios.create({
 })
 
 const UserServices = {
+  async removeUser(userId) {
+    try {
+      const response = await apiClient.delete(`/RemoveUser?userId=${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async deleteUserCourse(userId, courseId) {
     try {
       const response = await apiClient.delete(
@@ -71,9 +80,10 @@ const UserServices = {
       console.error(error)
     }
   },
-  async getUserList(pageNumber, pageSize) {
+  async getUserList(fitlerQuery, pageNumber, pageSize) {
     try {
       const searchParams = new URLSearchParams()
+      if (fitlerQuery !== null) searchParams.set('fitlerQuery', fitlerQuery)
       if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
       if (pageSize !== null) searchParams.set('pageSize', pageSize)
       const response = await apiClient.get(`/GetUserList?${searchParams.toString()}`)
@@ -190,14 +200,13 @@ const UserServices = {
     }
   },
   async updateUser(userId, user) {
-    try{
+    try {
       const response = await apiClient.put(`/UpdateUser/${userId}`, user)
       console.log(response.data)
       return response.data
-    }catch (error) {
+    } catch (error) {
       console.error(error)
     }
-
   }
 }
 

@@ -40,6 +40,8 @@ watch(
 const emit = defineEmits(['imgurl'])
 const handleRemove = (file, uploadFiles) => {
   console.log(file, uploadFiles)
+  fileList.value.pop()
+  emit('imgurl',null )
 }
 
 const handlePreview = (uploadFile) => {

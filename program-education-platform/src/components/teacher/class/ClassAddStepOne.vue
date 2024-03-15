@@ -53,7 +53,7 @@
           <component
             :is="UploadPicture"
             @imgurl="form.imageUrl = $event"
-            :Image="form.imageUrl"
+            :Image="form.imageUrl?form.imageUrl:''"
           ></component>
         </el-form-item>
       </el-form>

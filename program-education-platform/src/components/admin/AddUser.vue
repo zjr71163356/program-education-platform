@@ -57,15 +57,17 @@ import UserServices from '@/api/UserServices'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
-const oriUserName=ref('')
-const oriAccount=ref('')
+const oriUserName = ref('')
+const oriAccount = ref('')
 onMounted(async () => {
-  console.log(route.params.userId)
+  if (!route.params.userId) {
+    return
+  }
   await UserServices.getUserById(route.params.userId)
     .then((res) => {
       form.value = res
-      oriUserName.value=res.userName
-      oriAccount.value=res.account
+      oriUserName.value = res.userName
+      oriAccount.value = res.account
     })
     .catch((err) => {
       console.log(err)
@@ -92,8 +94,7 @@ const validateUserName = async (rule, value, callback) => {
   } else {
     if (isUsernameValid) {
       try {
-        if (value===oriUserName.value) {
-  
+        if (value === oriUserName.value) {
           return
         }
         const result = await UserServices.isUserNameExist(value)
@@ -117,7 +118,7 @@ const validateAccount = async (rule, value, callback) => {
   } else {
     if (isAccountValid) {
       try {
-        if (value===oriAccount.value) {
+        if (value === oriAccount.value) {
           return
         }
         const result = await UserServices.isUserAccountExist(value)
@@ -191,6 +192,8 @@ const onSubmit = async (formRef, type) => {
     if (route.params.userId) {
       await UserServices.updateUser(route.params.userId, form.value)
         .then((res) => {
+          oriUserName.value = res.userName
+          oriAccount.value = res.account
           ElMessage({
             type: 'success',
             message: '保存成功'
@@ -203,6 +206,9 @@ const onSubmit = async (formRef, type) => {
     } else {
       await UserServices.addUser(form.value)
         .then((res) => {
+          oriUserName.value = res.userName
+          oriAccount.value = res.account
+          router.push({ name: 'UserDesc', params: { userId: res.userId } })
           ElMessage({
             type: 'success',
             message: '保存成功'
