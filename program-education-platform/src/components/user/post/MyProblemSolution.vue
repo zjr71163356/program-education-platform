@@ -1,72 +1,84 @@
 <template>
-  <el-table :data="tableData"    style="width: 100%">
-    <el-table-column label="标题" prop="title" >
-    <template #default="{ row }">
-      <router-link class="text-sky-400" :to="{ name: 'PostDesc', params: { id: row.id } }">{{
-        row.title
-      }}</router-link>
-    </template>
-  </el-table-column>
-    <el-table-column label="发布时间" prop="date"  width="100"/>
-    <el-table-column align="right"  >
-      <template #header>
- 
-      </template>
-      <template #default="scope">
-        <div class="flex justify-center">
-          
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-          >编辑</el-button
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column label="Id" prop="postId" />
+    <el-table-column label="标题" prop="title">
+      <template #default="{ row }">
+        <router-link
+          class="text-sky-400"
+          :to="{
+            name: 'PostAdd',
+            params: { problemId: row.problemId },
+            query: { title: row.title, postType: false }
+          }"
+          >{{ row.title }}</router-link
         >
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)"
-          >删除</el-button
-        >
-        </div>
-
       </template>
     </el-table-column>
-    
+    <el-table-column label="发布时间" prop="postTime" />
+    <el-table-column align="right">
+      <template #header> </template>
+      <template #default="scope">
+        <div class="flex justify-center">
+          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)"
+            >删除</el-button
+          >
+        </div>
+      </template>
+    </el-table-column>
   </el-table>
-  <el-pagination layout="prev, pager, next" :total="1000" />
+  <el-pagination
+    layout="prev, pager, next"
+    :total="total"
+    :page-size="pageSize"
+    v-model:current-page="currentpage"
+  />
 </template>
 
-<script  setup>
-import { computed, ref } from 'vue'
+<script setup>
+import { onMounted, ref, watch } from 'vue'
+import PostServices from '@/api/PostServices'
+import { useRouter } from 'vue-router'
+import ProblemServices from '@/api/ProblemServices'
+const token = localStorage.getItem('token')
+const userId = JSON.parse(token).userId
+const total = ref(0)
+const currentpage = ref(1)
+const pageSize = 10
+const router = useRouter()
 
- 
-const tableData = [
-  {
-    date: '2016-05-03',
-    title: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    title: 'John',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    title: 'Morgan',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    title: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
+const handleEdit = async (index, row) => {
+  console.log(index, row)
+  const problemTitle = ref('')
+  await ProblemServices.getProblemById(row.problemId).then((data) => {
+    problemTitle.value = data.title
+  })
+  router.push({
+    name: 'PostAdd',
+    params: { problemId: row.problemId },
+    query: { title: problemTitle.value, postType: true, postId: row.postId }
+  })
+}
+
+onMounted(async () => {
+  console.log('mounted')
+  await PostServices.getPostByUserId(userId).then((data) => {
+    total.value = data.length
+    tableData.value = data
+    console.log(data)
+  })
+  await PostServices.getPostByUserId(userId, 1, pageSize).then((data) => {
+    tableData.value = data
+    console.log(data)
+  })
+})
+watch(currentpage, async (newVal, oldVal) => {
+  console.log('currentpage', newVal)
+  await PostServices.getPostByUserId(userId, newVal, pageSize).then((data) => {
+    tableData.value = data
+    console.log(data)
+  })
+})
+
+const tableData = ref([])
 </script>

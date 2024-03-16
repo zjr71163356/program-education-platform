@@ -22,7 +22,14 @@
       <div class="bg-slate-100 flex justify-between content-center">
         <SelectList class="w-1/5 p-2" @selectedlanguage="language = $event" />
         <div class="w-1/2 flex justify-end">
-          <router-link :to="{ name: 'PostList' }" class="self-center">
+          <!-- {{TheProblem.title}} -->
+          <router-link
+            :to="{
+              name: 'PostList',
+              params: { problemId: problemId},query: { title: TheProblem.title, postType: false }
+            }"
+            class="self-center"
+          >
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
             >
@@ -44,7 +51,13 @@
               <div class="self-center">讨论</div>
             </div>
           </router-link>
-          <router-link :to="{ name: 'PostList' }" class="self-center">
+          <router-link
+            :to="{
+              name: 'PostList',
+              params: { problemId: problemId },query: { title: TheProblem.title, postType: true }
+            }"
+            class="self-center"
+          >
             <div
               class="rounded-lg flex h-1/2 mr-5 hover:bg-gray-200 transition-colors duration-200"
             >
@@ -123,7 +136,7 @@ import SubmitResult from '@/components/user/problem/SubmitResult.vue'
 import { useRoute } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
 import UserServices from '@/api/UserServices'
-import { getDate, getMaxTimeAndMemory, UnicodeDecodeB64   } from '@/utils/tools'
+import { getDate, getMaxTimeAndMemory, UnicodeDecodeB64 } from '@/utils/tools'
 
 const prop = defineProps({
   problemId: {
@@ -186,7 +199,7 @@ const receiveCode = async (codeFromEditer) => {
     状态: description,
     编译器输出: compiler_output
   }
-  console.log(problemId.value);
+  console.log(problemId.value)
   const addSubmission = {
     problemId: problemId.value,
     userId: userId,
@@ -200,7 +213,7 @@ const receiveCode = async (codeFromEditer) => {
     code: codeFromEditer,
     compilerOutput: compiler_output
   }
-  console.log(addSubmission);
+  console.log(addSubmission)
   await UserServices.addSubmissionRecord(addSubmission)
     .then((res) => {
       console.log(res)

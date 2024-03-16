@@ -1,5 +1,5 @@
 <template>
-  <form action="#" class="w-4/5">
+  <form action="#"  >
     <TabGroup>
       <!-- These buttons are here simply as examples and don't actually do anything. -->
 

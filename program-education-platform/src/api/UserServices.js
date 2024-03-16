@@ -80,6 +80,24 @@ const UserServices = {
       console.error(error)
     }
   },
+  async getUserName(userId) {
+    try {
+      const response = await apiClient.get(`/GetUserNameById?userId=${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getUserAvatar(userId) {
+    try {
+      const response = await apiClient.get(`/GetUserAvatar/${userId}`)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getUserList(fitlerQuery, pageNumber, pageSize) {
     try {
       const searchParams = new URLSearchParams()

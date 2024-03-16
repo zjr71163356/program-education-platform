@@ -13,7 +13,7 @@
         </h2>
       </div>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6"  >
+        <form class="space-y-6">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
               >账号</label
@@ -22,7 +22,6 @@
               <input
                 id="account"
                 name="account"
-      
                 autocomplete="account"
                 required=""
                 class="ps-3 pe-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
@@ -92,20 +91,18 @@ const login = async () => {
       Password: loginModel.value.password
     }
     const data = await UserServices.userLogin(user)
-    console.log(data);
-    if (data.role) {
-     const  token= JSON.stringify(data)
-     const role= data.role
-      if (token) {
-        localStorage.setItem('token', token)
-        localStorage.setItem('role', role)
-        IsShowSuccess.value = true
-        setTimeout(() => {
-          IsShowSuccess.value = false
-          router.push('/')
-        }, 1000)
-      }
-    }
+    console.log(data)
+
+    const token = JSON.stringify(data)
+    const role = data.role
+
+    localStorage.setItem('token', token)
+    localStorage.setItem('role', role)
+    IsShowSuccess.value = true
+    setTimeout(() => {
+      IsShowSuccess.value = false
+      router.push('/')
+    }, 1000)
   } catch (e) {
     IsShowError.value = true
     setTimeout(() => {

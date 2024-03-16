@@ -80,9 +80,10 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/PostList',
+      path: '/PostList/:problemId',
       name: 'PostList',
-      component: () => import('@/pages/post/PostList.vue')
+      component: () => import('@/pages/post/PostList.vue'),
+      props: true
     },
     {
       path: '/PostDesc',
@@ -90,9 +91,10 @@ const router = createRouter({
       component: () => import('@/pages/post/PostDesc.vue')
     },
     {
-      path: '/PostAdd',
+      path: '/PostAdd/:problemId',
       name: 'PostAdd',
-      component: () => import('@/pages/post/PostAdd.vue')
+      component: () => import('@/pages/post/PostAdd.vue'),
+      props: true
     },
     {
       path: '/EditPassword',

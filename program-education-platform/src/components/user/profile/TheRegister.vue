@@ -208,17 +208,19 @@ const UserRegister = async () => {
         Password: loginModel.value.password
       }
       // console.log('user', user);
-      const result = await UserServices.userRegister(user)
-      console.log('注册:', result)
-      const token = 'User'
-      if (token) {
-        localStorage.setItem('token', token)
-        IsShowSuccess.value = true
-        setTimeout(() => {
-          IsShowSuccess.value = false
-          router.push({ name: 'SignIn' })
-        }, 1500)
-      }
+      const data = await UserServices.userRegister(user)
+      console.log('注册:', data)
+
+      const token = JSON.stringify(data)
+      const role = data.role
+
+      localStorage.setItem('token', token)
+      localStorage.setItem('role', role)
+      IsShowSuccess.value = true
+      setTimeout(() => {
+        IsShowSuccess.value = false
+        router.push('/')
+      }, 1000)
     } catch (error) {
       console.log(error)
     }
