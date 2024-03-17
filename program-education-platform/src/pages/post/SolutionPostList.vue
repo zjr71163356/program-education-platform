@@ -8,7 +8,7 @@
         <router-link
           :to="{
             name: 'PostAdd',
-            params: { problemId: problemId },
+            params: { problemId: route.params.problemId },
             query: { title: route.query.title, postType: true }
           }"
         >
@@ -42,9 +42,11 @@
               </div>
             </div>
           </div>
- 
-            <p class="text-2xl font-semibold leading-6 text-gray-900 self-center">{{ Posts['title'] }}</p>
-       
+
+          <p class="text-2xl font-semibold leading-6 text-gray-900 self-center">
+            {{ Posts['title'] }}
+          </p>
+
           <div :class="{ 'max-h-40 overflow-hidden': !showFullContent[index] }">
             <MdPreview :modelValue="Posts['postContent']" />
           </div>
@@ -59,7 +61,7 @@
             <p class="mt-1 text-xs leading-5 text-gray-500">
               发布于: <time datetime="2023-01-23T13:23Z">{{ Posts['postTime'] }}</time>
             </p>
-            <div class="flex items-center cursor-pointer" @click="getComment">
+            <div class="flex items-center cursor-pointer" @click="getComment(Posts['postId'])">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -95,15 +97,21 @@
     </div>
   </div>
 
-  <el-dialog class="w-4/5" v-model="dialogVisible" title="Tips">
-    <CommentPlugin />
-    <CommentBlock />
-    <template #footer>
+  <el-dialog class="w-4/5" v-model="dialogVisible" title="评论">
+    <CommentPlugin :postId="selectedPostId" @commented="getComment(selectedPostId)" />
+    <CommentBlock :comments="postComments" @deleteComment="getComment(selectedPostId)" />
+    <!-- <template #footer>
       <div class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="dialogVisible = false"> Confirm </el-button>
       </div>
-    </template>
+    </template> -->
+    <el-pagination
+      layout="prev, pager, next"
+      :total="commentTotal"
+      :page-size="commentPageSize"
+      v-model:current-page="commentCurrentpage"
+    />
   </el-dialog>
   <!-- Card -->
 </template>
@@ -115,6 +123,11 @@ import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
 import { MdPreview } from 'md-editor-v3'
 import { ElMessageBox, ElMessage } from 'element-plus'
+ 
+const commentTotal=ref(0)
+const commentPageSize=6
+const commentCurrentpage=ref(1)
+const selectedPostId = ref('')
 const route = useRoute()
 const PostsList = ref([])
 const total = ref(0)
@@ -124,8 +137,24 @@ const dialogVisible = ref(false)
 const token = localStorage.getItem('token')
 const userId = JSON.parse(token).userId
 const role = localStorage.getItem('role')
-const getComment = () => {
+const postComments = ref([])
+const props = defineProps({
+  problemId: {
+    type: String
+  }
+})
+const getComment = async (postId) => {
+  console.log(postId)
+  selectedPostId.value = postId
   dialogVisible.value = true
+  await PostServices.getCommentsByPostId(postId).then(async (data) => {
+    postComments.value = []
+    for (const comment of data) {
+      const avatar = await UserServices.getUserAvatar(comment.fromUserId)
+      postComments.value.push({ ...comment, avatar: avatar })
+    }
+    commentTotal.value = data.length
+  })
 }
 
 const removePost = async (postId, index) => {
@@ -170,6 +199,17 @@ onMounted(async () => {
       showFullContent.value.push(post.postContent.length <= 200)
     }
   })
+})
+watch(commentCurrentpage, async (newVal, oldVal) => {
+  postComments.value = []
+  await PostServices.getCommentsByPostId(selectedPostId.value, newVal, commentPageSize).then(
+    async (data) => {
+      for (const comment of data) {
+        const avatar = await UserServices.getUserAvatar(comment.fromUserId)
+        postComments.value.push({ ...comment, avatar: avatar })
+      }
+    }
+  )
 })
 
 watch(currentpage, async (newVal, oldVal) => {

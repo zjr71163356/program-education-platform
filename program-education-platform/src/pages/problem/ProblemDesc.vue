@@ -25,7 +25,7 @@
           <!-- {{TheProblem.title}} -->
           <router-link
             :to="{
-              name: 'PostList',
+              name: 'DiscussionPostList',
               params: { problemId: problemId},query: { title: TheProblem.title, postType: false }
             }"
             class="self-center"
@@ -53,7 +53,7 @@
           </router-link>
           <router-link
             :to="{
-              name: 'PostList',
+              name: 'SolutionPostList',
               params: { problemId: problemId },query: { title: TheProblem.title, postType: true }
             }"
             class="self-center"

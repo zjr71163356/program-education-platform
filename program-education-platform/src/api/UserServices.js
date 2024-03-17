@@ -83,7 +83,7 @@ const UserServices = {
   async getUserName(userId) {
     try {
       const response = await apiClient.get(`/GetUserNameById?userId=${userId}`)
-      console.log(response.data)
+      // console.log(response.data)
       return response.data
     } catch (error) {
       console.error(error)
@@ -92,7 +92,7 @@ const UserServices = {
   async getUserAvatar(userId) {
     try {
       const response = await apiClient.get(`/GetUserAvatar/${userId}`)
-      console.log(response.data)
+      // console.log(response.data)
       return response.data
     } catch (error) {
       console.error(error)

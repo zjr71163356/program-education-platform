@@ -27,6 +27,19 @@ const PostServices = {
       console.error(error)
     }
   },
+  async getCommentsByPostId(postId, pageNumber = 1, pageSize = null) {
+    try {
+      const searchParams = new URLSearchParams()
+      searchParams.set('postId', postId)
+      searchParams.set('pageNumber', pageNumber)
+      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+      const response = await apiClient.get(`/GetCommentsByPostId?${searchParams.toString()}`)
+      console.log(response)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getPostByUserId(userId, pageNumber = 1, pageSize = null) {
     try {
       const searchParams = new URLSearchParams()
@@ -43,7 +56,7 @@ const PostServices = {
   async getPostById(postId) {
     try {
       const response = await apiClient.get(`/GetPostById/${postId}`)
-      console.log(response)
+      // console.log(response)
       return response.data
     } catch (error) {
       console.error(error)
@@ -58,9 +71,27 @@ const PostServices = {
       console.error(error)
     }
   },
+  async addComment(comment) {
+    try {
+      const response = await apiClient.post(`/AddComment`, comment)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async removePostById(postId) {
     try {
       const response = await apiClient.delete(`/DeletePostById/${postId}`)
+      console.log(response)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async removeComment(commentId) {
+    try {
+      const response = await apiClient.delete(`/DeleteCommentById/${commentId}`)
       console.log(response)
       return response.data
     } catch (error) {

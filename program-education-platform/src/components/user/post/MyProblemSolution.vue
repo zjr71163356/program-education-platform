@@ -40,6 +40,7 @@ import { onMounted, ref, watch } from 'vue'
 import PostServices from '@/api/PostServices'
 import { useRouter } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
+import { ElMessageBox, ElMessage } from 'element-plus'
 const token = localStorage.getItem('token')
 const userId = JSON.parse(token).userId
 const total = ref(0)
@@ -60,6 +61,23 @@ const handleEdit = async (index, row) => {
   })
 }
 
+const handleDelete = async (index, row) => {
+  // console.log(index, row)
+  ElMessageBox.confirm('删除当前题解?', 'Warning', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await PostServices.removePostById(row.postId).then((res) => {
+      console.log(res)
+      tableData.value.splice(index, 1)
+    })
+    ElMessage({
+      type: 'success',
+      message: '删除成功'
+    })
+  })
+}
 onMounted(async () => {
   console.log('mounted')
   await PostServices.getPostByUserId(userId).then((data) => {

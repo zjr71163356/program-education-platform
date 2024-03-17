@@ -80,13 +80,19 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/PostList/:problemId',
-      name: 'PostList',
-      component: () => import('@/pages/post/PostList.vue'),
+      path: '/SolutionPostList/:problemId',
+      name: 'SolutionPostList',
+      component: () => import('@/pages/post/SolutionPostList.vue'),
       props: true
     },
     {
-      path: '/PostDesc',
+      path: '/DiscussionPostList/:problemId',
+      name: 'DiscussionPostList',
+      component: () => import('@/pages/post/DiscussionPostList.vue'),
+      props: true
+    },
+    {
+      path: '/PostDesc/:postId',
       name: 'PostDesc',
       component: () => import('@/pages/post/PostDesc.vue')
     },

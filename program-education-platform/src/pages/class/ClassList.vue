@@ -71,4 +71,4 @@ async function getAllCoursesList(fitlerQuery = null, pageNumber = 1, pageSize = 
   align-items: center;
 }
 </style>
-@/api/CourseServices.js
+ 

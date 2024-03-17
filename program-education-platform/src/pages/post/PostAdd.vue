@@ -9,19 +9,19 @@
 
     <div class="flex justify-end">
       <button
-      v-if="!route.query.postId"
+        v-if="!route.query.postId"
         class="rounded-md bg-blue-600 px-8 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         @click="addPost"
       >
         发布
       </button>
       <button
-      v-if="route.query.postId"
-      class="rounded-md bg-blue-600 px-8 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-      @click="updatePost"
-    >
-      编辑
-    </button>
+        v-if="route.query.postId"
+        class="rounded-md bg-blue-600 px-8 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        @click="updatePost"
+      >
+        编辑
+      </button>
     </div>
   </div>
 </template>
@@ -41,6 +41,11 @@ const token = localStorage.getItem('token')
 const userId = JSON.parse(token).userId
 const route = useRoute()
 const router = useRouter()
+const props = defineProps({
+  problemId: {
+    type: Number
+  }
+})
 onMounted(async () => {
   if (route.query.postId) {
     await PostServices.getPostById(route.query.postId).then((res) => {
@@ -51,6 +56,8 @@ onMounted(async () => {
   }
 })
 const updatePost = async () => {
+  let postType = false
+  postType = route.query.postType == 'true'
   const post = {
     title: title.value,
     postTime: new Date(),
@@ -63,8 +70,9 @@ const updatePost = async () => {
         type: 'success',
         message: '更新'
       })
+
       router.push({
-        name: 'PostList',
+        name: postType ? 'SolutionPostList' : 'DiscussionPostList',
         params: { problemId: route.params.problemId },
         query: { postType: route.query.postType, title: route.query.title }
       })
@@ -76,7 +84,10 @@ const updatePost = async () => {
 
 const addPost = async () => {
   const postTime = await getFormattedDate(new Date())
-  const postType = Boolean(route.query.postType)
+  let postType = false
+
+  postType = route.query.postType == 'true'
+
   const post = {
     title: title.value,
     userId: userId,
@@ -93,10 +104,11 @@ const addPost = async () => {
         type: 'success',
         message: '添加'
       })
+
       router.push({
-        name: 'PostList',
+        name: postType ? 'SolutionPostList' : 'DiscussionPostList',
         params: { problemId: route.params.problemId },
-        query: { postType: postType, title: route.query.title }
+        query: { postType: route.query.postType, title: route.query.title }
       })
     })
     .catch((err) => {

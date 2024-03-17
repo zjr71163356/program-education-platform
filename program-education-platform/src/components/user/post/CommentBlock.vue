@@ -2,18 +2,14 @@
   <li
     v-for="(comment, index) in props.comments"
     :key="index"
-    class="flex flex-col justify-between py-3"
+    class="flex flex-col justify-between py-3 gap-y-2"
   >
     <div class="flex flex-col min-w-0 gap-x-4 grow">
       <div class="flex items-center gap-x-2">
-        <img
-          class="h-6 w-6 flex-none rounded-full bg-gray-50"
-          :src="'https://ui-avatars.com/api/?name=' + comment['from_username']"
-          alt=""
-        />
-        <p class="text-sm leading-6 text-gray-900">{{ comment['from_username'] }}</p>
+        <img class="h-6 w-6 flex-none rounded-full bg-gray-50" :src="comment['avatar']" alt="" />
+        <p class="text-sm leading-6 text-gray-900">{{ comment['fromUsername'] }}</p>
         <p class="text-xs leading-5 text-gray-500 justify-self-end">
-          <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'] }}</time>
+          <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'].replace('T', ' ') }}</time>
         </p>
         <p v-if="comment.to_username" class="justify-self-start text-gray-500">
           回复了 {{ comment['to_username'] }}的评论
@@ -21,7 +17,7 @@
       </div>
 
       <div class="min-w-0 flex-auto">
-        <p class="my-3">{{ comment['content'] }}</p>
+        <p class="my-3">{{ comment['commentContent'] }}</p>
       </div>
       <div class="flex items-center justify-between self-start gap-x-3">
         <!-- <div class="flex items-center cursor-pointer">
@@ -44,6 +40,7 @@
         </div> -->
 
         <div
+          v-if="!route.query.postType"
           class="flex items-center text-gray-500 cursor-pointer"
           @click="toggleCommentVis(index)"
         >
@@ -51,10 +48,11 @@
         </div>
 
         <div
+          v-if="role !== 'student' || comment['fromUserId'] === userId"
           class="flex items-center text-gray-500 cursor-pointer"
-          @click="showdeleteDialog(index)"
+          @click="showdeleteDialog(comment['commentId'])"
         >
-          删除
+          删除 
         </div>
       </div>
     </div>
@@ -65,16 +63,36 @@
     >
       <CommentBlock :comments="comment.replies" />
     </ul>
+    <hr />
   </li>
-  <DeleteDialog :isVisible="dialogVisible" @confirm-delete="handleDelete" />
 </template>
 <script setup>
 import { ref } from 'vue'
 import CommentPlugin from './CommentPlugin.vue'
-const DeleteId = ref('')
-const showdeleteDialog = (Id) => {
-  DeleteId.value = Id
+import { useRoute } from 'vue-router'
+import { ElMessageBox, ElMessage } from 'element-plus'
+import PostServices from '@/api/PostServices'
+const token = localStorage.getItem('token')
+const userId = JSON.parse(token).userId
+const role = localStorage.getItem('role')
+const emit = defineEmits(['deleteComment'])
+
+const route = useRoute()
+const showdeleteDialog = async (commentId) => {
   dialogVisible.value = true
+  ElMessageBox.confirm('删除当前评论?', 'Warning', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await PostServices.removeComment(commentId).then((res) => {
+      ElMessage({
+        type: 'success',
+        message: '删除成功'
+      })
+      emit('deleteComment', true)
+    })
+  })
 }
 const dialogVisible = ref(false)
 const handleDelete = (userConfirmed) => {
