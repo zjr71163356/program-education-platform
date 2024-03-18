@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import https from 'https' // Import the 'https' module
+ 
 
 const base_url = 'https://localhost:7231/api/Users'
 const apiClient = axios.create({
@@ -220,6 +221,42 @@ const UserServices = {
   async updateUser(userId, user) {
     try {
       const response = await apiClient.put(`/UpdateUser/${userId}`, user)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async updateUserProfile(userId, user) {
+    try {
+      const response = await apiClient.put(`/UpdateUserProfile/${userId}`, user)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async updateUserPW(userId, pw) {
+    try {
+      const response = await apiClient.put(`/UpdateUserPassword/${userId}`, pw)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  async isUserPWMatch(user) {
+    try {
+      const formData = new FormData()
+      formData.append('Account', user.Account)
+      formData.append('Password', user.Password)
+      formData.append('Role', 'user')
+      const response = await apiClient.post(`/isUserPWMatch `, user, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       console.log(response.data)
       return response.data
     } catch (error) {

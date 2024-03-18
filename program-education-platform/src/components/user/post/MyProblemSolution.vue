@@ -7,7 +7,7 @@
           class="text-sky-400"
           :to="{
             name: 'PostAdd',
-            params: { problemId: row.problemId },
+            params: { problemId: row.postId },
             query: { title: row.title, postType: false }
           }"
           >{{ row.title }}</router-link

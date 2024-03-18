@@ -19,7 +19,15 @@
         </p>
       </div>
       <div class="flex justify-end w-full">
-        <el-button type="primary" :icon="Edit" circle />
+        <router-link
+          :to="{
+            name: 'PostAdd',
+            params: { problemId: route.query.problemId },
+            query: { title: route.query.title, postType: false, postId: postId }
+          }"
+        >
+          <el-button type="primary" :icon="Edit" circle />
+        </router-link>
         <el-button type="danger" :icon="Delete" circle @click="showdeleteDialog(postId)" />
       </div>
     </div>
@@ -31,7 +39,7 @@
     <CommentPlugin class="w-4/5" :postId="postId" @commented="addComment" :isReply="false" />
 
     <ul role="list" class="divide-y divide-gray-100 w-4/5">
-      <CommentBlock :comments="postComments" :isReply="false"/>
+      <CommentBlock :comments="postComments" :isReply="false" />
     </ul>
     <el-pagination
       layout="prev, pager, next"
@@ -52,7 +60,8 @@ import { MdPreview } from 'md-editor-v3'
 import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
 import CommentBlock from '@/components/user/post/CommentBlock.vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
+import { ElMessageBox, ElMessage } from 'element-plus'
 const id = 'problem'
 const commentTotal = ref(0)
 const commentPageSize = 6
@@ -61,6 +70,7 @@ const dialogVisible = ref(false)
 const DeleteId = ref('')
 const PostInfo = ref('')
 const route = useRoute()
+const router=useRouter()
 const postComments = ref([])
 const postId = route.params.postId
 onMounted(async () => {
@@ -90,9 +100,25 @@ const getComment = async (postId) => {
     commentTotal.value = data.length
   })
 }
-const showdeleteDialog = (Id) => {
-  DeleteId.value = Id
-  dialogVisible.value = true
+const showdeleteDialog = (postId) => {
+  ElMessageBox.confirm('删除当前讨论贴?', 'Warning', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await PostServices.removePostById(postId).then((res) => {
+      console.log(res)
+    })
+    ElMessage({
+      type: 'success',
+      message: '删除成功'
+    })
+    router.push({
+      name: 'DiscussionPostList',
+      params: { problemId: route.query.problemId },
+      query: { postType: route.query.postType, title: route.query.title }
+    })
+  })
 }
 const text = ref(data)
 // const isrecommend = ref('')

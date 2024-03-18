@@ -6,12 +6,12 @@
       <h5 class="flex items-center justify-between dark:text-neutral-300">
         <span class="mr-2 text-xl"> Title </span>
         <router-link
-        :to="{
-          name: 'PostAdd',
-          params: { problemId: route.params.problemId },
-          query: { title: route.query.title, postType: false }
-        }"
-      >
+          :to="{
+            name: 'PostAdd',
+            params: { problemId: route.params.problemId },
+            query: { title: route.query.title, postType: false }
+          }"
+        >
           <button
             type="button"
             class="rounded-md bg-blue-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -52,7 +52,13 @@
               :src="Posts['avatar']"
               alt=""
             />
-            <router-link :to="{ name: 'PostDesc',params:{postId:Posts['postId']} }">
+            <router-link
+              :to="{
+                name: 'PostDesc',
+                params: { postId: Posts['postId'] },
+                query: { problemId: route.params.problemId, title: route.query.title }
+              }"
+            >
               <div class="min-w-0 flex-auto">
                 <p class="text-lg font-semibold leading-6 text-gray-900">{{ Posts['title'] }}</p>
               </div>
@@ -82,8 +88,8 @@
 // import { PostsList } from '@/data/data'
 import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
-import { onMounted, ref ,watch} from 'vue'
-import { useRoute } from 'vue-router';
+import { onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 const props = defineProps({
   problemId: {
     type: String
@@ -98,14 +104,15 @@ onMounted(async () => {
   await PostServices.getAllPostsOverViewList(false, props.problemId, 1, null).then(async (data) => {
     total.value = data.length
   })
-  await PostServices.getAllPostsOverViewList(false, props.problemId, 1, pageSize).then(async (data) => {
-    for (const post of data) {
-      const userName = await UserServices.getUserName(post.userId)
-      const avatar = await UserServices.getUserAvatar(post.userId)
-      PostsList.value.push({ ...post, userName: userName, avatar: avatar })
+  await PostServices.getAllPostsOverViewList(false, props.problemId, 1, pageSize).then(
+    async (data) => {
+      for (const post of data) {
+        const userName = await UserServices.getUserName(post.userId)
+        const avatar = await UserServices.getUserAvatar(post.userId)
+        PostsList.value.push({ ...post, userName: userName, avatar: avatar })
+      }
     }
-  })
-
+  )
 })
 
 watch(currentpage, async (newVal, oldVal) => {

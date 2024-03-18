@@ -35,7 +35,6 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
- 
           <!-- Profile dropdown -->
           <Menu as="div" class="relative ml-3">
             <div>
@@ -44,11 +43,7 @@
               >
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
-                <img
-                  class="h-8 w-8 rounded-full"
-                  src="https://ui-avatars.com/api/?name="
-                  alt=""
-                />
+                <img class="h-8 w-8 rounded-full" :src="avatar" alt="" />
               </MenuButton>
             </div>
             <transition
@@ -64,7 +59,7 @@
               >
                 <MenuItem v-slot="{ active }">
                   <RouterLink
-                   :to="{ name: 'TheProfile' }"
+                    :to="{ name: 'TheProfile' }"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >个人资料</RouterLink
                   >
@@ -77,7 +72,7 @@
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >退出账号</a
                   >
-                </MenuItem  >
+                </MenuItem>
               </MenuItems>
             </transition>
           </Menu>
@@ -136,7 +131,8 @@ export default {
     }
   },
   setup() {
-
+    const token = localStorage.getItem('token')
+    const avatar = ref(JSON.parse(token).avatar)
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
@@ -144,6 +140,7 @@ export default {
       { name: '题库', href: { name: 'ProblemBank' }, current: false }
     ])
     const navigation2 = ref([{ name: '个人中心', href: { name: 'MyClassList' }, current: false }])
+
 
     watch(
       () => router.name,
@@ -158,13 +155,14 @@ export default {
       },
       { immediate: true }
     )
-    const logout=()=>{
+    const logout = () => {
       localStorage.removeItem('token')
       console.log('logout')
     }
     return {
       navigation,
-      navigation2
+      navigation2,
+      avatar
     }
   }
 }

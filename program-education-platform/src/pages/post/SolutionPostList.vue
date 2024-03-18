@@ -142,6 +142,7 @@ const props = defineProps({
 })
 const getComment = async (postId) => {
   console.log(postId)
+
   selectedPostId.value = postId
   dialogVisible.value = true
   await PostServices.getCommentsByPostId(postId).then(async (data) => {

@@ -40,11 +40,12 @@ const PostServices = {
       console.error(error)
     }
   },
-  async getPostByUserId(userId, pageNumber = 1, pageSize = null) {
+  async getPostByUserId(userId, pageNumber = 1, pageSize = null,isSolution = true) {
     try {
       const searchParams = new URLSearchParams()
       searchParams.set('userId', userId)
       searchParams.set('pageNumber', pageNumber)
+      searchParams.set('isSolution', isSolution)
       if (pageSize !== null) searchParams.set('pageSize', pageSize)
       const response = await apiClient.get(`/GetPostsListByUserId?${searchParams.toString()} `)
       console.log(response)

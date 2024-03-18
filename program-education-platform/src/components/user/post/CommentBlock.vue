@@ -6,7 +6,7 @@
   >
     <div class="flex flex-col min-w-0 gap-x-4 grow">
       <div class="flex items-center gap-x-2">
-        <img class="h-6 w-6 flex-none rounded-full bg-gray-50" :src="avatar" alt="" />
+        <img class="h-6 w-6 flex-none rounded-full bg-gray-50" :src="comment.fromUser.avatar" alt="" />
         <p class="text-sm leading-6 text-gray-900">{{ comment['fromUsername'] }}</p>
         <p class="text-xs leading-5 text-gray-500 justify-self-end">
           <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'].replace('T', ' ') }}</time>
