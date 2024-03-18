@@ -99,13 +99,10 @@
 
   <el-dialog class="w-4/5" v-model="dialogVisible" title="评论">
     <CommentPlugin :postId="selectedPostId" @commented="getComment(selectedPostId)" />
-    <CommentBlock :comments="postComments" @deleteComment="getComment(selectedPostId)" />
-    <!-- <template #footer>
-      <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false"> Confirm </el-button>
-      </div>
-    </template> -->
+    <ul role="list" class="divide-y divide-gray-100 w-4/5">
+      <CommentBlock :comments="postComments" @deleteComment="getComment(selectedPostId)" />
+    </ul>
+
     <el-pagination
       layout="prev, pager, next"
       :total="commentTotal"
@@ -123,10 +120,10 @@ import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
 import { MdPreview } from 'md-editor-v3'
 import { ElMessageBox, ElMessage } from 'element-plus'
- 
-const commentTotal=ref(0)
-const commentPageSize=6
-const commentCurrentpage=ref(1)
+
+const commentTotal = ref(0)
+const commentPageSize = 6
+const commentCurrentpage = ref(1)
 const selectedPostId = ref('')
 const route = useRoute()
 const PostsList = ref([])

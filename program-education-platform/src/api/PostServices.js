@@ -80,6 +80,15 @@ const PostServices = {
       console.error(error)
     }
   },
+  async addReply(reply) {
+    try {
+      const response = await apiClient.post(`/AddReply`, reply)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async removePostById(postId) {
     try {
       const response = await apiClient.delete(`/DeletePostById/${postId}`)
@@ -92,6 +101,15 @@ const PostServices = {
   async removeComment(commentId) {
     try {
       const response = await apiClient.delete(`/DeleteCommentById/${commentId}`)
+      console.log(response)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async removeReply(replyId) {
+    try {
+      const response = await apiClient.delete(`/DeleteReplyById/${replyId}`)
       console.log(response)
       return response.data
     } catch (error) {

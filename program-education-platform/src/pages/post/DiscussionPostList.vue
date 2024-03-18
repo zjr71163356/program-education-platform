@@ -105,7 +105,9 @@ onMounted(async () => {
       PostsList.value.push({ ...post, userName: userName, avatar: avatar })
     }
   })
+
 })
+
 watch(currentpage, async (newVal, oldVal) => {
   PostsList.value = []
   await PostServices.getAllPostsOverViewList(false, props.problemId, newVal, pageSize).then(
