@@ -61,6 +61,11 @@
             <p class="mt-1 text-xs leading-5 text-gray-500">
               发布于: <time datetime="2023-01-23T13:23Z">{{ Posts['postTime'] }}</time>
             </p>
+            <div class="flex items-center cursor-pointer" @click="toggleBlue(index)">
+              <el-icon :size="25" :color="isBlue[index] ? blueColor : 'black'"><CaretTop /></el-icon>
+              <span :style="{ color: isBlue[index] ? blueColor : 'black' }">赞同</span>
+            </div>
+
             <div class="flex items-center cursor-pointer" @click="getComment(Posts['postId'])">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +125,12 @@ import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
 import { MdPreview } from 'md-editor-v3'
 import { ElMessageBox, ElMessage } from 'element-plus'
-
+import { CaretTop } from '@element-plus/icons-vue'
+const isBlue = ref([])
+const blueColor = 'rgb(47,181,96)'
+const toggleBlue = (index) => {
+  isBlue.value[index] = !isBlue.value[index]
+}
 const commentTotal = ref(0)
 const commentPageSize = 6
 const commentCurrentpage = ref(1)

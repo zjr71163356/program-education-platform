@@ -9,7 +9,7 @@
         <img class="h-6 w-6 flex-none rounded-full bg-gray-50" :src="comment.fromUser.avatar" alt="" />
         <p class="text-sm leading-6 text-gray-900">{{ comment['fromUsername'] }}</p>
         <p class="text-xs leading-5 text-gray-500 justify-self-end">
-          <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'].replace('T', ' ') }}</time>
+          <time datetime="2023-01-23T13:23Z">{{ comment['timestamp'].split('.')[0].replace('T',' ') }}</time>
         </p>
         <p v-if="comment.toUsername" class="justify-self-start text-gray-500">
           回复了 {{ comment['toUsername'] }}的评论

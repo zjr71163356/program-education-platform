@@ -45,6 +45,7 @@
 import { TabGroup, TabPanel, TabPanels } from '@headlessui/vue'
 import { watch, ref } from 'vue'
 import PostServices from '@/api/PostServices'
+import UserServices from '@/api/UserServices'
 const props = defineProps({
   small: Boolean,
   postId: Number,
@@ -66,9 +67,10 @@ const submitComment = async () => {
     commentContent: text.value,
     timestamp: new Date()
   }
-  await PostServices.addComment(comment).then((res) => {
-    console.log(res)
-    emit('commented', res)
+  await PostServices.addComment(comment).then(async (data) => {
+    await UserServices.getUserAvatar(userId).then((avatar) => {
+      emit('commented', { ...data, fromUser: { avatar: avatar } })
+    })
   })
 }
 const submitReply = async () => {
@@ -82,9 +84,10 @@ const submitReply = async () => {
     replyContent: text.value,
     timestamp: new Date()
   }
-  await PostServices.addReply(reply).then((res) => {
-    console.log(res)
-    emit('commented', res)
+  await PostServices.addReply(reply).then(async (data) => {
+    await UserServices.getUserAvatar(userId).then((avatar) => {
+      emit('commented', { ...data, fromUser: { avatar: avatar } })
+    })
   })
 }
 watch(

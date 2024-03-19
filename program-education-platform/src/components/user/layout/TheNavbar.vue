@@ -132,7 +132,8 @@ export default {
   },
   setup() {
     const token = localStorage.getItem('token')
-    const avatar = ref(JSON.parse(token).avatar)
+
+    let avatar =token?JSON.parse(token).avatar:''
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },

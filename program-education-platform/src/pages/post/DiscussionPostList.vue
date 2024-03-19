@@ -67,7 +67,7 @@
           <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             <p class="text-sm leading-6 text-gray-900">{{ Posts['userName'] }}</p>
             <p class="mt-1 text-xs leading-5 text-gray-500">
-              发布于:
+              回复于:
               <time datetime="2023-01-23T13:23Z">{{ Posts['postTime'].replace('T', ' ') }}</time>
             </p>
           </div>
