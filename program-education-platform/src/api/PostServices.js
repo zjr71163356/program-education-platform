@@ -125,6 +125,28 @@ const PostServices = {
     } catch (error) {
       console.error(error)
     }
+  },
+  async addLike(userlike){
+    try {
+      const response = await apiClient.post(`/AddUserLike`, userlike)
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async deleteLike(userId,postId){
+    try {
+      const searchParams = new URLSearchParams()
+      searchParams.set('userId', userId)
+      searchParams.set('postId', postId)
+      const response = await apiClient.delete(`/DeleteUserLike?${searchParams.toString()} `)
+      console.log(response)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+
   }
 }
 
