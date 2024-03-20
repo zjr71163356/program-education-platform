@@ -79,7 +79,7 @@
                     data-te-ripple-color="light"
                     @click="AddUserCourse"
                   >
-                    {{ userCourseRepeat ? '已添加' : '添加到我的课程列表' }}
+                    {{ userCourseRepeat ? '已添加' : '添加到我的教程列表' }}
                   </button>
                 </div>
               </div>

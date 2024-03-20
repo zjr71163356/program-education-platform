@@ -4,7 +4,7 @@
     <!-- Card header -->
     <div class="border-b-2 border-neutral-100 px-6 py-4 dark:border-neutral-500">
       <h5 class="flex items-center justify-center text-neutral-500 dark:text-neutral-300 text-3xl">
-        <span class="mr-2"> 我的课程 </span>
+        <span class="mr-2"> 我的教程 </span>
       </h5>
     </div>
 
@@ -41,12 +41,12 @@ import ClassItem from './ClassItem.vue'
 import UserServices from '@/api/UserServices'
 import { ElMessageBox, ElMessage } from 'element-plus'
 const deleteMode = ref(false)
-const buttonString = ref('编辑课程')
+const buttonString = ref('编辑教程')
 const myCourseList = ref()
 const token = localStorage.getItem('token')
 const userId = JSON.parse(token).userId
 const handleDeleteCourse = async (courseId) => {
-  ElMessageBox.confirm('删除当前课程?', 'Warning', {
+  ElMessageBox.confirm('删除当前教程?', 'Warning', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning'
@@ -70,7 +70,7 @@ onMounted(async () => {
 })
 const setDeleteMode = () => {
   deleteMode.value = !deleteMode.value
-  buttonString.value = deleteMode.value ? '取消' : '编辑课程'
+  buttonString.value = deleteMode.value ? '取消' : '编辑教程'
 }
 </script>
 

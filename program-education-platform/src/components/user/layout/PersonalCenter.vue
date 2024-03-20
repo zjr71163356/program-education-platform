@@ -82,7 +82,7 @@ const menuItems = [
     index: 'MyClassList',
     route: { name: 'MyClassList' },
     icon: Notebook,
-    label: '我的课程'
+    label: '我的教程'
   },
   {
     index: 'MyProblemSolution',
@@ -105,19 +105,19 @@ const menuItems = [
   {
     index: 'ClassManage',
     icon: Suitcase,
-    label: '课程管理',
+    label: '教程管理',
     children: [
       {
         index: 'ClassListManage',
         route: { name: 'ClassListManage' },
         icon: Tickets,
-        label: '课程列表'
+        label: '教程列表'
       },
       {
         index: 'ClassAddStepOne',
         route: { name: 'ClassAddStepOne' },
         icon: DocumentAdd,
-        label: '添加课程'
+        label: '添加教程'
       }
     ]
   },

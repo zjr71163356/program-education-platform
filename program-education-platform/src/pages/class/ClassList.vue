@@ -4,7 +4,7 @@
     <!-- Card header -->
     <div class="border-b-2 border-neutral-100 px-6 py-4 dark:border-neutral-500">
       <h5 class="flex items-center justify-center text-neutral-500 dark:text-neutral-300 text-3xl">
-        <span class="mr-2"> 全部课程 </span>
+        <span class="mr-2"> 全部教程 </span>
       </h5>
     </div>
 

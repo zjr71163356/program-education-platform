@@ -1,16 +1,16 @@
 <template lang="">
   <el-steps :active="1" align-center class="mt-5">
-    <el-step title="添加/修改课程信息" />
-    <el-step title="添加/修改课程章节详情" />
+    <el-step title="添加/修改教程信息" />
+    <el-step title="添加/修改教程章节详情" />
     <el-step title="完成" />
   </el-steps>
 
   <div class="mt-5 flex flex-col items-center">
-    <div class="my-5 font-semibold">添加课程信息</div>
+    <div class="my-5 font-semibold">添加教程信息</div>
     <div class="w-2/3">
       <el-form :model="form" label-width="120px" :rules="formRules" ref="formRef">
-        <el-form-item label="课程名称" prop="courseName">
-          <el-input v-model="form.courseName" placeholder="请输入课程名称" />
+        <el-form-item label="教程名称" prop="courseName">
+          <el-input v-model="form.courseName" placeholder="请输入教程名称" />
         </el-form-item>
         <el-form-item label="章节数" prop="chapterCount">
           <el-input-number v-model="form.chapterCount" :min="1" />
@@ -41,15 +41,15 @@
             </el-button>
           </div>
         </el-form-item>
-        <el-form-item label="课程简介" prop="introduction">
+        <el-form-item label="教程简介" prop="introduction">
           <el-input
             v-model="form.introduction"
             autosize
             type="textarea"
-            placeholder="请输入课程简介"
+            placeholder="请输入教程简介"
           />
         </el-form-item>
-        <el-form-item label="课程封面" prop="imageUrl">
+        <el-form-item label="教程封面" prop="imageUrl">
           <component
             :is="UploadPicture"
             @imgurl="form.imageUrl = $event"
@@ -101,9 +101,9 @@ onMounted(async () => {
   }
 })
 const formRules = ref({
-  courseName: [{ required: true, message: '请输入课程名称', trigger: ['blur', 'change'] }],
+  courseName: [{ required: true, message: '请输入教程名称', trigger: ['blur', 'change'] }],
   chapterCount: [{ required: true, message: '请输入章节数', trigger: 'blur' }],
-  introduction: [{ required: true, message: '请输入课程简介', trigger: 'blur' }],
+  introduction: [{ required: true, message: '请输入教程简介', trigger: 'blur' }],
   dynamicTags: [{required: true, validator: validateDynamicTags, trigger: 'blur' }]
 })
 const handleClose = (tag) => {

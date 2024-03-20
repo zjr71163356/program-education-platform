@@ -1,7 +1,7 @@
 <template lang="">
   <el-steps :active="2" align-center class="mt-5">
-    <el-step title="添加/修改课程信息" />
-    <el-step title="添加/修改课程章节详情" />
+    <el-step title="添加/修改教程信息" />
+    <el-step title="添加/修改教程章节详情" />
     <el-step title="完成" />
   </el-steps>
   <!-- <el-button plain @click="dialogVisible = true"> Click to open the Dialog </el-button> -->
@@ -20,7 +20,7 @@
 
   <DeleteDialog :isVisible="DeleteDialogVisible" />
   <div class="mt-5 flex flex-col items-center">
-    <div class="my-5 font-semibold">添加课程章节详情</div>
+    <div class="my-5 font-semibold">添加教程章节详情</div>
     <div class="w-2/3">
       <el-table :data="tableData" style="width: 100%" :row-key="(row) => row.chapterId">
         <el-table-column type="index"> </el-table-column>
@@ -80,7 +80,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-button plain class="mt-5" @click="addChapter()">添加课程章节</el-button>
+      <el-button plain class="mt-5" @click="addChapter()">添加教程章节</el-button>
     </div>
     <div class="flex gap-5">
       <el-button type="primary" @click="laststep">上一步</el-button>

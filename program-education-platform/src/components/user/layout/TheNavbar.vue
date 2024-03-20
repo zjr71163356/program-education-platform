@@ -137,7 +137,7 @@ export default {
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
-      { name: '课程', href: { name: 'ClassList' }, current: false },
+      { name: '教程', href: { name: 'ClassList' }, current: false },
       { name: '题库', href: { name: 'ProblemBank' }, current: false }
     ])
     const navigation2 = ref([{ name: '个人中心', href: { name: 'MyClassList' }, current: false }])

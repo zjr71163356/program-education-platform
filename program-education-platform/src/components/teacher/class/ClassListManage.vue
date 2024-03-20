@@ -1,7 +1,7 @@
 <template>
   <el-table :data="courses" style="width: 100%">
     <el-table-column prop="courseId" label="Id" width="50"/>
-    <el-table-column prop="courseName" label="课程名称">
+    <el-table-column prop="courseName" label="教程名称">
       <template #default="{ row }">
         <router-link
           class="text-sky-400"

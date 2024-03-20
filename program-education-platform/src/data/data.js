@@ -494,49 +494,49 @@ export const classdata = [
     chapterCount: 10,
     tag: ['JavaScript', '编程基础'],
     Introduction:
-      '这门课程旨在帮助初学者建立对JavaScript编程的基本理解。通过十个章节，学生将学到JavaScript的基础语法、变量、数据类型、控制流等内容，为进一步学习打下坚实基础。'
+      '这门教程旨在帮助初学者建立对JavaScript编程的基本理解。通过十个章节，学生将学到JavaScript的基础语法、变量、数据类型、控制流等内容，为进一步学习打下坚实基础。'
   },
   {
     name: '前端开发实战入门',
     chapterCount: 15,
     tag: ['JavaScript', '前端开发'],
     Introduction:
-      '本课程将深入介绍JavaScript在前端开发中的应用。学生将学到DOM操作、事件处理、Ajax等前端开发基础知识，并通过实际项目实战演练，提升实际编码能力。'
+      '本教程将深入介绍JavaScript在前端开发中的应用。学生将学到DOM操作、事件处理、Ajax等前端开发基础知识，并通过实际项目实战演练，提升实际编码能力。'
   },
   {
     name: 'Node.js后端开发入门',
     chapterCount: 12,
     tag: ['JavaScript', '后端开发', 'Node.js'],
     Introduction:
-      '这门课程专注于使用JavaScript进行后端开发，介绍Node.js的基本概念、Express框架、数据库连接等内容。学生将通过构建简单的后端应用，了解全栈开发的基本流程。'
+      '这门教程专注于使用JavaScript进行后端开发，介绍Node.js的基本概念、Express框架、数据库连接等内容。学生将通过构建简单的后端应用，了解全栈开发的基本流程。'
   },
   {
     name: 'React框架深入解析',
     chapterCount: 20,
     tag: ['JavaScript', '前端开发', 'React'],
     Introduction:
-      '本课程将深入探讨React框架，包括组件、状态管理、路由等高级主题。学生将通过实际项目实践，掌握React在现代前端开发中的核心概念和最佳实践。'
+      '本教程将深入探讨React框架，包括组件、状态管理、路由等高级主题。学生将通过实际项目实践，掌握React在现代前端开发中的核心概念和最佳实践。'
   },
   {
     name: 'Python编程基础',
     chapterCount: 12,
     tag: ['Python', '编程基础'],
     Introduction:
-      '这门课程旨在帮助初学者建立对Python编程的基本理解。通过十二个章节，学生将学到Python的基础语法、数据类型、函数等内容，为编写简单脚本和应用程序打下基础。'
+      '这门教程旨在帮助初学者建立对Python编程的基本理解。通过十二个章节，学生将学到Python的基础语法、数据类型、函数等内容，为编写简单脚本和应用程序打下基础。'
   },
   {
     name: 'Java面向对象编程',
     chapterCount: 15,
     tag: ['Java', '面向对象'],
     Introduction:
-      '本课程将深入介绍Java编程中的面向对象概念。学生将学到类、继承、多态等面向对象编程的基础知识，并通过实际案例进行实践，提升对Java编程的理解和应用能力。'
+      '本教程将深入介绍Java编程中的面向对象概念。学生将学到类、继承、多态等面向对象编程的基础知识，并通过实际案例进行实践，提升对Java编程的理解和应用能力。'
   },
   {
     name: 'C++高级编程技术',
     chapterCount: 18,
     tag: ['C++', '高级编程'],
     Introduction:
-      '这门课程专注于C++编程语言的高级主题。学生将学到模板、多线程编程、异常处理等高级技术，并通过实际项目演练，深入理解C++在系统级和应用级编程中的应用。'
+      '这门教程专注于C++编程语言的高级主题。学生将学到模板、多线程编程、异常处理等高级技术，并通过实际项目演练，深入理解C++在系统级和应用级编程中的应用。'
   }
 ]
 export const classoutline = [

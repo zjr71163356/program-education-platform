@@ -119,7 +119,7 @@ const formRules = ref({
     {
       required: true,
       validator: validateproblemContent,
-      message: '请输入课程简介',
+      message: '请输入教程简介',
       trigger: 'blur'
     }
   ],
