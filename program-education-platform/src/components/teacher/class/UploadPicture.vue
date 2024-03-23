@@ -6,7 +6,7 @@
     action="#"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
-    :before-remove="beforeRemove"
+ 
     :limit="1"
     :on-exceed="handleExceed"
     :http-request="uploadImage"
@@ -41,7 +41,7 @@ const emit = defineEmits(['imgurl'])
 const handleRemove = (file, uploadFiles) => {
   console.log(file, uploadFiles)
   fileList.value.pop()
-  emit('imgurl',null )
+  // emit('imgurl','' )
 }
 
 const handlePreview = (uploadFile) => {
@@ -50,11 +50,8 @@ const handlePreview = (uploadFile) => {
 
 const handleExceed = (files, uploadFiles) => {
   ElMessage
-    .warning
-    // `The limit is 3, you selected ${files.length} files this time, add up to ${
-    //   files.length + uploadFiles.length
-    // } totally`
-    ()
+    .warning(`当前只能上传 1 个文件，请删除原先的图片再上传新的文件`)
+ 
 }
 const uploadImage = async (file) => {
   try {

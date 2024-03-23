@@ -118,7 +118,7 @@
   <el-dialog class="w-4/5" v-model="dialogVisible" title="评论">
     <CommentPlugin :postId="selectedPostId" @commented="getComment(selectedPostId)" />
     <ul role="list" class="divide-y divide-gray-100 w-4/5">
-      <CommentBlock :comments="postComments" @deleteComment="getComment(selectedPostId)" />
+      <CommentBlock :isReply="false" :comments="postComments" @deleteComment="getComment(selectedPostId)" />
     </ul>
 
     <el-pagination

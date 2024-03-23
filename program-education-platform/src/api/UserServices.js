@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-import https from 'https' // Import the 'https' module
  
 
 const base_url = 'https://localhost:7231/api/Users'
@@ -10,9 +9,7 @@ const apiClient = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json'
   },
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false
-  })
+ 
 })
 
 const UserServices = {
