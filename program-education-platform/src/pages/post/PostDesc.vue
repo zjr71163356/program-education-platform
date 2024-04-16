@@ -26,9 +26,20 @@
             query: { title: route.query.title, postType: false, postId: postId }
           }"
         >
-          <el-button type="primary" :icon="Edit" circle />
+          <el-button
+            v-if="role !== 'student' || PostInfo['userId'] === userId"
+            type="primary"
+            :icon="Edit"
+            circle
+          />
         </router-link>
-        <el-button type="danger" :icon="Delete" circle @click="showdeleteDialog(postId)" />
+        <el-button
+          v-if="role !== 'student' || PostInfo['userId'] === userId"
+          type="danger"
+          :icon="Delete"
+          circle
+          @click="showdeleteDialog(postId)"
+        />
       </div>
     </div>
     <!-- Card body -->
@@ -60,8 +71,11 @@ import { MdPreview } from 'md-editor-v3'
 import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
 import CommentBlock from '@/components/user/post/CommentBlock.vue'
-import { useRoute,useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage } from 'element-plus'
+const token = localStorage.getItem('token')
+const userId = JSON.parse(token).userId
+const role = localStorage.getItem('role')
 const id = 'problem'
 const commentTotal = ref(0)
 const commentPageSize = 6
@@ -70,7 +84,7 @@ const dialogVisible = ref(false)
 const DeleteId = ref('')
 const PostInfo = ref('')
 const route = useRoute()
-const router=useRouter()
+const router = useRouter()
 const postComments = ref([])
 const postId = route.params.postId
 onMounted(async () => {
