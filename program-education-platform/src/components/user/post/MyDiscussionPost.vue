@@ -6,9 +6,9 @@
         <router-link
           class="text-sky-400"
           :to="{
-            name: 'PostAdd',
-            params: { problemId:  row.postId },
-            query: { title: row.title, postType: false }
+            name: 'PostDesc',
+            params: { postId:  row.postId },
+            query: { problemId: row.problemId,title: row.title }
           }"
           >{{ row.title }}</router-link
         >

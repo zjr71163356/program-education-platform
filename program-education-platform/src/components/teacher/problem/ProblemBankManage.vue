@@ -22,7 +22,7 @@
       </template>
     </el-table-column>
     <el-table-column prop="difficulty" label="难度" width="80" />
-    <el-table-column prop="acceptRate" label="通过率" width="80" />
+    <!-- <el-table-column prop="acceptRate" label="通过率" width="80" /> -->
     <el-table-column align="right">
       <template #header> </template>
       <template #default="scope">

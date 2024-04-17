@@ -69,12 +69,12 @@
                   :color="isBlue[index] ? blueColor : 'black'"
                   ><CaretTop
                 /></el-icon>
-                <el-icon
+                <!-- <el-icon
                   @click="toggleBlueDOWN(index, Posts['postId'])"
                   :size="25"
                   :color="isBlue2[index] ? blueColor : 'black'"
                   ><CaretBottom
-                /></el-icon>
+                /></el-icon> -->
               </div>
             </div>
             <span>赞同{{ Posts['likes'] }}</span>
@@ -118,7 +118,11 @@
   <el-dialog class="w-4/5" v-model="dialogVisible" title="评论">
     <CommentPlugin :postId="selectedPostId" @commented="getComment(selectedPostId)" />
     <ul role="list" class="divide-y divide-gray-100 w-4/5">
-      <CommentBlock :isReply="false" :comments="postComments" @deleteComment="getComment(selectedPostId)" />
+      <CommentBlock
+        :isReply="false"
+        :comments="postComments"
+        @deleteComment="getComment(selectedPostId)"
+      />
     </ul>
 
     <el-pagination
@@ -142,23 +146,39 @@ import { CaretTop, CaretBottom } from '@element-plus/icons-vue'
 const isBlue = ref([])
 const isBlue2 = ref([])
 const blueColor = 'rgb(47,181,96)'
-const toggleBlueUP = async (index, postId) => {
+
+const toggleBlueUP = (index, postId) => {
+  if (isBlue.value[index]) {
+    likeDOWN(index, postId)
+  } else {
+    likeUP(index, postId)
+  }
   isBlue.value[index] = !isBlue.value[index]
-  PostsList.value[index].likes++
+}
+// const toggleBlueDOWN = (index, postId) => {
+//   if (isBlue2.value[index]) {
+//     likeUP(index, postId)
+//   } else {
+//     likeDOWN(index, postId)
+//   }
+//   isBlue2.value[index] = !isBlue2.value[index]
+// }
+const likeUP = async (index, postId) => {
+  // isBlue.value[index] = !isBlue.value[index]
 
   await PostServices.addLike({
     userId: userId,
     postId: postId
   }).then((res) => {
     console.log(res)
+    if (res) PostsList.value[index].likes++
   })
 }
-const toggleBlueDOWN = async (index, postId) => {
-  isBlue2.value[index] = !isBlue2.value[index]
-  PostsList.value[index].likes--
+const likeDOWN = async (index, postId) => {
+  // isBlue2.value[index] = !isBlue2.value[index]
 
   await PostServices.deleteLike(userId, postId).then((res) => {
-    console.log(res)
+    if (res) PostsList.value[index].likes--
   })
 }
 const commentTotal = ref(0)
