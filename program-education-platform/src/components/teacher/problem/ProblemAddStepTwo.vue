@@ -129,7 +129,7 @@ onMounted(async () => {
   console.log('mounted')
   console.log(route.params.problemId)
   await ProblemServices.getProblemTestData(route.params.problemId).then((data) => {
-    tableData.value = data
+    if (data) tableData.value = data
   })
 })
 </script>

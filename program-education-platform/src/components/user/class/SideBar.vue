@@ -23,7 +23,7 @@
             class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300"
           >
           </span>
-          <span>{{ item.chapterNumber+'.' }}{{ item.title }}</span>
+          <span>{{ index+1+'.' }}{{ item.title }}</span>
           
         </a>
       </li>
