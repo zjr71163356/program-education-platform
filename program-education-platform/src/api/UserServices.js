@@ -1,8 +1,7 @@
 import axios from 'axios'
-
+import api_url from './config'
+const base_url = `${api_url}/Users`
  
-
-const base_url = 'https://localhost:7231/api/Users'
 const apiClient = axios.create({
   baseURL: base_url,
   headers: {
