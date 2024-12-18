@@ -33,7 +33,7 @@
                 <div class="flex justify-start gap-5">
                   <RouterLink
                     :to="{
-                      name: 'ClassContent',
+                      name: 'CourseContent',
                       query: {
                         subChapterIndex: 0,
                         chapterIndex: 0,
@@ -98,23 +98,22 @@
   <!-- Container for demo purpose -->
 </template>
 <script setup>
-import SideBar from '../../components/user/class/SideBar.vue'
-import SideBarDesc from '../../components/user/class/SideBarDesc.vue'
+import SideBar from '@/pages/course/SideBar.vue'
+import SideBarDesc from '@/pages/course/SideBarDesc.vue'
 import CourseServices from '@/api/CourseServices.js'
 import UserServices from '@/api/UserServices'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { tagColorList } from '@/api/staticdata'
- 
+
 const userCourseRepeat = ref(false)
 const route = useRoute()
 const course = ref({})
 const courseId = ref(route.params.courseId)
 const token = localStorage.getItem('token')
 const userId = JSON.parse(token).userId
-const subChapterId=ref(1)
+const subChapterId = ref(1)
 onMounted(async () => {
-  
   userCourseRepeat.value = await UserServices.isUserCourseRepeat(userId, courseId.value)
   await getCoursesById(courseId.value)
 })
@@ -135,7 +134,7 @@ async function getCoursesById(courseId) {
   try {
     const data = await CourseServices.getCoursesById(courseId)
     course.value = data
-    subChapterId.value=course.value.courseChapters[0].subChapters[0].subChapterId
+    subChapterId.value = course.value.courseChapters[0].subChapters[0].subChapterId
   } catch (error) {
     console.log(error)
   }

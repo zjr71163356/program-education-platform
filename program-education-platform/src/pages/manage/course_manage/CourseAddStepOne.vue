@@ -53,7 +53,7 @@
           <component
             :is="UploadPicture"
             @imgurl="form.imageUrl = $event"
-            :Image="form.imageUrl?form.imageUrl:''"
+            :Image="form.imageUrl ? form.imageUrl : ''"
           ></component>
         </el-form-item>
       </el-form>
@@ -68,7 +68,7 @@
 import { ref, nextTick, onMounted } from 'vue'
 import { ElInput } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router' // Add this import statement
-import UploadPicture from './UploadPicture.vue'
+import UploadPicture from '@/components/picture/UploadPicture.vue'
 import { tagColorList } from '@/api/staticdata'
 import CourseServices from '@/api/CourseServices'
 import { ElMessage } from 'element-plus'
@@ -97,14 +97,14 @@ onMounted(async () => {
       form.value.imageUrl = res.imageUrl
       dynamicTags.value = res.courseTags
     })
-    // router.push({ name: 'ClassAddStepTwo' ,param:{courseId:route.params.courseId}}) // Replace this line
+    // router.push({ name: 'CourseAddStepTwo' ,param:{courseId:route.params.courseId}}) // Replace this line
   }
 })
 const formRules = ref({
   courseName: [{ required: true, message: '请输入教程名称', trigger: ['blur', 'change'] }],
   chapterCount: [{ required: true, message: '请输入章节数', trigger: 'blur' }],
   introduction: [{ required: true, message: '请输入教程简介', trigger: 'blur' }],
-  dynamicTags: [{required: true, validator: validateDynamicTags, trigger: 'blur' }]
+  dynamicTags: [{ required: true, validator: validateDynamicTags, trigger: 'blur' }]
 })
 const handleClose = (tag) => {
   dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1)
@@ -147,9 +147,6 @@ const onSubmit = async (formRef, type) => {
     }
   })
 
-
-
-  
   if (result) {
     console.log('courseId:' + route.params.courseId)
     console.log(dynamicTags.value)
@@ -159,11 +156,11 @@ const onSubmit = async (formRef, type) => {
       if (route.params.courseId) {
         result = await CourseServices.updateCourseStepOne(route.params.courseId, form.value)
         if (type == 'next')
-          router.push({ name: 'ClassAddStepTwo', params: { courseId: route.params.courseId } })
+          router.push({ name: 'CourseAddStepTwo', params: { courseId: route.params.courseId } })
       } else {
         result = await CourseServices.addCourseStepOne(form.value)
         if (type == 'next')
-          router.push({ name: 'ClassAddStepTwo', params: { courseId: result.courseId } })
+          router.push({ name: 'CourseAddStepTwo', params: { courseId: result.courseId } })
       }
 
       ElMessage({

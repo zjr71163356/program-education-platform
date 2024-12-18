@@ -47,7 +47,6 @@
               :data="scope.row.subChapters"
               style="width: 90%; float: right"
               :show-header="false"
-       
             >
               <el-table-column type="index">
                 <template #default="subchapter">
@@ -110,14 +109,12 @@ onMounted(async () => {
   courseData.value = res
   console.log(res)
   tableData.value = res.courseChapters
- 
 })
 
-const saveCourseStepTwo= async () => {
-  const resData = await CourseServices.updateCourseStepTwo(
-    courseData.value.courseId,
-    {"courseChapters":tableData.value}
-  )
+const saveCourseStepTwo = async () => {
+  const resData = await CourseServices.updateCourseStepTwo(courseData.value.courseId, {
+    courseChapters: tableData.value
+  })
   console.log(resData)
   ElMessage({
     type: 'success',
@@ -149,13 +146,12 @@ const handleClose = () => {
   dialogVisible.value = false
 }
 
-
 const laststep = () => {
-  router.push({ name: 'ClassUpdateStepOne', params: { courseId: route.params.courseId } })
+  router.push({ name: 'CourseUpdateStepOne', params: { courseId: route.params.courseId } })
 }
 
 const nextstep = () => {
-  router.push({ name: 'ClassAddStepThree' }) // Replace this line
+  router.push({ name: 'CourseAddStepThree' }) // Replace this line
 }
 const addChapter = async () => {
   console.log(tableData.value)

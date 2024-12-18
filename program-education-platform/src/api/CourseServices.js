@@ -1,12 +1,9 @@
 import axios from 'axios'
-import api_url from './config'
+import { api_url, headers } from './config'
 const base_url = `${api_url}/Courses`
 const apiClient = axios.create({
   baseURL: base_url,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
+  headers: headers
 })
 
 const CourseServices = {

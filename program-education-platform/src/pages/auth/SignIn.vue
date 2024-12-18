@@ -71,43 +71,58 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import UserServices from '@/api/UserServices'
-import SuccessAlert from '@/components/user/SuccessAlert.vue'
-const router = useRouter()
-const loginModel = ref({
-  account: '',
+import { userLogin } from '@/api/UserServices'
+import SuccessAlert from '@/components/modal/SuccessAlert.vue'
 
-  password: ''
-})
-const IsShowSuccess = ref(false)
-const IsShowError = ref(false)
-const login = async () => {
-  try {
-    const user = {
-      Account: loginModel.value.account,
-      Password: loginModel.value.password
+export default {
+  components: { SuccessAlert },
+  setup() {
+    const router = useRouter()
+    const loginModel = ref({
+      account: '',
+
+      password: ''
+    })
+    const IsShowSuccess = ref(false)
+    const IsShowError = ref(false)
+    const login = async () => {
+      try {
+        const user = {
+          Account: loginModel.value.account,
+          Password: loginModel.value.password
+        }
+        console.log('login')
+        const data = await userLogin(user)
+        console.log(data)
+
+        // const token = JSON.stringify(data)
+        // const role = data.role
+
+        // localStorage.setItem('token', token)
+        // localStorage.setItem('role', role)
+
+        IsShowSuccess.value = true
+        setTimeout(() => {
+          IsShowSuccess.value = false
+          router.push('/')
+        }, 1000)
+      } catch (e) {
+        IsShowError.value = true
+        setTimeout(() => {
+          IsShowError.value = false
+        }, 1000)
+        console.log(e)
+      }
     }
-    const data = await UserServices.userLogin(user)
-    console.log(data)
-
-    const token = JSON.stringify(data)
-    const role = data.role
-
-    localStorage.setItem('token', token)
-    localStorage.setItem('role', role)
-    IsShowSuccess.value = true
-    setTimeout(() => {
-      IsShowSuccess.value = false
-      router.push('/')
-    }, 1000)
-  } catch (e) {
-    IsShowError.value = true
-    setTimeout(() => {
-      IsShowError.value = false
-    }, 1000)
+    return {
+      login,
+      loginModel,
+      IsShowSuccess,
+      IsShowError
+    }
   }
 }
 </script>

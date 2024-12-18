@@ -27,7 +27,7 @@
 <script setup>
 // import '@vavt/markdown-theme/all.css';
 import CourseServices from '@/api/CourseServices.js'
-import { ref, reactive, onMounted ,watch} from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { MdPreview, MdCatalog } from 'md-editor-v3'
 import 'md-editor-v3/lib/preview.css'
 // import mdtext from '@/data/doc/grammar.md?raw'
@@ -49,7 +49,7 @@ const subChapterIndex = ref(Number(route.query.subChapterIndex))
 const chapterIndex = ref(Number(route.query.chapterIndex))
 const courseId = ref(Number(route.query.courseId))
 onMounted(async () => {
-  console.log('onMounted');
+  console.log('onMounted')
   await getMdContent(route.params.subChapterId)
 })
 async function getMdContent(subChapterId) {

@@ -26,16 +26,14 @@
             :key="subChapterIndex"
             :ref="subChapterIndex"
             :to="{
-              name: 'ClassContent',
+              name: 'CourseContent',
               query: {
-              
                 subChapterIndex: subChapterIndex,
                 chapterIndex: chapterIndex,
-                courseId:Course.courseId,
- 
+                courseId: Course.courseId
               },
-              params:{
-                subChapterId: itemchild.subChapterId,
+              params: {
+                subChapterId: itemchild.subChapterId
               }
             }"
           >
@@ -43,8 +41,8 @@
               <a
                 class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                 data-te-sidenav-link-ref
-                > {{ subChapterIndex+1 + '.'
-                }}{{ itemchild.title }}</a
+              >
+                {{ subChapterIndex + 1 + '.' }}{{ itemchild.title }}</a
               >
             </li>
           </router-link>
@@ -61,7 +59,6 @@ const props = defineProps({
 })
 const myElements = ref({})
 
- 
 onMounted(() => {
   const scrollTo = (event) => {
     const id = event.detail

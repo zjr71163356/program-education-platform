@@ -27,7 +27,7 @@
       <template #header> </template>
       <template #default="scope">
         <div class="flex justify-center">
-          <!-- <router-link :to="{ name: 'ClassAddStepOne' }"> -->
+          <!-- <router-link :to="{ name: 'CourseAddStepOne' }"> -->
           <el-button size="small" type="primary" @click="toEdit(scope.row.problemId)"
             >编辑</el-button
           >

@@ -50,7 +50,7 @@ import {
 } from '@element-plus/icons-vue'
 import { ElMenuItem, ElSubMenu } from 'element-plus'
 const role = localStorage.getItem('role')
- 
+
 console.log(role)
 // import { watch } from 'vue'
 
@@ -67,7 +67,7 @@ const filteredMenuItems = computed(() => {
   if (role === 'student') {
     return menuItems.filter(
       (item) =>
-        item.index !== 'ClassManage' &&
+        item.index !== 'CourseManage' &&
         item.index !== 'ProblemBankManage' &&
         item.index !== 'UserListManage'
     )
@@ -79,8 +79,8 @@ const filteredMenuItems = computed(() => {
 })
 const menuItems = [
   {
-    index: 'MyClassList',
-    route: { name: 'MyClassList' },
+    index: 'MyCourseList',
+    route: { name: 'MyCourseList' },
     icon: Notebook,
     label: '我的教程'
   },
@@ -103,19 +103,19 @@ const menuItems = [
     label: '历史提交'
   },
   {
-    index: 'ClassManage',
+    index: 'CourseManage',
     icon: Suitcase,
     label: '教程管理',
     children: [
       {
-        index: 'ClassListManage',
-        route: { name: 'ClassListManage' },
+        index: 'CourseListManage',
+        route: { name: 'CourseListManage' },
         icon: Tickets,
         label: '教程列表'
       },
       {
-        index: 'ClassAddStepOne',
-        route: { name: 'ClassAddStepOne' },
+        index: 'CourseAddStepOne',
+        route: { name: 'CourseAddStepOne' },
         icon: DocumentAdd,
         label: '添加教程'
       }

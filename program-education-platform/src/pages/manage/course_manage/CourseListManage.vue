@@ -1,11 +1,11 @@
 <template>
   <el-table :data="courses" style="width: 100%">
-    <el-table-column prop="courseId" label="Id" width="50"/>
+    <el-table-column prop="courseId" label="Id" width="50" />
     <el-table-column prop="courseName" label="教程名称">
       <template #default="{ row }">
         <router-link
           class="text-sky-400"
-          :to="{ name: 'ClassDesc', params: { courseId: row.courseId } }"
+          :to="{ name: 'CourseDesc', params: { courseId: row.courseId } }"
           >{{ row.courseName }}</router-link
         >
       </template>
@@ -29,8 +29,15 @@
       <template #default="scope">
         <div class="flex justify-center">
           <!-- {{ row.courseId }} -->
-          <el-button size="small" type="primary" @click="toEdit(scope.row.courseId)">编辑</el-button>
-          <el-button size="small" type="danger" @click="deleteCourse(scope.row.courseId,scope.$index)">删除</el-button>
+          <el-button size="small" type="primary" @click="toEdit(scope.row.courseId)"
+            >编辑</el-button
+          >
+          <el-button
+            size="small"
+            type="danger"
+            @click="deleteCourse(scope.row.courseId, scope.$index)"
+            >删除</el-button
+          >
         </div>
       </template>
     </el-table-column>
@@ -61,7 +68,7 @@ onMounted(async () => {
   console.log(total.value)
 })
 watch(currentpage, async (newVal, oldVal) => {
-  await getAllCoursesList(null, newVal,  pageSize.value)
+  await getAllCoursesList(null, newVal, pageSize.value)
 })
 async function getAllCoursesList(fitlerQuery, pageNumber, pageSize) {
   try {
@@ -72,25 +79,22 @@ async function getAllCoursesList(fitlerQuery, pageNumber, pageSize) {
   }
 }
 const toEdit = (courseId) => {
-  router.push({ name: 'ClassUpdateStepOne', params: { courseId: courseId } })
+  router.push({ name: 'CourseUpdateStepOne', params: { courseId: courseId } })
 }
-const deleteCourse = async (courseId,index) => {
+const deleteCourse = async (courseId, index) => {
   ElMessageBox.confirm('删除当前主章节?', 'Warning', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning'
-  })
-  .then(async () => {
-    const res=await CourseServices.deleteCourseById(courseId)
+  }).then(async () => {
+    const res = await CourseServices.deleteCourseById(courseId)
     courses.value.splice(index, 1)
-      console.log(res)
-      ElMessage({
-        type: 'success',
-        message: '删除成功'
-      })
+    console.log(res)
+    ElMessage({
+      type: 'success',
+      message: '删除成功'
     })
-
-
+  })
 }
 </script>
 <style lang=""></style>

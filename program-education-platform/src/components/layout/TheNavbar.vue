@@ -133,15 +133,14 @@ export default {
   setup() {
     const token = localStorage.getItem('token')
 
-    let avatar =token?JSON.parse(token).avatar:''
+    let avatar = token ? JSON.parse(token).avatar : ''
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
-      { name: '教程', href: { name: 'ClassList' }, current: false },
+      { name: '教程', href: { name: 'CourseList' }, current: false },
       { name: '题库', href: { name: 'ProblemBank' }, current: false }
     ])
-    const navigation2 = ref([{ name: '个人中心', href: { name: 'MyClassList' }, current: false }])
-
+    const navigation2 = ref([{ name: '个人中心', href: { name: 'MyCourseList' }, current: false }])
 
     watch(
       () => router.name,

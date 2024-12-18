@@ -1,29 +1,39 @@
 import axios from 'axios'
-import api_url from './config'
-const base_url = `${api_url}/Users`
- 
-const apiClient = axios.create({
-  baseURL: base_url,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  },
- 
-})
+import { HttpInstance } from '@/api/config'
+// const base_url = `${api_url}/Users`
 
+// const HttpInstance = axios.create({
+//   baseURL: base_url
+// })
+HttpInstance.baseURL = HttpInstance.baseURL + '/Users'
+const base_url = '/Users'
+
+export async function userLogin(user) {
+  console.log(user)
+  const formData = new FormData()
+  formData.append('Account', user.Account)
+  formData.append('Password', user.Password)
+  console.log('111')
+  return await HttpInstance.post(base_url + '/Login', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+export async function removeUser(userId) {
+  return await HttpInstance.delete(base_url + `/RemoveUser?userId=${userId}`).catch((error) =>
+    console.error(error)
+  )
+}
 const UserServices = {
   async removeUser(userId) {
-    try {
-      const response = await apiClient.delete(`/RemoveUser?userId=${userId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance
+      .delete(`/RemoveUser?userId=${userId}`)
+      .catch((error) => console.error(error))
   },
   async deleteUserCourse(userId, courseId) {
     try {
-      const response = await apiClient.delete(
+      const response = await HttpInstance.delete(
         `/RemoveCourseFromMyList?userId=${userId}&courseId=${courseId}`
       )
       console.log(response.data)
@@ -34,7 +44,7 @@ const UserServices = {
   },
   async addUserCourse(userCourse) {
     try {
-      const response = await apiClient.post(`/AddUserCourse`, userCourse)
+      const response = await HttpInstance.post(`/AddUserCourse`, userCourse)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -43,7 +53,7 @@ const UserServices = {
   },
   async addUser(user) {
     try {
-      const response = await apiClient.post(`/AddUser`, user)
+      const response = await HttpInstance.post(`/AddUser`, user)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -52,7 +62,7 @@ const UserServices = {
   },
   async addSubmissionRecord(submissionRecord) {
     try {
-      const response = await apiClient.post(`/AddUserSubmission`, submissionRecord)
+      const response = await HttpInstance.post(`/AddUserSubmission`, submissionRecord)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -61,7 +71,7 @@ const UserServices = {
   },
   async getUserCourseList(userId) {
     try {
-      const response = await apiClient.get(`/GetUserCourseList/${userId}`)
+      const response = await HttpInstance.get(`/GetUserCourseList/${userId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -70,7 +80,7 @@ const UserServices = {
   },
   async getUserById(userId) {
     try {
-      const response = await apiClient.get(`/GetUserById/${userId}`)
+      const response = await HttpInstance.get(`/GetUserById/${userId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -79,7 +89,7 @@ const UserServices = {
   },
   async getUserName(userId) {
     try {
-      const response = await apiClient.get(`/GetUserNameById?userId=${userId}`)
+      const response = await HttpInstance.get(`/GetUserNameById?userId=${userId}`)
       // console.log(response.data)
       return response.data
     } catch (error) {
@@ -88,7 +98,7 @@ const UserServices = {
   },
   async getUserAvatar(userId) {
     try {
-      const response = await apiClient.get(`/GetUserAvatar/${userId}`)
+      const response = await HttpInstance.get(`/GetUserAvatar/${userId}`)
       // console.log(response.data)
       return response.data
     } catch (error) {
@@ -101,29 +111,14 @@ const UserServices = {
       if (fitlerQuery !== null) searchParams.set('fitlerQuery', fitlerQuery)
       if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
       if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      const response = await apiClient.get(`/GetUserList?${searchParams.toString()}`)
+      const response = await HttpInstance.get(`/GetUserList?${searchParams.toString()}`)
       console.log(response.data)
       return response.data
     } catch (error) {
       console.error(error)
     }
   },
-  async userLogin(user) {
-    try {
-      const formData = new FormData()
-      formData.append('Account', user.Account)
-      formData.append('Password', user.Password)
-      const response = await apiClient.post('/Login', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(formData)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
+
   async userRegister(user) {
     try {
       const formData = new FormData()
@@ -132,7 +127,7 @@ const UserServices = {
       formData.append('Password', user.Password)
       console.log(formData)
 
-      const response = await apiClient.post('/Register', formData, {
+      const response = await HttpInstance.post('/Register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -146,7 +141,7 @@ const UserServices = {
   },
   async isUserNameExist(username) {
     try {
-      const response = await apiClient.get(`/isUserNameRepeat?userName=${username}`)
+      const response = await HttpInstance.get(`/isUserNameRepeat?userName=${username}`)
       console.log(response.data)
       return response.data.isUserNameRepeat
     } catch (error) {
@@ -155,7 +150,7 @@ const UserServices = {
   },
   async isUserAccountExist(account) {
     try {
-      const response = await apiClient.get(`/isUserAccountRepeat?userAccount=${account}`)
+      const response = await HttpInstance.get(`/isUserAccountRepeat?userAccount=${account}`)
       console.log(response.data)
       return response.data.isUserAccountRepeat
     } catch (error) {
@@ -164,7 +159,7 @@ const UserServices = {
   },
   async isUserCourseRepeat(userId, courseId) {
     try {
-      const response = await apiClient.get(
+      const response = await HttpInstance.get(
         `/isUserCourseRepeat?userId=${userId}&courseId=${courseId}`
       )
 
@@ -198,7 +193,7 @@ const UserServices = {
       if (problemId !== null) searchParams.set('problemId', problemId)
       if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
       if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      const response = await apiClient.get(`/GetUserSubmission?${searchParams.toString()}`)
+      const response = await HttpInstance.get(`/GetUserSubmission?${searchParams.toString()}`)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -207,7 +202,7 @@ const UserServices = {
   },
   async getHistorySubmissionByrecordId(recordId) {
     try {
-      const response = await apiClient.get(`/GetSubmissionRecordById/${recordId}`)
+      const response = await HttpInstance.get(`/GetSubmissionRecordById/${recordId}`)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -216,7 +211,7 @@ const UserServices = {
   },
   async updateUser(userId, user) {
     try {
-      const response = await apiClient.put(`/UpdateUser/${userId}`, user)
+      const response = await HttpInstance.put(`/UpdateUser/${userId}`, user)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -225,7 +220,7 @@ const UserServices = {
   },
   async updateUserProfile(userId, user) {
     try {
-      const response = await apiClient.put(`/UpdateUserProfile/${userId}`, user)
+      const response = await HttpInstance.put(`/UpdateUserProfile/${userId}`, user)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -234,7 +229,7 @@ const UserServices = {
   },
   async updateUserPW(userId, pw) {
     try {
-      const response = await apiClient.put(`/UpdateUserPassword/${userId}`, pw)
+      const response = await HttpInstance.put(`/UpdateUserPassword/${userId}`, pw)
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -248,7 +243,7 @@ const UserServices = {
       formData.append('Account', user.Account)
       formData.append('Password', user.Password)
       formData.append('Role', 'user')
-      const response = await apiClient.post(`/isUserPWMatch `, user, {
+      const response = await HttpInstance.post(`/isUserPWMatch `, user, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -261,4 +256,4 @@ const UserServices = {
   }
 }
 
-export default UserServices
+// export default UserServices

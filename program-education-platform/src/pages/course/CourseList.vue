@@ -12,7 +12,7 @@
     <div class="flex flex-wrap justify-center">
       <!-- Text -->
       <div v-for="(data, id) in courses" :key="id" class="text item w-1/4">
-        <ClassItem :classItemData="data" />
+        <CourseItem :classItemData="data" />
       </div>
 
       <div class="flex justify-center w-full">
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script setup>
-import ClassItem from '../../components/user/class/ClassItem.vue'
+import CourseItem from '@/pages/personal_center/mycourse/CourseItem.vue'
 import CourseServices from '@/api/CourseServices.js'
 import { onMounted, watch } from 'vue'
 import { ref } from 'vue'
@@ -35,15 +35,18 @@ import { ref } from 'vue'
 const currentpage = ref(1)
 const total = ref(0)
 const courses = ref([])
+
 onMounted(async () => {
   await getAllCoursesList(null, currentpage.value, 6)
   const data = await CourseServices.getAllCoursesOverViewList(null, 1, null)
   total.value = data.length
   console.log(total.value)
 })
+
 watch(currentpage, async (newVal, oldVal) => {
   await getAllCoursesList(null, newVal, 6)
 })
+
 async function getAllCoursesList(fitlerQuery = null, pageNumber = 1, pageSize = 6) {
   try {
     const data = await CourseServices.getAllCoursesOverViewList(fitlerQuery, pageNumber, pageSize)
@@ -71,4 +74,3 @@ async function getAllCoursesList(fitlerQuery = null, pageNumber = 1, pageSize = 
   align-items: center;
 }
 </style>
- 

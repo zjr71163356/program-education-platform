@@ -26,7 +26,8 @@
           <router-link
             :to="{
               name: 'DiscussionPostList',
-              params: { problemId: problemId},query: { title: TheProblem.title, postType: false }
+              params: { problemId: problemId },
+              query: { title: TheProblem.title, postType: false }
             }"
             class="self-center"
           >
@@ -54,7 +55,8 @@
           <router-link
             :to="{
               name: 'SolutionPostList',
-              params: { problemId: problemId },query: { title: TheProblem.title, postType: true }
+              params: { problemId: problemId },
+              query: { title: TheProblem.title, postType: true }
             }"
             class="self-center"
           >
@@ -130,9 +132,9 @@
 import { onMounted, ref } from 'vue'
 
 import { MdPreview } from 'md-editor-v3'
-import FooterBannerProblemDesc from '@/components/user/layout/FooterBannerProblemDesc.vue'
-import CodeEditer from '@/components/user/problem/CodeEditer.vue'
-import SubmitResult from '@/components/user/problem/SubmitResult.vue'
+import FooterBannerProblemDesc from '@/components/layout/FooterBannerProblemDesc.vue'
+import CodeEditer from '@/pages/problem/CodeEditer.vue'
+import SubmitResult from '@/pages/personal_center/myproblem/SubmitResult.vue'
 import { useRoute } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
 import UserServices from '@/api/UserServices'

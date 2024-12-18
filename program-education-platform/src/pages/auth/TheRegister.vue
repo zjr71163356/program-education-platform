@@ -128,7 +128,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import UserServices from '@/api/UserServices.js'
-import SuccessAlert from '@/components/user/SuccessAlert.vue'
+import SuccessAlert from '@/components/modal/SuccessAlert.vue'
 const IsShowSuccess = ref(false)
 const IsShowError = ref(false)
 const router = useRouter()

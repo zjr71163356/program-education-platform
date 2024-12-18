@@ -13,14 +13,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/ClassItem',
-      name: 'ClassItem',
-      component: () => import('../components/user/class/ClassItem.vue')
+      path: '/CourseItem',
+      name: 'CourseItem',
+      component: () => import('@/pages/personal_center/mycourse/CourseItem.vue')
     },
     {
-      path: '/ClassList',
-      name: 'ClassList',
-      component: () => import('../pages/class/ClassList.vue')
+      path: '/CourseList',
+      name: 'CourseList',
+      component: () => import('@/pages/course/CourseList.vue')
     },
 
     {
@@ -31,23 +31,23 @@ const router = createRouter({
     {
       path: '/SignIn',
       name: 'SignIn',
-      component: () => import('../components/user/profile/SignIn.vue')
+      component: () => import('@/pages/auth/SignIn.vue')
     },
     {
       path: '/TheRegister',
       name: 'TheRegister',
-      component: () => import('../components/user/profile/TheRegister.vue')
+      component: () => import('@/pages/auth/TheRegister.vue')
     },
     {
-      path: '/ClassDesc/:courseId',
-      name: 'ClassDesc',
-      component: () => import('../pages/class/ClassDesc.vue'),
+      path: '/CourseDesc/:courseId',
+      name: 'CourseDesc',
+      component: () => import('@/pages/course/CourseDesc.vue'),
       props: true
     },
     {
       path: '/CurrentHistroySubmission/:problemId',
       name: 'CurrentHistroySubmission',
-      component: () => import('../components/user/problem/MyHistorySubmission.vue'),
+      component: () => import('@/pages/personal_center/myproblem/CurrentHistroySubmission.vue'),
       props: true
     },
     {
@@ -59,20 +59,19 @@ const router = createRouter({
     {
       path: '/SideBar',
       name: 'SideBar',
-      component: () => import('../components/user/class/SideBar.vue')
+      component: () => import('@/pages/course/SideBar.vue')
     },
     {
       path: '/TheProfile',
       name: 'TheProfile',
-      component: () => import('../pages/TheProfile.vue')
+      component: () => import('../pages/personal_center/myinfo/TheProfile.vue')
     },
     {
-      path: '/ClassContent/:subChapterId',
-      name: 'ClassContent',
-      component: () => import('../pages/class/ClassContent.vue'),
+      path: '/CourseContent/:subChapterId',
+      name: 'CourseContent',
+      component: () => import('@/pages/course/CourseContent.vue'),
       props: true
     },
-
     {
       path: '/ProblemDesc/:problemId',
       name: 'ProblemDesc',
@@ -105,112 +104,112 @@ const router = createRouter({
     {
       path: '/EditPassword',
       name: 'EditPassword',
-      component: () => import('../components/user/profile/EditPassword.vue')
+      component: () => import('@/pages/personal_center/myinfo/EditPassword.vue')
     },
     {
       path: '/PersonalCenter',
       name: 'PersonalCenter',
-      component: () => import('../components/user/layout/PersonalCenter.vue'),
+      component: () => import('@/components/layout/PersonalCenter.vue'),
       children: [
         {
-          path: 'MyClassList',
-          name: 'MyClassList',
-          component: () => import('../components/user/class/MyClassList.vue')
+          path: 'MyCourseList',
+          name: 'MyCourseList',
+          component: () => import('@/pages/personal_center/mycourse/MyCourseList.vue')
         },
         {
           path: 'MyProblemSolution',
           name: 'MyProblemSolution',
-          component: () => import('../components/user/post/MyProblemSolution.vue')
+          component: () => import('@/pages/personal_center/mypost/MyProblemSolution.vue')
         },
         {
           path: 'MyDiscussionPost',
           name: 'MyDiscussionPost',
-          component: () => import('../components/user/post/MyDiscussionPost.vue')
+          component: () => import('@/pages/personal_center/mypost/MyDiscussionPost.vue')
         },
         {
           path: 'MyHistorySubmission',
           name: 'MyHistorySubmission',
-          component: () => import('../components/user/problem/MyHistorySubmission.vue')
+          component: () => import('@/pages/personal_center/myproblem/MyHistorySubmission.vue')
         },
         {
-          path: 'ClassListManage',
-          name: 'ClassListManage',
-          component: () => import('@/components/teacher/class/ClassListManage.vue')
+          path: 'CourseListManage',
+          name: 'CourseListManage',
+          component: () => import('@/pages/course/CourseList.vue')
         },
         {
           path: 'ProblemManage',
           name: 'ProblemManage',
-          component: () => import('@/components/teacher/problem/ProblemBankManage.vue')
+          component: () => import('@/pages/manage/problem_manage/ProblemBankManage.vue')
         },
         {
-          path: 'ClassAddStepOne',
-          name: 'ClassAddStepOne',
-          component: () => import('@/components/teacher/class/ClassAddStepOne.vue')
+          path: 'CourseAddStepOne',
+          name: 'CourseAddStepOne',
+          component: () => import('@/pages/manage/course_manage/CourseAddStepOne.vue')
         },
         {
-          path: 'ClassAddStepTwo/:courseId',
-          name: 'ClassAddStepTwo',
-          component: () => import('@/components/teacher/class/ClassAddStepTwo.vue'),
+          path: 'CourseAddStepTwo/:courseId',
+          name: 'CourseAddStepTwo',
+          component: () => import('@/pages/manage/course_manage/CourseAddStepTwo.vue'),
           props: true
         },
         {
-          path: 'ClassAddStepThree',
-          name: 'ClassAddStepThree',
-          component: () => import('@/components/teacher/class/ClassAddStepThree.vue')
+          path: 'CourseAddStepThree',
+          name: 'CourseAddStepThree',
+          component: () => import('@/pages/manage/course_manage/CourseAddStepThree.vue')
         },
         {
-          path: 'ClassUpdateStepOne/:courseId',
-          name: 'ClassUpdateStepOne',
-          component: () => import('@/components/teacher/class/ClassAddStepOne.vue'),
+          path: 'CourseUpdateStepOne/:courseId',
+          name: 'CourseUpdateStepOne',
+          component: () => import('@/pages/manage/course_manage/CourseAddStepOne.vue'),
           props: true
         },
         {
           path: 'ProblemAddStepOne',
           name: 'ProblemAddStepOne',
-          component: () => import('@/components/teacher/problem/ProblemAddStepOne.vue')
+          component: () => import('@/pages/manage/problem_manage/ProblemAddStepOne.vue')
         },
         {
           path: 'ProblemAddStepTwo/:problemId',
           name: 'ProblemAddStepTwo',
-          component: () => import('@/components/teacher/problem/ProblemAddStepTwo.vue'),
+          component: () => import('@/pages/manage/problem_manage/ProblemAddStepTwo.vue'),
           props: true
         },
         {
           path: 'ProblemAddStepThree',
           name: 'ProblemAddStepThree',
-          component: () => import('@/components/teacher/problem/ProblemAddStepThree.vue')
+          component: () => import('@/pages/manage/problem_manage/ProblemAddStepThree.vue')
         },
         {
           path: 'ProblemUpdateStepOne/:problemId',
           name: 'ProblemUpdateStepOne',
-          component: () => import('@/components/teacher/problem/ProblemAddStepOne.vue'),
+          component: () => import('@/pages/manage/problem_manage/ProblemAddStepOne.vue'),
           props: true
         },
         {
           path: 'UserList',
           name: 'UserList',
-          component: () => import('@/components/admin/UserList.vue')
+          component: () => import('@/pages/manage/user_manage/UserList.vue')
         },
         {
           path: 'UserDesc/:userId',
           name: 'UserDesc',
-          component: () => import('@/components/admin/AddUser.vue'),
+          component: () => import('@/pages/manage/user_manage/AddUser.vue'),
           props: true
         },
         {
           path: 'EditUserPassword',
           name: 'EditUserPassword',
-          component: () => import('@/components/admin/EditUserPassword.vue')
+          component: () => import('@/pages/manage/user_manage/EditUserPassword.vue')
         },
         {
           path: 'AddUser',
           name: 'AddUser',
-          component: () => import('@/components/admin/AddUser.vue')
+          component: () => import('@/pages/manage/user_manage/AddUser.vue')
         },
         {
           path: 'AddUserFinish',
           name: 'AddUserFinish',
-          component: () => import('@/components/admin/AddUserFinish.vue')
+          component: () => import('@/pages/manage/user_manage/AddUserFinish.vue')
         }
       ]
     }

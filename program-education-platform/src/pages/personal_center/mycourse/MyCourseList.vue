@@ -25,7 +25,7 @@
         <!-- Text -->
 
         <div v-for="(course, id) in myCourseList" :key="id" class="text item w-1/4">
-          <ClassItem
+          <CourseItem
             :deletemode="deleteMode"
             :classItemData="course"
             @deleteCourse="handleDeleteCourse"
@@ -37,7 +37,7 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
-import ClassItem from './ClassItem.vue'
+import CourseItem from './CourseItem.vue'
 import UserServices from '@/api/UserServices'
 import { ElMessageBox, ElMessage } from 'element-plus'
 const deleteMode = ref(false)
@@ -51,7 +51,7 @@ const handleDeleteCourse = async (courseId) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(async () => {
-    const res = await UserServices.deleteUserCourse(userId,courseId)
+    const res = await UserServices.deleteUserCourse(userId, courseId)
     console.log(res)
     myCourseList.value = myCourseList.value.filter((item) => item.courseId !== courseId)
     ElMessage({

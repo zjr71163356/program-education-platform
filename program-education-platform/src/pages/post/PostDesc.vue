@@ -70,7 +70,7 @@ import { MdPreview } from 'md-editor-v3'
 // import { comments, PostInfo } from '@/data/data'
 import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
-import CommentBlock from '@/components/user/post/CommentBlock.vue'
+import CommentBlock from '@/pages/post/CommentBlock.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage } from 'element-plus'
 const token = localStorage.getItem('token')

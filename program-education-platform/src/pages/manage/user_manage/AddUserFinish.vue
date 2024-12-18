@@ -9,7 +9,7 @@
     <span class="text-3xl">用户添加成功</span>
     <div class="flex gap-5">
       <el-button type="primary" @click="laststep" class="mt-5">上一步</el-button>
-      <el-button type="primary" @click="returnToClassList" class="mt-5">查看用户列表</el-button>
+      <el-button type="primary" @click="returnToCourseList" class="mt-5">查看用户列表</el-button>
     </div>
   </div>
   <!-- Card -->
@@ -19,7 +19,7 @@
 import { CircleCheck } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router' // Add this import statement
 const router = useRouter() //
-const returnToClassList = () => {
+const returnToCourseList = () => {
   router.push({ name: 'UserList' })
 }
 const laststep = () => {

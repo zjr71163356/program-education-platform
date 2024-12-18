@@ -91,13 +91,13 @@ const nextSubChapter = (CourseDesc, subChapterIndex, chapterIndex) => {
   )
   console.log(nextChapterIndex, nextSubChapterIndex, nextSubChapterId)
   router.push({
-    name: 'ClassContent',
+    name: 'CourseContent',
     query: {
-    
       subChapterIndex: nextSubChapterIndex,
       chapterIndex: nextChapterIndex,
       courseId: route.query.courseId
-    },params:{
+    },
+    params: {
       subChapterId: nextSubChapterId
     }
   })
@@ -109,14 +109,13 @@ const lastSubChapter = (CourseDesc, subChapterIndex, chapterIndex) => {
     chapterIndex
   )
   router.push({
-    name: 'ClassContent',
+    name: 'CourseContent',
     query: {
- 
       subChapterIndex: lastSubChapterIndex,
       chapterIndex: lastChapterIndex,
       courseId: route.query.courseId
     },
-    params:{
+    params: {
       subChapterId: lastSubChapterId
     }
   })
