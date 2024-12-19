@@ -79,10 +79,10 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import UserServices from '@/api/UserServices'
 import { ElMessage } from 'element-plus'
+import { useProfileStore } from '@/stores/user'
 
 const router = useRouter()
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+const userId = useProfileStore().userId
 const oriPW = ref('')
 const newPW = ref('')
 const newPW2 = ref('')

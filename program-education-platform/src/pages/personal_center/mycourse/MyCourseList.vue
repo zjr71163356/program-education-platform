@@ -40,11 +40,12 @@ import { onMounted, ref } from 'vue'
 import CourseItem from './CourseItem.vue'
 import UserServices from '@/api/UserServices'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import { useProfileStore } from '@/stores/user'
 const deleteMode = ref(false)
 const buttonString = ref('编辑教程')
 const myCourseList = ref()
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+const userId = useProfileStore().userId
+
 const handleDeleteCourse = async (courseId) => {
   ElMessageBox.confirm('删除当前教程?', 'Warning', {
     confirmButtonText: '确认',
@@ -62,8 +63,6 @@ const handleDeleteCourse = async (courseId) => {
 }
 onMounted(async () => {
   // myCourseList.value = a
-  const token = localStorage.getItem('token')
-  const userId = JSON.parse(token).userId
   const res = await UserServices.getUserCourseList(userId)
   console.log(res)
   myCourseList.value = res

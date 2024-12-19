@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
+
+const userInfo = JSON.parse(localStorage.getItem('user'))
 export const useProfileStore = defineStore('user', {
   state: () => ({
-    userId: null,
-    userName: null,
-    account: null,
-    avatar: null,
-    role: null,
-    token: null
+    userId: userInfo?.userId,
+    userName: userInfo?.userName,
+    account: userInfo?.account,
+    avatar: userInfo?.avatar,
+    role: userInfo?.role,
+    token: userInfo?.token
   }),
   getters: {
     isLoggedIn: (state) => state.token !== null
@@ -18,9 +20,8 @@ export const useProfileStore = defineStore('user', {
       this.account = user.account
       this.avatar = user.avatar
       this.role = user.role
-    },
-    setToken(token) {
-      this.token = token
+      this.token = user.role
+      localStorage.setItem('user', JSON.stringify(this.$state))
     },
     clearUser() {
       this.userId = null
@@ -28,9 +29,8 @@ export const useProfileStore = defineStore('user', {
       this.account = null
       this.avatar = null
       this.role = null
-    },
-    removeToken() {
       this.token = null
+      localStorage.removeItem('user')
     }
   }
 })

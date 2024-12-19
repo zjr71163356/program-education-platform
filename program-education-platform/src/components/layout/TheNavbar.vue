@@ -110,6 +110,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { RouterLink, useRoute } from 'vue-router'
 import { watch, ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { useProfileStore } from '@/stores/user'
 export default {
   components: {
     Disclosure,
@@ -125,15 +126,15 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem('token')
-      console.log('logout')
+      const userInfo = useProfileStore()
+      userInfo.clearUser()
+
       ElMessage.success('退出成功')
     }
   },
   setup() {
-    const token = localStorage.getItem('token')
-
-    let avatar = token ? JSON.parse(token).avatar : ''
+    const userInfo = useProfileStore()
+    let avatar = userInfo.avatar
     let router = useRoute()
     const navigation = ref([
       { name: '首页', href: { name: 'Home' }, current: false },
@@ -155,10 +156,7 @@ export default {
       },
       { immediate: true }
     )
-    const logout = () => {
-      localStorage.removeItem('token')
-      console.log('logout')
-    }
+  
     return {
       navigation,
       navigation2,

@@ -34,11 +34,11 @@ import PostServices from '@/api/PostServices'
 import { getFormattedDate } from '@/utils/tools'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-
+import { useProfileStore } from '@/stores/user'
 const title = ref('')
 const text = ref('')
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+
+const userId = useProfileStore().userId
 const route = useRoute()
 const router = useRouter()
 const props = defineProps({

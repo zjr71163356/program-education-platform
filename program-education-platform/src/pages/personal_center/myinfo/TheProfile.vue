@@ -177,10 +177,10 @@ import { Plus } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import UserServices from '@/api/UserServices'
 import { ElMessage } from 'element-plus'
-const token = localStorage.getItem('token')
+
 const userInfo = ref(JSON.parse(token))
 const saveUserInfo = async () => {
-  await UserServices.updateUserProfile(userInfo.value.userId,userInfo.value).then((res) => {
+  await UserServices.updateUserProfile(userInfo.value.userId, userInfo.value).then((res) => {
     console.log(res)
     localStorage.setItem('token', JSON.stringify(userInfo.value))
     ElMessage({

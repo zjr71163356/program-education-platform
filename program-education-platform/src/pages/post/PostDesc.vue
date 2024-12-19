@@ -73,8 +73,8 @@ import UserServices from '@/api/UserServices'
 import CommentBlock from '@/pages/post/CommentBlock.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage } from 'element-plus'
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+import { useProfileStore } from '@/stores/user'
+const userId = useProfileStore().userId
 const role = localStorage.getItem('role')
 const id = 'problem'
 const commentTotal = ref(0)

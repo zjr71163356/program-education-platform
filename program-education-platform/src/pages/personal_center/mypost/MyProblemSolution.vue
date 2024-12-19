@@ -8,7 +8,7 @@
           :to="{
             name: 'PostAdd',
             params: { problemId: row.problemId },
-            query: { title:row.title, postType: true, postId: row.postId }
+            query: { title: row.title, postType: true, postId: row.postId }
           }"
           >{{ row.title }}</router-link
         >
@@ -41,8 +41,8 @@ import PostServices from '@/api/PostServices'
 import { useRouter } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
 import { ElMessageBox, ElMessage } from 'element-plus'
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+import { useProfileStore } from '@/stores/user'
+const userId = useProfileStore().userId
 const total = ref(0)
 const currentpage = ref(1)
 const pageSize = 10

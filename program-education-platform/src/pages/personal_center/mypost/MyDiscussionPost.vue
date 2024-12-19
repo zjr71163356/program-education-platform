@@ -7,8 +7,8 @@
           class="text-sky-400"
           :to="{
             name: 'PostDesc',
-            params: { postId:  row.postId },
-            query: { problemId: row.problemId,title: row.title }
+            params: { postId: row.postId },
+            query: { problemId: row.problemId, title: row.title }
           }"
           >{{ row.title }}</router-link
         >
@@ -41,8 +41,8 @@ import PostServices from '@/api/PostServices'
 import { useRouter } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
 import { ElMessageBox, ElMessage } from 'element-plus'
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+import { useProfileStore } from '@/stores/user'
+const userId = useProfileStore().userId
 const total = ref(0)
 const currentpage = ref(1)
 const pageSize = 10
@@ -81,19 +81,19 @@ const handleDelete = async (index, row) => {
 }
 onMounted(async () => {
   console.log('mounted')
-  await PostServices.getPostByUserId(userId,1,null,false).then((data) => {
+  await PostServices.getPostByUserId(userId, 1, null, false).then((data) => {
     total.value = data.length
     tableData.value = data
     console.log(data)
   })
-  await PostServices.getPostByUserId(userId, 1, pageSize,false).then((data) => {
+  await PostServices.getPostByUserId(userId, 1, pageSize, false).then((data) => {
     tableData.value = data
     console.log(data)
   })
 })
 watch(currentpage, async (newVal, oldVal) => {
   console.log('currentpage', newVal)
-  await PostServices.getPostByUserId(userId, newVal, pageSize,false).then((data) => {
+  await PostServices.getPostByUserId(userId, newVal, pageSize, false).then((data) => {
     tableData.value = data
     console.log(data)
   })

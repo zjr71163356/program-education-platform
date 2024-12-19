@@ -46,14 +46,15 @@ import { TabGroup, TabPanel, TabPanels } from '@headlessui/vue'
 import { watch, ref } from 'vue'
 import PostServices from '@/api/PostServices'
 import UserServices from '@/api/UserServices'
+import { useProfileStore } from '@/stores/user'
 const props = defineProps({
   small: Boolean,
   postId: Number,
   parentComment: Object,
   isReply: Boolean
 })
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+
+const userId = useProfileStore().userId
 const userName = JSON.parse(token).userName
 const text = ref('')
 const postId = ref(props.postId)

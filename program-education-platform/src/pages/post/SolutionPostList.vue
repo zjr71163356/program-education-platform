@@ -143,6 +143,7 @@ import UserServices from '@/api/UserServices'
 import { MdPreview } from 'md-editor-v3'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { CaretTop, CaretBottom } from '@element-plus/icons-vue'
+import { useProfileStore } from '@/stores/user'
 const isBlue = ref([])
 const isBlue2 = ref([])
 const blueColor = 'rgb(47,181,96)'
@@ -191,8 +192,8 @@ const total = ref(0)
 const currentpage = ref(1)
 const showFullContent = ref([])
 const dialogVisible = ref(false)
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+import { useProfileStore } from '@/stores/user'
+const userId = useProfileStore().userId
 const role = localStorage.getItem('role')
 const postComments = ref([])
 const props = defineProps({

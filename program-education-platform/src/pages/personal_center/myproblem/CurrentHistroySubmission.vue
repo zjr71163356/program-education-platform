@@ -48,13 +48,12 @@
 // import { historyRecords } from '@/data/data'
 import ProblemServices from '@/api/ProblemServices'
 import { onMounted, ref } from 'vue'
-
+import { useProfileStore } from '@/stores/user'
 const historyRecords = ref([])
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+
+const userId = useProfileStore().userId
 onMounted(async () => {
   const data = await ProblemServices.getHistorySubmission(userId, null)
   historyRecords.value = data
-  
 })
 </script>

@@ -105,13 +105,12 @@ import UserServices from '@/api/UserServices'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { tagColorList } from '@/api/staticdata'
-
+import {useProfileStore} from '@/stores/user'
 const userCourseRepeat = ref(false)
 const route = useRoute()
 const course = ref({})
 const courseId = ref(route.params.courseId)
-const token = localStorage.getItem('token')
-const userId = JSON.parse(token).userId
+const userId = useProfileStore().userId
 const subChapterId = ref(1)
 onMounted(async () => {
   userCourseRepeat.value = await UserServices.isUserCourseRepeat(userId, courseId.value)

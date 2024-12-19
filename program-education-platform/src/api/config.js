@@ -27,6 +27,7 @@ HttpInstance.interceptors.request.use(
 
 HttpInstance.interceptors.response.use(
   (res) => {
+    console.log(res);
     return res.data
   },
   (error) => {

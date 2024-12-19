@@ -74,9 +74,9 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { userLogin } from '@/api/UserServices'
+import UserServices from '@/api/UserServices'
 import SuccessAlert from '@/components/modal/SuccessAlert.vue'
-
+import { useProfileStore } from '@/stores/user'
 export default {
   components: { SuccessAlert },
   setup() {
@@ -95,14 +95,15 @@ export default {
           Password: loginModel.value.password
         }
         console.log('login')
-        const data = await userLogin(user)
+        const data = await UserServices.userLogin(user)
+        const profile = useProfileStore()
         console.log(data)
-
         // const token = JSON.stringify(data)
         // const role = data.role
 
-        // localStorage.setItem('token', token)
-        // localStorage.setItem('role', role)
+        profile.setUser(data)
+
+        console.log(profile.userId)
 
         IsShowSuccess.value = true
         setTimeout(() => {
