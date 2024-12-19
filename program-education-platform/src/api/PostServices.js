@@ -1,150 +1,81 @@
-import axios from 'axios'
-import { api_url, headers } from './config'
-const base_url = `${api_url}/Posts`
-const apiClient = axios.create({
-  baseURL: base_url,
-  headers: headers
-})
+import { HttpInstance } from '@/api/config'
+
+const base_url = '/Posts'
 
 const PostServices = {
   async getAllPostsOverViewList(isSolution = true, problemId, pageNumber, pageSize) {
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('isSolution', isSolution)
-      if (problemId !== null) searchParams.set('problemId', problemId)
-      if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
-      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+    const searchParams = new URLSearchParams()
+    searchParams.set('isSolution', isSolution)
+    if (problemId !== null) searchParams.set('problemId', problemId)
+    if (pageNumber !== null) searchParams.set('pageNumber', pageNumber)
+    if (pageSize !== null) searchParams.set('pageSize', pageSize)
 
-      const response = await apiClient.get(
-        `/GetAllPostsListByProblemId?${searchParams.toString()} `
-      )
-      // console.log(`Courses?${searchParams.toString()} `)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(
+      `${base_url}/GetAllPostsListByProblemId?${searchParams.toString()}`
+    )
   },
+
   async getCommentsByPostId(postId, pageNumber = 1, pageSize = null) {
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('postId', postId)
-      searchParams.set('pageNumber', pageNumber)
-      if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      const response = await apiClient.get(`/GetCommentsByPostId?${searchParams.toString()}`)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async getPostByUserId(userId, pageNumber = 1, pageSize = null,isSolution = true) {
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('userId', userId)
-      searchParams.set('pageNumber', pageNumber)
-      searchParams.set('isSolution', isSolution)
-      if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      const response = await apiClient.get(`/GetPostsListByUserId?${searchParams.toString()} `)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async getPostById(postId) {
-    try {
-      const response = await apiClient.get(`/GetPostById/${postId}`)
-      // console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addPost(post) {
-    try {
-      const response = await apiClient.post(`/AddPost`, post)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addComment(comment) {
-    try {
-      const response = await apiClient.post(`/AddComment`, comment)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addReply(reply) {
-    try {
-      const response = await apiClient.post(`/AddReply`, reply)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async removePostById(postId) {
-    try {
-      const response = await apiClient.delete(`/DeletePostById/${postId}`)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async removeComment(commentId) {
-    try {
-      const response = await apiClient.delete(`/DeleteCommentById/${commentId}`)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async removeReply(replyId) {
-    try {
-      const response = await apiClient.delete(`/DeleteReplyById/${replyId}`)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async updatePostById(postId, post) {
-    try {
-      const response = await apiClient.put(`/UpdatePost/${postId}`, post)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addLike(userlike){
-    try {
-      const response = await apiClient.post(`/AddUserLike`, userlike)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async deleteLike(userId,postId){
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('userId', userId)
-      searchParams.set('postId', postId)
-      const response = await apiClient.delete(`/DeleteUserLike?${searchParams.toString()} `)
-      console.log(response)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    const searchParams = new URLSearchParams()
+    searchParams.set('postId', postId)
+    searchParams.set('pageNumber', pageNumber)
+    if (pageSize !== null) searchParams.set('pageSize', pageSize)
 
+    return await HttpInstance.get(`${base_url}/GetCommentsByPostId?${searchParams.toString()}`)
+  },
+
+  async getPostByUserId(userId, pageNumber = 1, pageSize = null, isSolution = true) {
+    const searchParams = new URLSearchParams()
+    searchParams.set('userId', userId)
+    searchParams.set('pageNumber', pageNumber)
+    searchParams.set('isSolution', isSolution)
+    if (pageSize !== null) searchParams.set('pageSize', pageSize)
+
+    return await HttpInstance.get(`${base_url}/GetPostsListByUserId?${searchParams.toString()}`)
+  },
+
+  async getPostById(postId) {
+    return await HttpInstance.get(`${base_url}/GetPostById/${postId}`)
+  },
+
+  async addPost(post) {
+    return await HttpInstance.post(`${base_url}/AddPost`, post)
+  },
+
+  async addComment(comment) {
+    return await HttpInstance.post(`${base_url}/AddComment`, comment)
+  },
+
+  async addReply(reply) {
+    return await HttpInstance.post(`${base_url}/AddReply`, reply)
+  },
+
+  async removePostById(postId) {
+    return await HttpInstance.delete(`${base_url}/DeletePostById/${postId}`)
+  },
+
+  async removeComment(commentId) {
+    return await HttpInstance.delete(`${base_url}/DeleteCommentById/${commentId}`)
+  },
+
+  async removeReply(replyId) {
+    return await HttpInstance.delete(`${base_url}/DeleteReplyById/${replyId}`)
+  },
+
+  async updatePostById(postId, post) {
+    return await HttpInstance.put(`${base_url}/UpdatePost/${postId}`, post)
+  },
+
+  async addLike(userLike) {
+    return await HttpInstance.post(`${base_url}/AddUserLike`, userLike)
+  },
+
+  async deleteLike(userId, postId) {
+    const searchParams = new URLSearchParams()
+    searchParams.set('userId', userId)
+    searchParams.set('postId', postId)
+
+    return await HttpInstance.delete(`${base_url}/DeleteUserLike?${searchParams.toString()}`)
   }
 }
 

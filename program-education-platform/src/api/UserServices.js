@@ -1,8 +1,7 @@
 import { HttpInstance } from '@/api/config'
 
-
 const base_url = '/Users'
-const  UserServices = {
+const UserServices = {
   async userLogin(user) {
     console.log(user)
     const formData = new FormData()

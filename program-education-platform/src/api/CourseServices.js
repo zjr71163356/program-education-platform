@@ -1,143 +1,67 @@
-import axios from 'axios'
-import { api_url, headers } from './config'
-const base_url = `${api_url}/Courses`
-const apiClient = axios.create({
-  baseURL: base_url,
-  headers: headers
-})
+import { HttpInstance } from '@/api/config'
+
+const base_url = '/Courses'
 
 const CourseServices = {
   async getAllCoursesOverViewList(filterQuery = null, pageNumber = 1, pageSize = null) {
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('pageNumber', pageNumber)
-      if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
-      if (pageSize !== null) searchParams.set('pageSize', pageSize)
+    const searchParams = new URLSearchParams()
+    searchParams.set('pageNumber', pageNumber)
+    if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
+    if (pageSize !== null) searchParams.set('pageSize', pageSize)
 
-      const response = await apiClient.get(`?${searchParams.toString()} `)
-      // console.log(`Courses?${searchParams.toString()} `)
-      // console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(`${base_url}?${searchParams.toString()}`)
   },
 
   async getCoursesById(courseId) {
-    try {
-      const response = await apiClient.get(`/CourseDesc?courseId=${courseId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(`${base_url}/CourseDesc?courseId=${courseId}`)
   },
-  async getCourseSubChapterById(subChapterId) {
-    try {
-      const response = await apiClient.get(`/CourseSubChapters?subChapterId=${subChapterId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addCourseStepOne(course) {
-    try {
-      const requestBody = JSON.stringify(course)
-      // console.log(requestBody);
-      const response = await apiClient.post('/AddStepOne', requestBody)
-      // console.log(response.data);
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addCourseChapter(courseChapter) {
-    try {
-      // console.log(requestBody);
-      const response = await apiClient.post('/AddCourseChapter', courseChapter)
-      // console.log(response.data);
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async addSubChapter(subChapter) {
-    try {
-      // console.log(requestBody);
-      const response = await apiClient.post('/AddSubChapter', subChapter)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async updateCourseStepOne(courseId, course) {
-    try {
-      const requestBody = JSON.stringify(course)
-      const response = await apiClient.put(`/UpdateStepOne/${courseId}`, requestBody)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async updateCourseStepTwo(courseId, courseChapters) {
-    try {
-      // const requestBody = JSON.stringify(courseChapters)
-      // console.log( {"courseChapters":requestBody});
-      const response = await apiClient.put(`/UpdateStepTwo/${courseId}`, courseChapters)
 
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+  async getCourseSubChapterById(subChapterId) {
+    return await HttpInstance.get(`${base_url}/CourseSubChapters?subChapterId=${subChapterId}`)
   },
-  async updateSubchapter(SubchapterId, Subchapter) {
-    try {
-      const response = await apiClient.put(`/UpdateSubChapter/${SubchapterId}`, Subchapter)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+
+  async addCourseStepOne(course) {
+    return await HttpInstance.post(`${base_url}/AddStepOne`, course)
   },
+
+  async addCourseChapter(courseChapter) {
+    return await HttpInstance.post(`${base_url}/AddCourseChapter`, courseChapter)
+  },
+
+  async addSubChapter(subChapter) {
+    return await HttpInstance.post(`${base_url}/AddSubChapter`, subChapter)
+  },
+
+  async updateCourseStepOne(courseId, course) {
+    return await HttpInstance.put(`${base_url}/UpdateStepOne/${courseId}`, course)
+  },
+
+  async updateCourseStepTwo(courseId, courseChapters) {
+    return await HttpInstance.put(`${base_url}/UpdateStepTwo/${courseId}`, courseChapters)
+  },
+
+  async updateSubchapter(subchapterId, subchapter) {
+    return await HttpInstance.put(`${base_url}/UpdateSubChapter/${subchapterId}`, subchapter)
+  },
+
   async updateSubchapterMD(subchapterId, updateSubchapterMD) {
-    try {
-      console.log(subchapterId)
-      const response = await apiClient.put(
-        `/UpdateSubChapterMDcontent/${subchapterId}`,
-        updateSubchapterMD
-      )
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.put(
+      `${base_url}/UpdateSubChapterMDcontent/${subchapterId}`,
+      updateSubchapterMD
+    )
   },
+
   async deleteSubChapterById(subChapterId) {
-    try {
-      const response = await apiClient.delete(`/SubChapter/${subChapterId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.delete(`${base_url}/SubChapter/${subChapterId}`)
   },
+
   async deleteChapterById(chapterId) {
-    try {
-      const response = await apiClient.delete(`/CourseChapter/${chapterId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.delete(`${base_url}/CourseChapter/${chapterId}`)
   },
+
   async deleteCourseById(courseId) {
-    try {
-      const response = await apiClient.delete(`/${courseId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.delete(`${base_url}/${courseId}`)
   }
 }
+
 export default CourseServices

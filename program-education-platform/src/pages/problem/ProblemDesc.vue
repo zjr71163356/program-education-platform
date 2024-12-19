@@ -135,10 +135,12 @@ import { MdPreview } from 'md-editor-v3'
 import FooterBannerProblemDesc from '@/components/layout/FooterBannerProblemDesc.vue'
 import CodeEditer from '@/pages/problem/CodeEditer.vue'
 import SubmitResult from '@/pages/personal_center/myproblem/SubmitResult.vue'
+import SelectList from '@/pages/problem/SelectList.vue'
 import { useRoute } from 'vue-router'
 import ProblemServices from '@/api/ProblemServices'
 import UserServices from '@/api/UserServices'
 import { getDate, getMaxTimeAndMemory, UnicodeDecodeB64 } from '@/utils/tools'
+import {useProfileStore} from '@/stores/user'
 
 const prop = defineProps({
   problemId: {
@@ -154,8 +156,9 @@ const text = ref('')
 const isOpen = ref(false)
 const isSendCode = ref(false)
 const Submission = ref({})
-const userId = JSON.parse(localStorage.getItem('token')).userId
-const userName = JSON.parse(localStorage.getItem('token')).userName
+const userInfo=useProfileStore()
+const userId = userInfo.userId
+const userName = userInfo.userName
 
 const openSubmitResult = () => {
   console.log('openSubmitResult')
@@ -231,7 +234,7 @@ onMounted(async () => {
   // console.log(route.params)
   // console.log('mounted')
   // console.log(problemId.value)
-  await ProblemServices.getSystemInfo()
+
   await ProblemServices.getProblemById(problemId.value)
     .then((problem) => {
       TheProblem.value = problem

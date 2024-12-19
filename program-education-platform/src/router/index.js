@@ -134,7 +134,7 @@ const router = createRouter({
         {
           path: 'CourseListManage',
           name: 'CourseListManage',
-          component: () => import('@/pages/course/CourseList.vue')
+          component: () => import('@/pages/manage/course_manage/CourseListManage.vue')
         },
         {
           path: 'ProblemManage',

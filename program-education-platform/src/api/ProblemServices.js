@@ -1,11 +1,8 @@
-import axios from 'axios'
+import { HttpInstance } from '@/api/config'
 import { b64EncodeUnicode } from '@/utils/tools'
-import { api_url, headers } from './config'
-const base_url = `${api_url}/Problems`
-const apiClient = axios.create({
-  baseURL: base_url,
-  headers: headers
-})
+import axios  from 'axios'
+const base_url = '/Problems'
+
 const SubmitAndResultOptions = {
   method: 'POST',
   url: 'http://localhost:2358/submissions',
@@ -29,11 +26,8 @@ const getSubmissionOptions = {
     base64_encoded: 'true',
     fields: '*'
   }
-  // headers: {
-  //   'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
-  //   'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
-  // }
 }
+
 const submitOptions = {
   method: 'POST',
   url: 'http://localhost:2358/submissions/batch',
@@ -43,111 +37,63 @@ const submitOptions = {
   headers: {
     'content-type': 'application/json',
     'Content-Type': 'application/json'
-    // 'X-RapidAPI-Key': '055a4bb1damsh3ee8e4205a9974bp1b2d7ejsn7e145775d87c',
-    // 'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
   }
 }
 
 const MySysOptions = {
   method: 'GET',
   url: 'http://localhost:2358/system_info',
-
   headers: {
     'content-type': 'application/json',
     'Content-Type': 'application/json'
   }
 }
+
 const ProblemServices = {
   async deleteTestData(dataId) {
-    try {
-      const response = await apiClient.delete(`/DeleteTestData/${dataId}`)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.delete(`${base_url}/DeleteTestData/${dataId}`)
   },
   async deleteProblem(problemId) {
-    try {
-      const response = await apiClient.delete(`/DeleteProblem?problemId=${problemId}`)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.delete(`${base_url}/DeleteProblem?problemId=${problemId}`)
   },
 
   async getProblemList(filterQuery, pageNumber, pageSize) {
-    try {
-      const searchParams = new URLSearchParams()
-      searchParams.set('pageNumber', pageNumber)
-      if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
-      if (pageSize !== null) searchParams.set('pageSize', pageSize)
-      const response = await apiClient.get(`?${searchParams.toString()} `)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    const searchParams = new URLSearchParams()
+    searchParams.set('pageNumber', pageNumber)
+    if (filterQuery !== null) searchParams.set('filterQuery', filterQuery)
+    if (pageSize !== null) searchParams.set('pageSize', pageSize)
+    return await HttpInstance.get(`${base_url}/?${searchParams.toString()}`)
   },
   async getProblemById(problemId) {
-    try {
-      const response = await apiClient.get(`/GetProblemById?problemId=${problemId}`)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(`${base_url}/GetProblemById?problemId=${problemId}`)
   },
 
   async submitProblemCode(language, code, testData) {
-    try {
-      const languageIds = {
-        'C++': 52,
-        Java: 62,
-        JavaScript: 63,
-        Python: 71
-      }
-      console.log(testData)
-      const language_id = languageIds[language]
-      const base64Encoded = b64EncodeUnicode(code)
-      const submissions = []
-      for (let i = 0; i < testData.length; i++) {
-        const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
-        const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '')
-        submissions.push({
-          language_id: language_id,
-          source_code: base64Encoded,
-          stdin: b64EncodeUnicode(inputWithoutNewlines),
-          expected_output: b64EncodeUnicode(outputWithoutNewlines)
-        })
-      }
-
-      const requestBody = {
-        submissions
-      }
-      console.log({
-        ...submitOptions,
-        data: requestBody
-      })
-      const response = await axios.request({
-        ...submitOptions,
-        data: requestBody
-      })
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
+    const languageIds = {
+      'C++': 52,
+      Java: 62,
+      JavaScript: 63,
+      Python: 71
     }
+    const language_id = languageIds[language]
+    const base64Encoded = b64EncodeUnicode(code)
+    const submissions = testData.map((data) => ({
+      language_id: language_id,
+      source_code: base64Encoded,
+      stdin: b64EncodeUnicode(data.inputData.replace(/[\n\r]/g, '')),
+      expected_output: b64EncodeUnicode(data.outputData.replace(/[\n\r]/g, ''))
+    }))
+
+    const requestBody = { submissions }
+    return await axios.request({
+      ...submitOptions,
+      data: requestBody
+    })
   },
   async getSubmission(tokenList) {
     const tokens = tokenList.map((item) => item.token).join(',')
     getSubmissionOptions.params.tokens = tokens
-    console.log(getSubmissionOptions)
-    try {
-      const response = await axios.request(getSubmissionOptions)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await axios.request(getSubmissionOptions)
   },
   async SendGetSubmission(language, code, testData) {
     const languageIds = {
@@ -158,85 +104,44 @@ const ProblemServices = {
     }
     const source_code = b64EncodeUnicode(code)
     const language_id = languageIds[language]
-    let resultList = []
-    for (let i = 0; i < testData.length; i++) {
-      const inputWithoutNewlines = testData[i].inputData.replace(/[\n\r]/g, '')
-      const outputWithoutNewlines = testData[i].outputData.replace(/[\n\r]/g, '')
-      // console.log(inputWithoutNewlines, outputWithoutNewlines)
-      const stdin = b64EncodeUnicode(inputWithoutNewlines)
-      const expected_output = b64EncodeUnicode(outputWithoutNewlines)
-      const data = {
+    const resultList = []
+
+    for (const data of testData) {
+      const stdin = b64EncodeUnicode(data.inputData.replace(/[\n\r]/g, ''))
+      const expected_output = b64EncodeUnicode(data.outputData.replace(/[\n\r]/g, ''))
+      const submissionData = {
         language_id: language_id,
         source_code: source_code,
         stdin: stdin,
         expected_output: expected_output
       }
-      SubmitAndResultOptions.data = data
+      SubmitAndResultOptions.data = submissionData
       const res = await axios.request(SubmitAndResultOptions)
       resultList.push(res.data)
-      console.log(res.data, i)
-      // console.log(SubmitAndResultOptions)
     }
-    console.log(resultList)
     return resultList
   },
   async getProblemTestData(problemId) {
-    try {
-      const response = await apiClient.get(`/GetTestDatasByProblemId/${problemId}`)
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(`${base_url}/GetTestDatasByProblemId/${problemId}`)
   },
   async getTestData(dataId) {
-    try {
-      const response = await apiClient.get(`/GetTestData/${dataId}`)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.get(`${base_url}/GetTestData/${dataId}`)
   },
   async getSystemInfo() {
-    try {
-      const res = await axios.request(MySysOptions)
-      console.log(res.data)
-    } catch (error) {
-      console.error(error)
-    }
+    return await axios.request(MySysOptions)
   },
   async addProblem(problem) {
-    try {
-      const response = await apiClient.post('/AddProblem', problem)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.post(`${base_url}/AddProblem`, problem)
   },
   async addTestData(testData) {
-    try {
-      const response = await apiClient.post('/AddTestData', testData)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.post(`${base_url}/AddTestData`, testData)
   },
   async updateProblemStepOne(problemId, problem) {
-    try {
-      const response = await apiClient.put(`/UpdateProblemStepOne/${problemId}`, problem)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.put(`${base_url}/UpdateProblemStepOne/${problemId}`, problem)
   },
 
   async updateTestData(dataId, testData) {
-    try {
-      const response = await apiClient.put(`/UpdateTestData/${dataId}`, testData)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
+    return await HttpInstance.put(`${base_url}/UpdateTestData/${dataId}`, testData)
   }
 }
 
